@@ -1,0 +1,678 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+    <meta name="description" content=", 有故事、有担当、有思考" />
+
+
+
+  <meta name="keywords" content="shadowsocks,git,github,git工作流,大数据,jstorm,fastdfs,xirong,ixirong,分布式 " />
+
+
+
+
+
+  <meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+
+
+
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+ 
+
+
+
+  <meta name="baidu_union_verify" content="63d8c69bdbc435b09f0d1b064de79a19" />
+
+
+
+  <meta  baidu-gxt-verify-token="52c8363b5f7cf3520969573f8b170868" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自由" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+  <title>
+  
+
+  
+    自由
+  
+</title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column ">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">自由</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
+    </script>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
+        <a href="/404.html">
+          <i class="menu-item-icon icon-commonweal"></i> <br />
+          公益404
+        </a>
+      </li>
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+    
+      <blockquote class="blockquote-center">&#x7EB8;&#x4E0A;&#x5F97;&#x6765;&#x7EC8;&#x89C9;&#x6D45;&#xFF0C;&#x7EDD;&#x77E5;&#x6B64;&#x4E8B;&#x8981;&#x8EAC;&#x884C;&#x3002;<br> &#x300A;&#x51AC;&#x591C;&#x8BFB;&#x4E66;&#x793A;&#x5B50;&#x807F;&#x300B;&#x2014;&#x2014; <strong>&#x9646;&#x6E38;</strong></blockquote>
+
+
+<h2 id="&#x535A;&#x5BA2;&#x8BF4;&#x660E;">&#x535A;&#x5BA2;&#x8BF4;&#x660E;</h2><blockquote>
+<p>20&#x5C81;&#x5230;30&#x5C81;&#x8FD9;&#x5341;&#x5E74;&#x95F4;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x6211;&#x4EEC;&#x6700;&#x91CD;&#x8981;&#x7684;&#x5341;&#x5E74;&#xFF0C;&#x4F60;&#x8981;&#x786E;&#x5B9A;&#x81EA;&#x5DF1;&#x7684;&#x4E16;&#x754C;&#x89C2;&#x3001;&#x4EF7;&#x503C;&#x89C2;&#xFF0C;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5408;&#x9002;&#x7684;&#x4EBA;&#x751F;&#x4F34;&#x4FA3;&#xFF0C;&#x6162;&#x6162;&#x5B9A;&#x4E0B;&#x6765;&#xFF0C;&#x53EF;&#x662F;&#x8FD9;&#x5176;&#x95F4;&#x5145;&#x6EE1;&#x4E86;&#x632B;&#x6298;&#x3001;&#x6000;&#x7591;&#x548C;&#x56F0;&#x60D1;&#x3002;<br>25&#x5C81;&#x4E4B;&#x524D;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x548C;&#x6211;&#x4E00;&#x6837;&#xFF0C;&#x5145;&#x6EE1;&#x4E86;&#x5404;&#x79CD;&#x5343;&#x5947;&#x767E;&#x602A;&#x7684;&#x60F3;&#x6CD5;&#x548C;&#x60F3;&#x8981;&#x53BB;&#x95EF;&#x8361;&#x7684;&#x5FC3;&#xFF0C;&#x53EF;&#x7ED3;&#x679C;&#x603B;&#x662F;&#x6DF7;&#x6DF7;&#x5F53;&#x5F53;&#xFF0C;&#x60F3;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x53EA;&#x662F;&#x505C;&#x7559;&#x5728;&#x4E86;&#x201C;&#x60F3;&#x201D;&#x7684;&#x5C42;&#x9762;&#x4E0A;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x4ECA;&#x6211;&#x5DF2;&#x5F00;&#x59CB;&#x5954;&#x4E09;&#xFF0C;&#x597D;&#x591A;&#x4E8B;&#x60C5;&#x8FD8;&#x6CA1;&#x6709;&#x6765;&#x5F97;&#x53CA;&#x505A;&#xFF0C;&#x597D;&#x591A;&#x60F3;&#x6CD5;&#x4E5F;&#x65E9;&#x5DF2;&#x6CEF;&#x706D;&#xFF0C;&#x6211;&#x4E0D;&#x8981;&#x518D;&#x8FC7;&#x8FD9;&#x6837;&#x5B50;&#x7684;&#x751F;&#x6D3B;&#xFF0C;&#x6211;&#x60F3;&#x6539;&#x53D8;&#xFF0C;&#x6210;&#x4E3A;&#x66F4;&#x597D;&#x7684;&#x81EA;&#x5DF1;&#xFF01;</p>
+<p>&#x5982;&#x679C;&#x56DE;&#x5230;25&#x5C81;&#x6216;&#x8005;&#x66F4;&#x5E74;&#x8F7B;&#x53C8;&#x6216;&#x8005;&#x5BF9;&#x73B0;&#x5728;&#x7684;&#x4F60;&#xFF0C;&#x4F60;&#x60F3;&#x544A;&#x8BC9;&#x81EA;&#x5DF1;&#x4EC0;&#x4E48;&#xFF0C;&#x4F60;&#x8981;&#x600E;&#x4E48;&#x505A;&#xFF1F; Good luck and make it count .</p>
+</blockquote>
+<p>&#x5F53;&#x6211;&#x6B65;&#x5165;26&#x5C81;&#xFF0C;&#x610F;&#x8BC6;&#x5230;&#x65F6;&#x95F4;&#x8D8A;&#x8FC7;&#x8D8A;&#x5FEB;&#xFF0C;&#x597D;&#x591A;&#x4E8B;&#x60C5;&#x518D;&#x4E0D;&#x505A;&#x5C31;&#x6765;&#x4E0D;&#x53CA;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x5C31;&#x6709;&#x4E86;&#x8FD9;&#x4E2A;&#x535A;&#x5BA2;&#xFF0C;&#x8BB0;&#x5F55;&#x81EA;&#x5DF1;&#x8FD9;&#x4E00;&#x8DEF;&#x8D70;&#x6765;&#x7684;&#x5386;&#x7A0B;&#xFF0C;&#x5E0C;&#x671B;&#x80FD;&#x5FE0;&#x4E8E;&#x81EA;&#x5DF1;&#xFF0C;&#x575A;&#x6301;&#x4E0B;&#x53BB;&#xFF0C;&#x6BD5;&#x4E1A;&#x540E;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;10&#x5E74;&#x662F;&#x79EF;&#x7D2F;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x671F;&#x95F4;&#x9700;&#x8981;&#x6162;&#x6162;&#x6539;&#x53D8;&#x5B66;&#x4E60;&#x7684;&#x65B9;&#x5F0F;&#x65B9;&#x6CD5;&#xFF0C;&#x79EF;&#x7D2F;&#x884C;&#x4E1A;&#x77E5;&#x8BC6;&#xFF0C;&#x8BA4;&#x8BC6;&#x884C;&#x4E1A;&#x725B;&#x4EBA;&#xFF0C;&#x672C;&#x535A;&#x5BA2;&#x76EE;&#x7684;&#x5728;&#x4E8E;&#x79EF;&#x7D2F;&#xFF1A;&#x6C47;&#x603B;&#x65E5;&#x5E38;&#x6240;&#x5B66;&#xFF0C;&#x5206;&#x4EAB;&#x8BFB;&#x4E66;&#x7B14;&#x8BB0;&#xFF0C;&#x6574;&#x7406;&#x7F51;&#x7EDC;&#x8D44;&#x6599;&#xFF0C;&#x5FE0;&#x4E8E;&#x81EA;&#x5DF1;&#xFF0C;&#x5FE0;&#x4E8E;&#x7406;&#x60F3;&#xFF01;</p>
+<h2 id="&#x5173;&#x4E8E;-xirong">&#x5173;&#x4E8E; xirong</h2><p>&#x4ECB;&#x7ECD;&#x81EA;&#x5DF1;&#x662F;&#x6700;&#x56F0;&#x96BE;&#x7684;&#x4E00;&#x4EF6;&#x4E8B;&#x60C5;&#xFF0C;&#x5B83;&#x610F;&#x5473;&#x7740;&#xFF0C;&#x4F60;&#x628A;&#x81EA;&#x5DF1;&#x5B9A;&#x4F4D;&#x6210;&#x4EC0;&#x4E48;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x4F60;&#x60F3;&#x8FC7;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x751F;&#x6D3B;&#xFF0C;&#x8FD8;&#x610F;&#x5473;&#x7740;&#x4E00;&#x65E6;&#x4F60;&#x505A;&#x51FA;&#x4ECB;&#x7ECD;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x4F60;&#x81EA;&#x5DF1;&#x7684;&#x601D;&#x7EF4;&#x5C31;&#x5C40;&#x9650;&#x4E8E;&#x6B64;&#xFF0C;&#x56E0;&#x4E3A;&#x5230;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#x6211;&#x90FD;&#x6CA1;&#x6709;&#x60F3;&#x6E05;&#x695A;&#x201C;<strong>&#x6211;&#x662F;&#x8C01;</strong>&#x201D;&#x8FD9;&#x4E2A;&#x56F0;&#x96BE;&#x7684;&#x54F2;&#x5B66;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4E0D;&#x65AD;&#x7684;&#x7ED9;&#x81EA;&#x5DF1;&#x6253; tag&#xFF0C;&#x8BA9;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#x7684;&#x6807;&#x7B7E;&#x6765;&#x6765;&#x6A21;&#x7CCA;&#x7684;&#x5F62;&#x6210;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x4EBA;&#xFF0C;&#x540D;&#x5B57;&#x53EB; <code>xirong</code> </p>
+<blockquote>
+<p>89&#x3001;&#x5F00;&#x53D1;&#x8005;&#x3001;&#x5DE5;&#x7A0B;&#x5E08;&#x3001;&#x7A0B;&#x5E8F;&#x733F;&#x3001;java&#x3001;net&#x3001;C#&#x3001;js&#x3001;&#x524D;&#x7AEF;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x3001;&#x67B6;&#x6784;&#x3001;&#x5168;&#x6808; &#x3001;&#x97F3;&#x4E50;&#x3001;&#x7535;&#x5F71;&#x3001;&#x7F8E;&#x5267;&#x3001;&#x9605;&#x8BFB;&#x3001;&#x5199;&#x4F5C;&#x3001;&#x72EC;&#x7ACB;&#x535A;&#x4E3B;&#x3001;&#x8DD1;&#x6B65;&#x3001;&#x6E38;&#x6CF3;&#x3001;APP&#x3001;&#x7535;&#x5B50;&#x8BBE;&#x5907;&#x3001;&#x6DF3;&#x6734;&#x3001;&#x6781;&#x7B80; &#x3001;&#x6548;&#x7387;&#x3001;&#x654F;&#x6377;&#x4E2A;&#x4EBA;&#x3001;&#x65F6;&#x95F4;&#x7BA1;&#x7406;</p>
+</blockquote>
+<h2 id="&#x4E2A;&#x4EBA;&#x540D;&#x8A00;">&#x4E2A;&#x4EBA;&#x540D;&#x8A00;</h2><blockquote><p>&#x6BCF;&#x4E2A;&#x5E73;&#x51E1;&#x7684;&#x4EBA;&#x90FD;&#x6709;&#x7740;&#x81EA;&#x5DF1;&#x7684;&#x6545;&#x4E8B;&#xFF0C;&#x6709;&#x90A3;&#x4E48;&#x591A;&#x6C89;&#x9ED8;&#x7684;&#x65F6;&#x5149;&#xFF0C;&#x9ED8;&#x9ED8;&#x7684;&#x52AA;&#x529B;&#x7740;&#xFF0C;&#x5FCD;&#x53D7;&#x5B64;&#x72EC;&#x4E0E;&#x5BC2;&#x5BDE;&#xFF0C;&#x6CA1;&#x6709;&#x62B1;&#x6028;&#xFF0C;&#x6CA1;&#x6709;&#x8BC9;&#x82E6;&#xFF0C;&#x90A3;&#x6BB5;&#x8FDE;&#x81EA;&#x5DF1;&#x56DE;&#x5FC6;&#x8D77;&#x6765;&#x90FD;&#x611F;&#x52A8;&#x7684;&#x65E5;&#x5B50;&#xFF0C;&#x503C;&#x5F97;&#x8BB0;&#x5F55;&#xFF0C;&#x94ED;&#x8BB0;&#x5FC3;&#x4E2D;&#x3002;&#x52AA;&#x529B;&#x7684;&#x53BB;&#x505A;&#xFF0C;&#x53BB;&#x5C1D;&#x8BD5;&#x66F4;&#x591A;&#x7684;&#x53EF;&#x80FD;&#xFF0C;&#x4E0D;&#x8F9C;&#x8D1F;&#x5E74;&#x8F7B;&#xFF0C;&#x5FE0;&#x4E8E;&#x81EA;&#x5DF1;&#xFF0C;&#x5FE0;&#x4E8E;&#x7406;&#x60F3;&#xFF01;<br>Try a better life , you deserve more !</p>
+<footer><strong>xirong</strong><cite>be free</cite></footer></blockquote>
+<h2 id="&#x516C;&#x76CA;&#x4E8B;&#x4E1A;">&#x516C;&#x76CA;&#x4E8B;&#x4E1A;</h2><p>&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x516C;&#x76CA;&#xFF1F;&#x5728;&#x6211;&#x957F;&#x5927;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6709;&#x65E0;&#x6570;&#x7684;&#x4EBA;&#x5E2E;&#x52A9;&#x8FC7;&#x6211;&#xFF0C;&#x90A3;&#x4E2A;&#x65F6;&#x5019;&#x6211;&#x5C31;&#x60F3;&#x7740;&#x5C06;&#x6765;&#x4E00;&#x5B9A;&#x8981;&#x56DE;&#x62A5;&#x4ED6;&#x4EBA;&#xFF0C;&#x5E2E;&#x52A9;&#x66F4;&#x591A;&#x7684;&#x4EBA;&#xFF0C;&#x53EF;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x4E00;&#x76F4;&#x6CA1;&#x6709;&#x6765;&#x5F97;&#x53CA;&#x505A;&#x3002;&#x5F53;&#x6211;&#x770B;&#x5230;&#x300A;<a href="http://movie.douban.com/subject/25835293/" target="_blank" rel="external">&#x5931;&#x5B64;</a>&#x300B;&#x300A;<a href="http://movie.douban.com/subject/25798222/" target="_blank" rel="external">&#x4EB2;&#x7231;&#x7684;</a>&#x300B;&#x5C24;&#x5176;&#x662F;&#x770B;&#x5B8C;&#x300A;<a href="http://www.iqiyi.com/v_19rrnokglg.html#vfrm=2-3-0-1" target="_blank" rel="external">&#x5931;&#x5B64;&#x80CC;&#x540E;&#x7684;&#x6545;&#x4E8B;</a>&#x300B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6211;&#x60F3;&#xFF0C;&#x8FD9;&#x6216;&#x8BB8;&#x662F;&#x4E2A;&#x5951;&#x673A;&#xFF0C;&#x5E94;&#x8BE5;&#x5C31;&#x4ECE;&#x6B64;&#x523B;&#x505A;&#x8D77;&#x6765;&#xFF0C;&#x8981;&#x575A;&#x4FE1;&#x4E16;&#x754C;&#x4E4B;&#x5927;&#xFF0C;&#x53EA;&#x8981;&#x6BCF;&#x4E2A;&#x50CF;&#x6211;&#x8FD9;&#x4E00;&#x6837;&#x7684;&#x5C0F;&#x4EBA;&#x7269;&#x505A;&#x51FA;&#x4E00;&#x4E9B;&#x6539;&#x53D8;&#xFF0C;&#x4E16;&#x754C;&#x5C31;&#x4F1A;&#x7F8E;&#x597D;&#x4E00;&#x70B9;&#xFF0C;&#x6B63;&#x5728;&#x9605;&#x8BFB;&#x7684;&#x670B;&#x53CB;&#xFF0C;&#x5E0C;&#x671B;&#x4F60;&#x4E0E;&#x6211;&#x4E00;&#x8D77;&#xFF0C;&#x53C2;&#x4E0E;&#x5230;&#x516C;&#x76CA;&#x4E2D;&#x6765;&#xFF0C;&#x8BA9;&#x6B64;&#x4E8B;&#x6210;&#x4E3A;&#x6211;&#x4EEC;&#x7684;&#x4FE1;&#x4EF0;&#xFF0C;&#x4E00;&#x8D77;&#x5E2E;&#x52A9;&#x66F4;&#x591A;&#x9700;&#x8981;&#x5E2E;&#x52A9;&#x7684;&#x4EBA;&#xFF01;</p>
+<p>&#x8BA9;&#x6211;&#x4EEC;&#x4E00;&#x8D77;&#x4E3A;&#x4E16;&#x754C;&#x66F4;&#x7F8E;&#x597D;&#x4E00;&#x70B9;&#x800C;&#x7F8E;&#x4E3D;&#xFF01;</p>
+<ul>
+<li><a href="http://gongyi.qq.com/userinfo.htm?gyuin=1311756726&amp;ptlang=QQCLIENT" target="_blank" rel="external">&#x6211;&#x7684;&#x817E;&#x8BAF;&#x516C;&#x76CA;&#x6708;&#x6350;&#x8BA1;&#x5212;</a></li>
+<li><a href="http://npoapp.gongyi.qq.com/_MyactivityList" target="_blank" rel="external">&#x6211;&#x7684;&#x817E;&#x8BAF;&#x516C;&#x76CA;&#x6D3B;&#x52A8;</a></li>
+<li>&#x2026;&#x2026;</li>
+</ul>
+<h2 id="&#x6211;&#x6B63;&#x5728;&#x575A;&#x6301;&#x7684;&#x884C;&#x52A8;~">&#x6211;&#x6B63;&#x5728;&#x575A;&#x6301;&#x7684;&#x884C;&#x52A8;~</h2><ul>
+<li>100&#x5929;&#x884C;&#x52A8;&#x8BA1;&#x5212; &#x4E4B; &#x53D1;&#x73B0;&#x751F;&#x6D3B;&#x4E4B;&#x7F8E;&#xFF0C;&#x6BCF;&#x65E5;&#x4E00;&#x5F20;&#x56FE; <a href="https://instagram.com/ixirong/" target="_blank" rel="external">&#x6211;&#x7684;Instagram&#x5730;&#x5740;</a></li>
+<li>30&#x5929;&#x6311;&#x6218;&#x6BCF;&#x65E5;&#x8D21;&#x732E; github &#x5185;&#x5BB9; <a href="https://github.com/xirong" target="_blank" rel="external">&#x6211;&#x7684;GitHub&#x5730;&#x5740;</a></li>
+<li>&#x5F00;&#x59CB;&#x654F;&#x6377;&#x4E2A;&#x4EBA;&#x8BA1;&#x5212;&#xFF0C;&#x8BE6;&#x60C5;&#x89C1; <a href="http://www.zhoujingen.cn/blog/" target="_blank" rel="external">&#x5468;&#x91D1;&#x6839;&#x72EC;&#x7ACB;&#x535A;&#x5BA2;</a>&#xFF0C;&#x4E5F;&#x63A8;&#x8350;&#x5404;&#x4F4D;&#x52A0;&#x5165;&#x4E00;&#x8D77;&#x5206;&#x4EAB;&#x6539;&#x53D8;</li>
+<li>&#x6211;&#x7684; Mooc &#x5B66;&#x4E60;&#x8BA1;&#x5212;</li>
+<li>&#x2026;&#x2026;</li>
+</ul>
+<h2 id="one-more-thing">One more thing &#x2026;&#x2026;</h2><p>&#x65E0;&#x8BBA;&#x4F55;&#x65F6;&#x4F60;&#x90FD;&#x8981;&#x8BB0;&#x4F4F; <code>xirong</code> &#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x7684;&#x7F51;&#x7EDC; ID&#xFF0C;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x6765;&#x81EA;&#x7F51;&#x7EDC;&#x4E0A;&#x9762;&#x7684;&#x58F0;&#x97F3;&#xFF0C;&#x53EF;&#x5728;&#x6D3B;&#x751F;&#x751F;&#x7684;&#x4E16;&#x754C;&#x91CC;&#x9762;&#xFF0C;&#x5374;&#x771F;&#x5B9E;&#x7684;&#x751F;&#x5B58;&#x7740;&#x8FD9;&#x4E48;&#x4E00;&#x4E2A;&#x4EBA;&#xFF0C;&#x6709;&#x7740;&#x535A;&#x6587;&#x4E2D;&#x7684;&#x4EF7;&#x503C;&#x89C2;&#x548C;&#x4E00;&#x4E9B;&#x72EC;&#x7279;&#x7684;&#x60F3;&#x6CD5;&#xFF0C;&#x811A;&#x8E0F;&#x5B9E;&#x5730;&#x7684;&#x884C;&#x8D70;&#x5728;&#x8FD9;&#x6761;&#x8270;&#x96BE;&#x7684;&#x4EBA;&#x751F;&#x8DEF;&#x4E0A;&#xFF0C;&#x52AA;&#x529B;&#x8DDF;&#x968F;&#x81EA;&#x5DF1;&#x7684;&#x5185;&#x5FC3;&#xFF0C;&#x53BB;&#x8FFD;&#x6C42;&#x7406;&#x60F3;&#x4E2D;&#x7684;&#x751F;&#x6D3B;&#xFF1B; <code>xirong</code> &#x662F;&#x8C01;&#x5E76;&#x4E0D;&#x91CD;&#x8981;&#xFF0C;&#x91CD;&#x8981;&#x7684;&#x662F;&#x82B8;&#x82B8;&#x4F17;&#x751F;&#x4E2D;&#x6709;&#x90A3;&#x4E48;&#x4E00;&#x6279;&#x4EBA;&#xFF0C;&#x6709;&#x6240;&#x60F3;&#x6709;&#x6240;&#x505A;&#xFF0C;&#x4E0D;&#x7126;&#x4E0D;&#x71E5;&#xFF0C;&#x5FE0;&#x4E8E;&#x81EA;&#x5DF1;&#xFF0C;&#x5FE0;&#x4E8E;&#x7406;&#x60F3;&#xFF0C;&#x4E0D;&#x65AD;&#x7A81;&#x7834;&#x7740;&#x3001;&#x575A;&#x5B88;&#x7740;&#xFF0C;&#x6216;&#x8BB8;&#x4F60;&#x770B;&#x5230;&#x6587;&#x7AE0;&#x4E2D;&#x7684;&#x67D0;&#x4E9B;&#x6587;&#x5B57;&#x4F1A;&#x4EA7;&#x751F;&#x5171;&#x9E23;&#xFF0C;&#x5F15;&#x8D77;&#x6539;&#x53D8;&#xFF0C;&#x8FDB;&#x800C;&#x5C06;&#x8FD9;&#x79CD;&#x6539;&#x53D8;&#x5E26;&#x7ED9;&#x8EAB;&#x8FB9;&#x7684;&#x4EBA;&#xFF0C;&#x8BA9;&#x81EA;&#x5DF1;&#x7684;&#x751F;&#x6D3B;&#x66F4;&#x52A0;&#x7F8E;&#x597D;&#xFF0C;&#x8FD9;&#x662F;&#x5E73;&#x51E1;&#x7684;&#x529B;&#x91CF;&#xFF01; &#x4E00;&#x4E2A;&#x5E73;&#x51E1;&#x7684;&#x4EBA;&#xFF0C;&#x7528; <code>xirong</code> &#x8FD9;&#x4E2A; ID &#x6446;&#x5F04;&#x7740;&#x4E00;&#x4E9B;&#x6587;&#x5B57;&#xFF0C;&#x5F71;&#x54CD;&#x7740;&#x4E00;&#x4E9B;&#x4EBA;&#xFF0C;&#x8FD9;&#x5C31;&#x8DB3;&#x591F;&#x4E86;&#x2026;&#x2026;</p>
+<h2 id="&#x8054;&#x7CFB;-xirong">&#x8054;&#x7CFB; xirong</h2><ul>
+<li><a href="https://twitter.com/ixirong" target="_blank" rel="external">Twitter</a> &#x3001; <a href="http://weibo.com/jackieliuxirong" target="_blank" rel="external">&#x5FAE;&#x535A;</a></li>
+<li><a href="http://www.douban.com/people/alexliuxirong/" target="_blank" rel="external">&#x8C46;&#x74E3;</a></li>
+<li><a href="https://github.com/xirong/" target="_blank" rel="external">GitHub</a> &#x3001; <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank" rel="external">StackOverflow</a></li>
+<li><a href="http://www.jianshu.com/users/51db946c00fa/latest_articles" target="_blank" rel="external">&#x7B80;&#x4E66;</a> </li>
+<li><a href="mailto:ixirong.liu@gmail.com" target="_blank" rel="external">MailMe(&#x90AE;&#x4EF6;&#x8054;&#x7CFB;)</a></li>
+</ul>
+<p>&#x4E0E;&#x6211;&#x4E00;&#x8D77;&#xFF0C;&#x8046;&#x542C;&#x8FD9;&#x9996; Beyond &#x7684;&#x300A;&#x6D77;&#x9614;&#x5929;&#x7A7A;&#x300B;&#xFF0C;&#x611F;&#x53D7;&#x5185;&#x5FC3;&#x6DF1;&#x5904;&#x7684;&#x89E6;&#x52A8; ~ </p>
+<embed src="http://music.163.com/style/swf/widget.swf?sid=347230&amp;type=2&amp;auto=1&amp;width=320&amp;height=66" width="340" height="86" allownetworking="all">
+    
+  </div>
+
+
+
+          
+         
+        </div>        
+      </div>
+               
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/xirong.jpg" alt="xirong" />
+          <p class="site-author-name">xirong</p>
+        </div>
+        <p class="site-description motion-element">有故事、有担当、有思考</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/ixirong" target="_blank">Twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/jackieliuxirong" target="_blank">微博</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/xirong/" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank">StackOverflow</a>
+            </span>
+                      
+           </div>
+        
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+     
+        
+          <div class="links-of-author motion-element">        
+          <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.read.org.cn/" target="_blank">战隼</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.mifengtd.cn/" target="_blank">褪墨</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://mindhacks.cn/" target="_blank">刘未鹏</a>
+              </span>
+            
+          </div>
+        
+        
+      </div>
+
+      
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  
+  <span class="author"> xirong</span>
+</div>
+
+<div class="powered-by">
+  <div style="float:left;margin-top:7px;margin-right:10px;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254711542'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254711542%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+   鲁ICP备15013969号
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Clone theme 
+  <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
+    NexT
+  </a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

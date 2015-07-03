@@ -1,0 +1,1259 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+    <meta name="description" content="sql语句基础复习及资料推荐, 有故事、有担当、有思考" />
+
+
+
+  <meta name="keywords" content="sql,sqlserver,数据库, 基础知识,sqlserver,ms sqlserver,sql脚本,sql数据库" />
+
+
+
+
+
+  <meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+
+
+
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+ 
+
+
+
+  <meta name="baidu_union_verify" content="63d8c69bdbc435b09f0d1b064de79a19" />
+
+
+
+  <meta  baidu-gxt-verify-token="52c8363b5f7cf3520969573f8b170868" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自由" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+  <title> sql语句基础复习及资料推荐 - 自由 </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">自由</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
+    </script>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
+        <a href="/404.html">
+          <i class="menu-item-icon icon-commonweal"></i> <br />
+          公益404
+        </a>
+      </li>
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              sql语句基础复习及资料推荐
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-20
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/DB/">DB</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/20/materials-about-sql/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/20/materials-about-sql/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x5185;&#x5BB9;&#x6765;&#x81EA;4&#x5E74;&#x524D;&#x7684;&#x4E2A;&#x4EBA;&#x535A;&#x5BA2;&#x56ED;&#x4E0A;&#x7684;&#x535A;&#x5BA2;&#xFF0C;&#x8FD9;&#x91CC;&#x5C06;&#x8FD9;&#x4E9B;&#x5185;&#x5BB9;&#x8FC1;&#x79FB;&#x8FC7;&#x6765;&#xFF0C;&#x6B63;&#x597D;&#x987A;&#x4FBF;&#x4E5F;&#x662F;&#x590D;&#x4E60;&#x4E00;&#x904D;&#x3002;&#x771F;&#x662F;&#x611F;&#x6168;&#x65F6;&#x5149;&#x98DE;&#x901D;&#x554A;&#xFF0C;&#x8FD8;&#x8BB0;&#x5F97;&#x5F53;&#x65F6;&#x8BA4;&#x8BA4;&#x771F;&#x771F;&#x7684;&#x62FF;&#x7740;&#x4E66;&#x5199;&#x8FD9;&#x4E24;&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x60C5;&#x666F;&#xFF0C;&#x604D;&#x5982;&#x6628;&#x65E5;&#xFF01;&#xFF01; &#x539F;&#x6587;&#x7AE0;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li><a href="http://www.cnblogs.com/xirongliu/archive/2011/03/24/1993668.html" target="_blank" rel="external">MS SQLServer &#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x56DE;&#x987E;&#xFF08;&#x4E00;&#xFF09;</a></li>
+<li><a href="http://www.cnblogs.com/xirongliu/archive/2011/03/27/1997329.html" target="_blank" rel="external">MS sql server &#x57FA;&#x7840;&#x77E5;&#x8BC6;&#x56DE;&#x987E;&#xFF08;&#x4E8C;&#xFF09;-&#x8868;&#x8FDE;&#x63A5;&#x548C;&#x5B50;&#x67E5;&#x8BE2;</a></li>
+</ul>
+<h1 id="&#x4E00;-&#x6570;&#x636E;&#x7C7B;&#x578B;">&#x4E00;&#x3001; &#x6570;&#x636E;&#x7C7B;&#x578B;</h1><p>&#x5305;&#x62EC;&#x6574;&#x6570;&#x7C7B;&#x578B;&#xFF08;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x505A;&#x4E3B;&#x952E;&#xFF09;&#x7684;&#x5982;bit&#xFF0C;int&#xFF0C;smallint&#xFF0C;tinyint&#xFF0C;bigint&#xFF0C;&#x5B58;&#x50A8;&#x7684;&#x8303;&#x56F4;&#x4E2A;&#x4E0D;&#x884C;&#x540C;&#xFF0C;&#x5E38;&#x7528;&#x7684;&#x6709;int&#xFF0C;bigint&#x7B49;&#xFF1B;&#x6570;&#x503C;&#x7C7B;&#x578B;decimal&#xFF08;p&#xFF0C;s&#xFF09;&#x3010;p&#x4E3A;&#x56FA;&#x5B9A;&#x7CBE;&#x5EA6;&#xFF0C;s&#x4E3A;&#x5BBD;&#x5EA6;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x65F6;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x8303;&#x56F4;&#x548C;&#x7CBE;&#x5EA6;&#x3011;&#xFF0C;numeric&#xFF08;decimal&#x7684;&#x540C;&#x4E49;&#x8BCD;&#xFF09;&#xFF0C;money&#xFF08;&#x8D27;&#x5E01;&#x578B;&#xFF0C;&#x7CBE;&#x786E;&#x5230;&#x8D27;&#x5E01;&#x7684;&#x4E07;&#x5206;&#x4E4B;&#x4E00;&#xFF09;&#xFF0C;smallmoney&#xFF08;&#x8D27;&#x5E01;&#x578B;&#xFF09;&#xFF0C;float&#xFF08;&#x8FD1;&#x4F3C;&#x6570;&#x503C;&#x578B;&#xFF0C;&#x4F9B;&#x6D6E;&#x70B9;&#x6570;&#x4F7F;&#x7528;&#xFF09;&#x7B49;&#x3002;</p>
+<p>&#x5B57;&#x7B26;&#x7C7B;&#x578B;&#xFF1A;&#x56FA;&#x5B9A;&#x957F;&#x5EA6;char&#xFF0C;nchar&#xFF0C;&#x53EF;&#x53D8;&#x957F;&#x5EA6;varchar&#xFF0C;&#x56FD;&#x9645;&#x5316;&#x53EF;&#x53D8;&#x957F;&#x5EA6;nvarchar&#x3002;&#x56FA;&#x5B9A;&#x957F;&#x5EA6;char&#x7C7B;&#x578B;&#x7684;&#xFF0C;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x5177;&#x6709;&#x56FA;&#x5B9A;&#x957F;&#x5EA6;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x5B57;&#x7B26;&#x957F;&#x5EA6;&#x4E0D;&#x6EE1;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5219;&#x7528;&#x7A7A;&#x683C;&#x586B;&#x5145;&#xFF0C;&#x8FD9;&#x6837;&#x5728;&#x8BFB;&#x53D6;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x65F6;&#x5019;&#x4E5F;&#x5C06;&#x7A7A;&#x683C;&#x8BFB;&#x53D6;&#x51FA;&#x6765;&#xFF0C;&#x5F88;&#x4E0D;&#x65B9;&#x4FBF;&#xFF1B;&#x53EF;&#x53D8;&#x957F;&#x5EA6;varchar&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6700;&#x5927;&#x957F;&#x5EA6;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x6570;&#x636E;&#x4E0D;&#x8DB3;&#x6700;&#x5927;&#x957F;&#x5EA6;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x4E0D;&#x4F1A;&#x5C06;&#x5269;&#x4E0B;&#x7684;&#x90E8;&#x5206;&#x7528;&#x7A7A;&#x683C;&#x586B;&#x5145;&#xFF1B;&#x56FA;&#x5B9A;&#x957F;&#x5EA6;&#x548C;&#x53EF;&#x53D8;&#x957F;&#x5EA6;&#x53EA;&#x80FD;&#x5B58;&#x50A8;&#x57FA;&#x4E8E;ASCII&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x8FD9;&#x6837;&#x5BF9;&#x4E8E;&#x4E2D;&#x6587;&#x3001;&#x65E5;&#x6587;&#x3001;&#x97E9;&#x6587;&#x7B49;Unicode&#x5B57;&#x7B26;&#x96C6;&#x7684;&#x7A0B;&#x5E8F;&#x6765;&#x8BF4;&#x5C31;&#x4F1A;&#x9020;&#x6210;&#x5B58;&#x50A8;&#x95EE;&#x9898;&#xFF0C;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x4F7F;&#x7528;&#x56FD;&#x9645;&#x5316;&#x53EF;&#x53D8;&#x957F;&#x5EA6;nvarchar&#x3002;</p>
+<a id="more"></a>
+<p>&#x65E5;&#x671F;&#x65F6;&#x95F4;&#x7C7B;&#x578B;&#xFF1A;smalldatetime&#xFF0C;timestamp&#xFF08;&#x65F6;&#x95F4;&#x6233;&#xFF09;&#xFF0C;datetime-&#x683C;&#x5F0F;&#x4E3A;&#x2018;2008-8-8 19:30:34&#x2019;&#x3002;</p>
+<p>&#x4E8C;&#x8FDB;&#x5236;&#x7C7B;&#x578B;&#xFF1A;&#x5728;&#x5B58;&#x50A8;&#x4E00;&#x5E45;&#x56FE;&#x7247;&#x6216;&#x8005;&#x4E00;&#x6BB5;&#x89C6;&#x9891;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x8981;&#x4F7F;&#x7528;&#x4E8C;&#x8FDB;&#x5236;&#x7C7B;&#x578B;&#x7684;&#x5B57;&#x6BB5;&#xFF0C;&#x8FD9;&#x79CD;&#x5B57;&#x6BB5;&#x901A;&#x5E38;&#x80FD;&#x591F;&#x4FDD;&#x5B58;&#x975E;&#x5E38;&#x5927;&#x7684;&#xFF0C;&#x6CA1;&#x6709;&#x56FA;&#x5B9A;&#x7ED3;&#x6784;&#x7684;&#x6570;&#x636E;&#x3002;&#x5982;image&#xFF0C;&#x53EF;&#x4EE5;&#x4FDD;&#x5B58;&#x4EFB;&#x610F;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<h1 id="&#x4E8C;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x8868;">&#x4E8C;&#x3001;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x8868;</h1><h2 id="1&#x521B;&#x5EFA;&#x6570;&#x636E;&#x8868;">1&#x3001;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x8868;</h2><p>sql&#x8BED;&#x53E5;&#x521B;&#x5EFA;&#x6570;&#x636E;&#x8868;&#xFF1A;create table &#x8868;&#x540D;&#xFF08;&#x5B57;&#x6BB5;1 &#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#xFF0C;&#x5B57;&#x6BB5;2&#xFF0C;&#x5B57;&#x6BB5;&#x7C7B;&#x578B;&#x2026;&#x2026; &#x7EA6;&#x675F;&#x5B9A;&#x4E49;1&#xFF0C; &#x7EA6;&#x675F;&#x5B9A;&#x4E49;2&#x2026;&#x2026;&#xFF09; (&#x5173;&#x4E8E;&#x4E3B;&#x952E;&#x548C;&#x5916;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x7A0D;&#x540E;&#x518D;&#x8BE6;&#x7EC6;&#x8BB2;&#x89E3;)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x4F8B;&#x5982;&#x521B;&#x5EFA;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x4EBA;&#x5458;&#x4FE1;&#x606F;&#x7684;&#x6570;&#x636E;&#x8868;</span></span><br><span class="line"> <span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> T_Person (FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> , FName <span class="built_in">varchar</span>(<span class="number">20</span>),FAge <span class="built_in">int</span>,<span class="keyword">primary</span> <span class="keyword">key</span>(FId) ) </span><br><span class="line"><span class="comment">-- &#x521B;&#x5EFA;&#x6709;&#x5916;&#x952E;&#x7684;&#x8868;T_Order&#xFF0C;&#x5176;&#x4E2D;&#x7684;FCustomerId&#x4E3A;&#x8868;T_Person&#x7684;&#x4E3B;&#x952E;FId</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T_Order (FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> ,FName <span class="built_in">varchar</span>(<span class="number">20</span>),FAccount <span class="built_in">int</span> ,FCustomerId <span class="built_in">int</span> ,</span><br><span class="line"> <span class="keyword">foreign</span> <span class="keyword">key</span> (FCustomerId)  <span class="keyword">references</span> T_Person (FId))</span></span><br></pre></td></tr></table></figure>
+<h2 id="2&#x4FEE;&#x6539;&#x5DF2;&#x6709;&#x8868;">2&#x3001;&#x4FEE;&#x6539;&#x5DF2;&#x6709;&#x8868;</h2><p>&#x6DFB;&#x52A0;&#x5B57;&#x6BB5;&#xFF1A;alter table &#x8868;&#x540D; add &#x5B57;&#x6BB5;&#x540D; &#x5B57;&#x6BB5;&#x7C7B;&#x578B;  &#x3002;&#x5220;&#x9664;&#x5B57;&#x6BB5; &#xFF1A;alter table &#x8868;&#x540D; drop &#x5B57;&#x6BB5;&#x540D;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x4E3A;T_Person &#x6DFB;&#x52A0;&#x5B57;&#x6BB5;FYearofBirth</span></span><br><span class="line"><span class="operator"><span class="keyword">alter</span> <span class="keyword">table</span> T_Person  <span class="keyword">add</span> FYearofBirth <span class="built_in">int</span> </span><br><span class="line"><span class="comment">-- &#x5220;&#x9664;&#x8868;T_Person&#x4E2D;&#x7684;&#x5B57;&#x6BB5;FAge</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> T_Person <span class="keyword">drop</span> FAge</span></span><br></pre></td></tr></table></figure>
+<h2 id="3&#x5220;&#x9664;&#x6570;&#x636E;&#x8868;">3&#x3001;&#x5220;&#x9664;&#x6570;&#x636E;&#x8868;</h2><p>&#x5305;&#x62EC;&#x6E05;&#x7A7A;&#x6570;&#x636E;&#x8868;&#xFF08;delete from&#xFF09;&#x548C;&#x9500;&#x6BC1;&#x6570;&#x636E;&#x8868;&#xFF08;drop&#xFF09;&#xFF0C;&#x4E24;&#x8005;&#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#xFF0C;delete&#x53EA;&#x662F;&#x5C06;&#x8868;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x5168;&#x90E8;&#x6E05;&#x7A7A;&#xFF0C;&#x4F46;&#x662F;&#x8868;&#x7684;&#x6846;&#x67B6;&#x8FD8;&#x5728;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;insert&#x8BED;&#x53E5;&#x4E3A;&#x8868;&#x63D2;&#x5165;&#x65B0;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x800C;drop&#x662F;&#x5C06;&#x6570;&#x636E;&#x8868;&#x76F4;&#x63A5;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x9500;&#x6BC1;&#xFF0C;&#x6539;&#x8868;&#x4E0D;&#x5B58;&#x5728;&#x4E86;&#x3002;</p>
+<p>&#x8BED;&#x6CD5;  delete from &#x8868;&#x540D;   drop&#x8868;&#x540D;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x4F8B;&#x5982; &#xFF1A;&#x5220;&#x9664;&#x8868;T_Person</span></span><br><span class="line"> <span class="operator"><span class="keyword">delete</span> <span class="keyword">from</span> T_Person   </span><br><span class="line"> <span class="keyword">drop</span> T_Person  </span><br><span class="line"><span class="comment">--  &#x5220;&#x9664;&#x5E74;&#x9F84;&#x5728;20-30&#x5C81;&#x4E4B;&#x95F4;&#x7684;&#x6570;&#x636E;   </span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> T_Person <span class="keyword">where</span> FAge &gt;<span class="number">20</span> <span class="keyword">and</span> FAge&lt;<span class="number">30</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="4&#x4E3A;&#x6570;&#x636E;&#x8868;&#x63D2;&#x5165;&#x65B0;&#x7684;&#x6570;&#x636E;insert&#x8BED;&#x53E5;">4&#x3001;&#x4E3A;&#x6570;&#x636E;&#x8868;&#x63D2;&#x5165;&#x65B0;&#x7684;&#x6570;&#x636E;&#xFF08;insert&#x8BED;&#x53E5;&#xFF09;</h2><p>&#x8BED;&#x6CD5;&#xFF1A;insert into &#x8868;&#x540D; &#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x5B57;&#x6BB5;2&#x2026;&#x2026;&#x5B57;&#x6BB5;n&#xFF09; values &#xFF08;&#x503C;1&#xFF0C;&#x503C;2,&#x2026;&#x2026;&#x503C;n&#xFF09;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x4F8B;&#x5982;&#xFF1A; &#x4E3A;T_Person&#x63D2;&#x5165;&#x4E00;&#x6761;&#x6570;&#x636E;</span></span><br><span class="line"> <span class="operator"><span class="keyword">insert</span>  <span class="keyword">into</span> T_Person (FId , FName ,FAge ,FYearofBirth) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&apos;Tom&apos;</span>,<span class="number">24</span>,<span class="number">1989</span>)</span></span><br></pre></td></tr></table></figure>
+<p>&#x518D;&#x63D2;&#x5165;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x8981;&#x6CE8;&#x610F;&#x539F;&#x8868;&#x4E2D;&#x7684;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#xFF0C;&#x5982;FId&#x5C31;&#x6709;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x4E3A;FId&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5219;&#x4F1A;&#x62A5;&#x9519;&#x3002;&#x540C;&#x6837;FId&#x6709;&#x4E3B;&#x952E;&#x7684;&#x7EA6;&#x675F;&#xFF0C;&#x5982;&#x679C;&#x4E3A;T_Person&#x8868;&#x518D;&#x63D2;&#x5165;&#x4E00;&#x6761;FId=1&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4E5F;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x8FD9;&#x8FDD;&#x53CD;&#x4E86;&#x4E3B;&#x952E;&#x5FC5;&#x987B;&#x552F;&#x4E00;&#x7684;&#x7EA6;&#x675F;&#x3002;&#x518D;&#x5982;&#x5916;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x8BF7;&#x770B;&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x73B0;&#x5728;&#x7684;T_Person&#x8868;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x6761;&#x540D;&#x4E3A;Tom&#x7684;&#x6570;&#x636E;&#xFF0C;&#x73B0;&#x5728;&#x5411;T_Order&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x4E00;&#x6761;&#x6570;&#x636E;</span></span><br><span class="line"> <span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> T_Order (FId ,FName,FAccount ,FCustomerId) <span class="keyword">values</span> (<span class="number">1</span>,<span class="string">&apos;Milk&apos;</span>,<span class="number">100</span>,<span class="number">2</span>)</span></span><br></pre></td></tr></table></figure>
+<pre><code>&#x6B64;&#x65F6;&#x4F1A;&#x62A5;&#x9519;&#x201C;<span class="operator"><span class="keyword">INSERT</span> &#x8BED;&#x53E5;&#x4E0E; <span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> &#x7EA6;&#x675F;<span class="string">&quot;FK__T_Order2__FCusto__1BFD2C07&quot;</span>&#x51B2;&#x7A81;&#x3002;&#x8BE5;&#x51B2;&#x7A81;&#x53D1;&#x751F;&#x4E8E;&#x6570;&#x636E;&#x5E93;<span class="string">&quot;Sql jindian&quot;</span>&#xFF0C;&#x8868;<span class="string">&quot;dbo.T_Person&quot;</span>, <span class="keyword">column</span> <span class="string">&apos;FId&apos;</span>&#x3002;&#x8BED;&#x53E5;&#x5DF2;&#x7EC8;&#x6B62;&#x3002;&#x201D;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x5728;&#x8868;T_Person&#x4E2D;&#x6CA1;&#x6709;FId=<span class="number">2</span>&#x7684;&#x8FD9;&#x6761;&#x6570;&#x636E;&#xFF0C;&#x8FDD;&#x53CD;&#x4E86;&#x5916;&#x952E;&#x7684;&#x7EA6;&#x675F;&#x3002;</span>
+</code></pre><h2 id="5&#x6570;&#x636E;&#x66F4;&#x65B0;update&#x8BED;&#x53E5;">5&#x3001;&#x6570;&#x636E;&#x66F4;&#x65B0;&#xFF08;Update&#x8BED;&#x53E5;&#xFF09;</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x5C06;T_Person&#x8868;&#x4E2D;&#x6240;&#x6709;&#x6570;&#x636E;&#x7684;FAge&#x5217;&#x7684;&#x503C;&#x66F4;&#x65B0;&#x4E3A;30&#xFF0C;&#x6267;&#x884C;&#x5B8C;&#x540E;&#xFF0C;&#x8BE5;&#x5217;&#x7684;&#x503C;&#x5168;&#x53D8;&#x4E3A;30</span></span><br><span class="line"><span class="operator"><span class="keyword">update</span> T_Person <span class="keyword">set</span> FAge=<span class="number">30</span></span><br><span class="line"><span class="comment">-- update&#x8FD8;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x5E26;&#x6709;where&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5C06;&#x5728;1990&#x5E74;&#x51FA;&#x751F;&#x7684;&#x4EBA;&#x7684;&#x5E74;&#x9F84;&#x66F4;&#x65B0;&#x4E3A;30&#x5C81;</span></span><br><span class="line"> <span class="keyword">update</span> T_Person <span class="keyword">set</span> FAge=<span class="number">30</span> <span class="keyword">where</span> FYearofBirth =<span class="number">1990</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x540C;&#x6837;&#x7684;&#xFF0C;&#x5728;&#x66F4;&#x65B0;&#x8BED;&#x53E5;&#x4E2D;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#xFF0C;&#x4E3B;&#x952E;&#x548C;&#x5916;&#x952E;&#x4E5F;&#x4F1A;&#x5BF9;&#x5176;&#x4EA7;&#x751F;&#x5F71;&#x54CD;&#x3002;&#x5982;&#x5BF9;&#x4E8E;T_Person&#x4E2D;&#x7684;FId&#x5B57;&#x6BB5;&#xFF0C;&#x6709;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#x548C;&#x4E3B;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x66F4;&#x65B0;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x80FD;&#x5C06;&#x4E00;&#x6761;&#x6570;&#x636E;&#x7684;set FId=null &#xFF0C;&#x8FDD;&#x53CD;&#x4E86;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#xFF0C;&#x4E0D;&#x80FD;&#x5C06;FId&#x66F4;&#x65B0;&#x4E3A;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;FId&#x7684;&#x503C;&#x3002;&#x5BF9;&#x4E8E;&#x66F4;&#x65B0;T_Order&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x4E5F;&#x4E0D;&#x80FD;&#x66F4;&#x65B0;T_Person&#x8868;&#x4E2D;&#x6CA1;&#x6709;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x56E0;&#x4E3A;&#x5B58;&#x5728;T_Order.FCustomerId =T_Person.FId &#x8FD9;&#x4E2A;&#x5916;&#x952E;&#x7EA6;&#x675F;&#x3002;</p>
+<h2 id="6&#x6570;&#x636E;&#x8868;&#x7684;&#x68C0;&#x7D22;select&#x8BED;&#x53E5;">6&#x3001;&#x6570;&#x636E;&#x8868;&#x7684;&#x68C0;&#x7D22;&#xFF08;select&#x8BED;&#x53E5;&#xFF09;</h2><p>(1)&#x3001;&#x53D6;&#x51FA;&#x6570;&#x636E;&#x8868;T_Perosn&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4E24;&#x6761;&#x8BED;&#x53E5;&#x6267;&#x884C;&#x6548;&#x679C;&#x4E00;&#x6837;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span>  * <span class="keyword">from</span> T_Person </span><br><span class="line"><span class="keyword">select</span> FId ,FName,FAge,FYearofBirth <span class="keyword">from</span> T_Person</span></span><br></pre></td></tr></table></figure>
+<p>(2)&#x3001;&#x6392;&#x5E8F; &#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5C06;&#x8868;T_Person &#x4E2D;&#x6570;&#x636E;&#x6309;&#x7167;&#x5E74;&#x9F84;&#x7684;&#x5927;&#x5C0F;&#x6392;&#x5217;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Person <span class="keyword">order</span> <span class="keyword">by</span> FAge <span class="keyword">DESC</span></span></span><br></pre></td></tr></table></figure>
+<p>desc&#x662F;descend&#x7684;&#x7F29;&#x5199;&#xFF0C;&#x610F;&#x4E3A;&#x4E0B;&#x964D;&#xFF0C;&#x5411;&#x4E0B;&#xFF1B;asc&#x4E3A;ascend&#x7684;&#x7F29;&#x5199;&#xFF0C;&#x610F;&#x4E3A;&#x5411;&#x4E0A;&#xFF0C;&#x4E0A;&#x5347;&#xFF0C;&#x6500;&#x767B;</p>
+<p>(3)&#x3001;&#x6761;&#x4EF6;&#x8FC7;&#x6EE4;&#xFF0C;&#x5305;&#x62EC;&#x4E00;&#x822C;&#x7684;where&#x8BED;&#x53E5;&#x548C;&#x901A;&#x914D;&#x7B26;&#x8FC7;&#x6EE4;&#xFF08;&#x5355;&#x5B57;&#x7B26;&#xFF0C;&#x591A;&#x5B57;&#x7B26;&#x548C;&#x96C6;&#x5408;&#x901A;&#x914D;&#x7B26;&#xFF09;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FAge=<span class="number">20</span> <span class="keyword">and</span> FYearofBirth &gt;<span class="number">1990</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x5355;&#x5B57;&#x7B26;&#x901A;&#x914D; _ :&#x5339;&#x914D;&#x5355;&#x4E2A;&#x51FA;&#x73B0;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x591A;&#x5B57;&#x7B26;%:&#x5339;&#x914D;&#x591A;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x96C6;&#x5408;[]:&#x5339;&#x914D;&#x6EE1;&#x8DB3;&#x96C6;&#x5408;&#x8981;&#x6C42;&#x7684;&#x5B57;&#x7B26;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x5339;&#x914D;&#x59D3;&#x540D;&#x4EE5;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x5F00;&#x5934;&#xFF0C;&#x540E;&#x9762;&#x4E3A;erry&#x7684;&#xFF0C;&#x4F8B;&#x5982;kerry&#x5C06;&#x4F1A;&#x5339;&#x914D;&#x51FA;&#x6765;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span>  * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FName <span class="keyword">like</span> <span class="string">&apos;_erry&apos;</span></span><br><span class="line"><span class="comment">-- &#x5339;&#x914D;&#x59D3;&#x540D;&#x4E2D;&#x4EE5;y&#x7ED3;&#x5C3E;&#xFF0C;&#x524D;&#x9762;&#x4EFB;&#x610F;&#x591A;&#x5B57;&#x7B26; &#xFF0C;&#x4F8B;&#x5982; kerry&#xFF0C;lily&#x7B49;</span></span><br><span class="line"><span class="keyword">select</span>  * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FName <span class="keyword">like</span> <span class="string">&apos;%y&apos;</span></span><br><span class="line"><span class="comment">-- &#x96C6;&#x5408;&#x5339;&#x914D;&#xFF1A;&#x59D3;&#x540D;&#x4EE5;s&#x6216;&#x8005;j&#x5F00;&#x5934;&#x7684;&#xFF0C;&#x4E0D;&#x662F;&#x4EE5;bt&#x5F00;&#x5934;&#x7684;</span></span><br><span class="line"> <span class="keyword">select</span> * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FName <span class="keyword">like</span> <span class="string">&apos;[sj]%&apos;</span></span><br><span class="line"> <span class="keyword">select</span> * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FName <span class="keyword">like</span> <span class="string">&apos;[^bt]%&apos;</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x6CA1;&#x6709;&#x6DFB;&#x52A0;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#x7684;&#x5217;&#x662F;&#x53EF;&#x4EE5;&#x4E3A;&#x7A7A;&#x503C;&#x7684;&#xFF08;null&#xFF09;&#xFF0C;&#x6709;&#x65F6;&#x6211;&#x4EEC;&#x8981;&#x5BF9;&#x7A7A;&#x503C;&#x8FDB;&#x884C;&#x76D1;&#x6D4B;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Person <span class="keyword">where</span> FName <span class="keyword">is</span> <span class="literal">null</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x53CD;&#x4E49;&#x8FD0;&#x7B97;&#x7B26;&#xFF1A;&lt; &gt; = !=  &#x7B49;&#x8FD9;&#x4E9B;&#x662F;&#x7528;&#x6765;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#x503C;&#x7684;&#xFF0C;&#x5176;&#x4E2D;&#x4E0D;&#x7B49;&#x4E8E;&#x53EF;&#x4EE5;&#x7528;&#x591A;&#x79CD;&#x5F62;&#x5F0F;&#x8868;&#x793A;&#xFF0C;&#x201C;&#xFF01;&#x201D;&#x53EA;&#x80FD;&#x7528;&#x5728;MS sql server&#x548C;DB2&#x4E2D;&#x4E2A;&#xFF0C;&#x5176;&#x5B83;&#x6570;&#x636E;&#x5E93;&#x4E0D;&#x652F;&#x6301;&#x3002;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x201C;&lt;&gt;&#x201D;&#x548C;&#x201D;not &#x201D;&#x6765;&#x8FDB;&#x884C;&#x4E0D;&#x7B49;&#x7684;&#x5224;&#x65AD;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span> FAge != <span class="number">20</span> <span class="keyword">and</span> FAge &gt;<span class="number">19</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span> FAge &lt;&gt;<span class="number">20</span> <span class="keyword">and</span> FAge &gt;<span class="number">19</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span>  <span class="keyword">not</span> (FAge =<span class="number">20</span>) <span class="keyword">and</span> FAge &gt;<span class="number">19</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x591A;&#x503C;&#x5224;&#x65AD;&#xFF0C;&#x8303;&#x56F4;&#x503C;&#x5224;&#x65AD;  IN&#x8BED;&#x53E5;&#xFF0C;between and &#x8BED;&#x53E5;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span> FAge  =<span class="number">19</span> <span class="keyword">or</span> FAge =<span class="number">20</span> <span class="keyword">or</span> FAge =<span class="number">24</span></span><br><span class="line"><span class="comment">-- &#x4E0A;&#x9762;&#x8FD9;&#x6761;&#x8BED;&#x53E5;&#x7B49;&#x4EF7;&#x4E8E;&#x4E0B;&#x9762;&#x8FD9;&#x6761;</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span> FAge <span class="keyword">in</span> (<span class="number">19</span>,<span class="number">20</span>,<span class="number">24</span>)</span><br><span class="line"><span class="comment">-- &#x9009;&#x62E9;&#x5E74;&#x9F84;&#x5728;19&#x5230;28&#x5C81;&#x8FD9;&#x4E2A;&#x5E74;&#x9F84;&#x6BB5;&#x7684;&#x4EBA;&#x7684;&#x4FE1;&#x606F;</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span>  T_Person <span class="keyword">where</span> FAge <span class="keyword">between</span> <span class="number">19</span> <span class="keyword">and</span> <span class="number">28</span></span></span><br></pre></td></tr></table></figure>
+<p>(4)&#x3001;&#x6570;&#x636E;&#x5206;&#x7EC4;(group by)&#x4E0E;&#x805A;&#x5408;&#x51FD;&#x6570;(max min count sum&#x7B49;)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x5C06;T_Person&#x8868;&#x4E2D;&#x6570;&#x636E;&#x6309;&#x7167;&#x5E74;&#x9F84;&#x76F8;&#x540C;&#x7684;&#x68C0;&#x7D22;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span>  * <span class="keyword">from</span> T_Person <span class="keyword">group</span> <span class="keyword">by</span> FAge </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> T_Person  <span class="keyword">where</span> FAge &gt;<span class="number">20</span> <span class="keyword">group</span> <span class="keyword">by</span> FAge </span><br><span class="line"><span class="comment">--  &#x67E5;&#x770B;&#x6BCF;&#x4E2A;&#x5E74;&#x9F84;&#x6BB5;&#x7684;&#x4EBA;&#x6570;</span></span><br><span class="line"><span class="keyword">select</span> FAge ,<span class="keyword">count</span> (*) <span class="keyword">as</span>  N<span class="string">&apos;&#x603B;&#x4EBA;&#x6570;&apos;</span> <span class="keyword">from</span>  T_Person <span class="keyword">group</span> <span class="keyword">by</span> FAge </span><br><span class="line"><span class="comment">--  &#x53EA;&#x68C0;&#x7D22;&#x4EBA;&#x6570;&#x5927;&#x4E8E;2&#x7684;&#x5E74;&#x9F84;&#x6BB5; having&#x8BED;&#x53E5;&#x7684;&#x4F7F;&#x7528;</span></span><br><span class="line"> <span class="keyword">select</span> FAge ,<span class="keyword">count</span> (*) <span class="keyword">as</span> N<span class="string">&apos;&#x603B;&#x4EBA;&#x6570;&apos;</span> <span class="keyword">from</span> T_Person  <span class="keyword">group</span> <span class="keyword">by</span> FAge  <span class="keyword">having</span> <span class="keyword">count</span>(*)&gt;<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x533A;&#x522B;&#xFF1A; having&#x8BED;&#x53E5;&#x662F;&#x6EF4;&#x5206;&#x7EC4;&#x540E;&#x7684;&#x4FE1;&#x606F;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#xFF0C;&#x800C;where&#x8BED;&#x53E5;&#x662F;&#x5BF9;&#x539F;&#x59CB;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;</p>
+<p>(5)&#x3001;&#x9650;&#x5236;&#x7ED3;&#x679C;&#x96C6;&#x884C;&#x6570;</p>
+<p>&#x6709;&#x65F6;&#x5019;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x68C0;&#x7D22;&#x7684;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981;&#x68C0;&#x7D22;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x884C;&#xFF0C;&#x6BD4;&#x5982;&#x201C;&#x68C0;&#x7D22;&#x6210;&#x7EE9;&#x6392;&#x5728;&#x524D;3&#x4F4D;&#x7684;&#x5B66;&#x751F;&#x4FE1;&#x606F;&#x201D;&#xFF0C;&#x8FD9;&#x79CD;&#x529F;&#x80FD;&#x88AB;&#x79F0;&#x4F5C;&#x9650;&#x5236;&#x7ED3;&#x679C;&#x96C6;&#x884C;&#x6570;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x4ECE;&#x6570;&#x636E;&#x8868;T_Employee&#x4E2D;&#x68C0;&#x7D22;&#x5DE5;&#x8D44;&#x6392;&#x5728;&#x524D;&#x4E94;&#x4F4D;&#x7684;&#x4EBA;&#x5458;&#x4FE1;&#x606F;&#xFF0C;&#x4E0B;&#x9762;&#x4E24;&#x53E5;&#x67E5;&#x8BE2;&#x7B49;&#x4EF7;</span></span><br><span class="line"> <span class="operator"><span class="keyword">select</span>  top <span class="number">5</span> * <span class="keyword">from</span> T_Employee <span class="keyword">order</span> <span class="keyword">by</span> FSarlary <span class="keyword">DESC</span></span><br><span class="line"> <span class="keyword">select</span> * <span class="keyword">from</span></span><br><span class="line">   (  </span><br><span class="line">     <span class="keyword">select</span> ROW_NUMBER () over (<span class="keyword">order</span> <span class="keyword">by</span> FSarlary ) <span class="keyword">as</span> <span class="keyword">row</span>,FName  <span class="keyword">from</span> T_Employee </span><br><span class="line">    ) a   <span class="keyword">where</span> a.<span class="keyword">row</span> &lt;=<span class="number">5</span></span></span><br></pre></td></tr></table></figure>
+<p>(6)&#x3001;&#x8054;&#x5408;&#x7ED3;&#x679C;&#x96C6;union &#xFF0C;union all&#x51FD;&#x6570;</p>
+<p>&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7EC4;&#x5408;&#x4E24;&#x4E2A;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#x7684;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#xFF0C;&#x800C;&#x8FD9;&#x4FE9;&#x4E2A;&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x76F4;&#x63A5;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7684;&#x8054;&#x7CFB;&#xFF0C;&#x53EA;&#x662F;&#x9700;&#x8981;&#x4ED6;&#x4EEC;&#x663E;&#x793A;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;union&#x51FD;&#x6570;&#x8054;&#x5408;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x67E5;&#x8BE2;&#x6B63;&#x5F0F;&#x5458;&#x5DE5;&#x548C;&#x4E34;&#x65F6;&#x5DE5;&#x7684;&#x6700;&#x9AD8;&#x3001;&#x6700;&#x4F4E;&#x5E74;&#x9F84; &#xFF0C;&#x5206;&#x5F00;&#x67E5;</span></span><br><span class="line"> <span class="operator"><span class="keyword">select</span> <span class="string">&apos;&#x6B63;&#x5F0F;&#x5DE5;&#x7684;&#x6700;&#x5927;&#x5E74;&#x9F84;&apos;</span> , <span class="keyword">max</span>(FAge) <span class="keyword">from</span> T_Employee</span><br><span class="line"> <span class="keyword">union</span></span><br><span class="line"> <span class="keyword">select</span> <span class="string">&apos;&#x6B63;&#x5F0F;&#x5DE5;&#x7684;&#x6700;&#x5C0F;&#x5E74;&#x9F84;&apos;</span> , <span class="keyword">min</span>(FAge) <span class="keyword">from</span> T_Employee</span><br><span class="line"> <span class="keyword">union</span></span><br><span class="line"> <span class="keyword">select</span> <span class="string">&apos;&#x4E34;&#x65F6;&#x5DE5;&#x7684;&#x6700;&#x5927;&#x5E74;&#x9F84;&apos;</span> , <span class="keyword">max</span>(FAge) <span class="keyword">from</span> T_TempEmployee</span><br><span class="line"> <span class="keyword">union</span></span><br><span class="line"> <span class="keyword">select</span> <span class="string">&apos;&#x4E34;&#x65F6;&#x5DE5;&#x7684;&#x6700;&#x5C0F;&#x5E74;&#x9F84;&apos;</span> , <span class="keyword">min</span>(FAge) <span class="keyword">from</span> T_TempEmployee</span></span><br></pre></td></tr></table></figure>
+<p>&#x8054;&#x5408;&#x7ED3;&#x679C;&#x96C6;&#x4F7F;&#x7528;&#x539F;&#x5219;&#xFF1A;&#x4E00;&#x662F;&#x6BCF;&#x4E2A;&#x7ED3;&#x679C;&#x96C6;&#x5FC5;&#x987B;&#x6709;&#x76F8;&#x540C;&#x7684;&#x5217;&#xFF0C;&#x4E8C;&#x662F;&#x6BCF;&#x4E2A;&#x7ED3;&#x679C;&#x96C6;&#x7684;&#x5217;&#x7C7B;&#x578B;&#x5FC5;&#x987B;&#x76F8;&#x5BB9;&#x3002;</p>
+<p>union&#x548C;union all &#x7684;&#x533A;&#x522B;&#xFF1A;union&#x4F1A;&#x81EA;&#x52A8;&#x5C06;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x91CD;&#x590D;&#x6BD4;&#x8F83;&#x5982;&#x679C;&#x6709;&#x91CD;&#x590D;&#xFF0C;&#x5219;&#x53EA;&#x663E;&#x793A;&#x4E00;&#x6761;&#xFF0C;&#x800C;union  all &#x5219;&#x5C06;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x7684;&#x7ED3;&#x679C;&#x76F4;&#x63A5;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5728;&#x6CA1;&#x6709;&#x7279;&#x6B8A;&#x8981;&#x6C42;&#x4E0B;&#xFF0C;&#x5C3D;&#x91CF;&#x4F7F;&#x7528;union all &#x8FDB;&#x884C;&#x8FDE;&#x63A5;&#x3002;</p>
+<h1 id="&#x4E09;&#x51FD;&#x6570;&#x5305;&#x62EC;&#x6570;&#x5B66;&#x51FD;&#x6570;&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x65E5;&#x671F;&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x5176;&#x5B83;&#x51FD;&#x6570;&#x7B49;">&#x4E09;&#x3001;&#x51FD;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x6570;&#x5B66;&#x51FD;&#x6570;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x3001;&#x65E5;&#x671F;&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x5176;&#x5B83;&#x51FD;&#x6570;&#x7B49;</h1><p>1&#x3001;&#x6570;&#x5B66;&#x51FD;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x5E38;&#x7528;&#x7684;&#x6C42;&#x7EDD;&#x5BF9;&#x503C;&#x51FD;&#x6570;abs() ,&#x6C42;&#x6307;&#x6570;&#x51FD;&#x6570;power() ,&#x6C42;&#x5E73;&#x65B9;&#x6839; sqrt () ,&#x6C42;&#x968F;&#x673A;&#x6570; rand () ,&#x820D;&#x5165;&#x5230;&#x6700;&#x5927;&#x6574;&#x6570;celing () ,&#x820D;&#x5165;&#x5230;&#x6700;&#x5C0F;&#x6574;&#x6570; floor () ,&#x56DB;&#x820D;&#x4E94;&#x5165; round () &#x7B49;&#xFF0C;&#x8FD8;&#x6709;&#x4E00;&#x4E9B;&#x6C42;&#x6B63;&#x5F26;&#x3001;&#x4F59;&#x5F26;&#x3001;&#x6B63;&#x5207;&#x3001;&#x4F59;&#x5207;&#x3001;&#x53CD;&#x6B63;&#x5F26;&#x3001;&#x53CD;&#x6B63;&#x5207;&#x7B49;&#x51FD;&#x6570;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">abs</span>(- <span class="number">12.27</span>) </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">power</span> ( <span class="number">2</span>,<span class="number">2</span> )<span class="comment">--  &#x6C42;2&#x7684;&#x5E73;&#x65B9; </span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rand</span> ()  <span class="comment">--  &#x751F;&#x6210;&#x968F;&#x673A;&#x6570;</span></span></span><br></pre></td></tr></table></figure>
+<p>2&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x8F6C;&#x6362;&#x5927;&#x5C0F;&#x5199;&#xFF0C;&#x53BB;&#x6389;&#x5B57;&#x7B26;&#x4E32;&#x4E24;&#x8FB9;&#x7684;&#x7A7A;&#x683C;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x66FF;&#x6362;&#xFF0C;&#x5F97;&#x5230;&#x5B57;&#x7B26;&#x4E32;&#x7684;ASCII&#x503C;&#x7B49;&#x3002; &#x770B;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x8BA1;&#x7B97; sqlserver&#x7684;&#x957F;&#x5EA6;</span></span><br><span class="line">   <span class="operator"><span class="keyword">select</span> <span class="keyword">len</span> (<span class="string">&apos;sqlserver&apos;</span>)     <span class="comment">-- &#x8FD4;&#x56DE; 9</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">upper</span>(<span class="string">&apos;sqlserver&apos;</span>)    <span class="comment">-- &#x8FD4;&#x56DE; SQLSERVER</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">upper</span>(<span class="string">&apos;SQLSERVER&apos;</span>)      <span class="comment">-- sqlserver</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">substring</span>(<span class="string">&apos;sqlserver&apos;</span>,<span class="number">4</span>,<span class="number">6</span>)    <span class="comment">--  &#x8FD4;&#x56DE; server</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">charindex</span>(<span class="string">&apos;q&apos;</span>,<span class="string">&apos;sqlserver&apos;</span>)    <span class="comment">-- &#x8FD4;&#x56DE; 2&#xFF0C;&#x67E5;&#x8BE2;q&#x5728;sqlserver&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">left</span>(<span class="string">&apos;sqlserver&apos;</span>,<span class="number">3</span>)       <span class="comment">-- &#x53D6;&#x51FA;&#x524D;&#x4E09;&#x4E2A;&#x5B57;&#x7B26;  &#xFF0C;&#x8FD4;&#x56DE; sql</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">right</span> (<span class="string">&apos;sqlserver&apos;</span>,<span class="number">3</span>)   <span class="comment">--  &#x53D6;&#x51FA;&#x540E;&#x4E09;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x8FD4;&#x56DE; ver</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">replace</span>(<span class="string">&apos;sqlserver&apos;</span>,<span class="string">&apos;sql&apos;</span>,<span class="string">&apos;SQL&apos;</span>)   <span class="comment">-- &#x66FF;&#x6362;&#x5B57;&#x7B26;  &#xFF0C;&#x8FD4;&#x56DE; SQLserver</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">ASCII</span>(<span class="string">&apos;a&apos;</span>)   <span class="comment">-- &#x53D6;a&#x7684;ASCII&#x503C;&#xFF0C;&#x8FD4;&#x56DE; 97</span></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">ASCII</span>(<span class="string">&apos;abc&apos;</span>)   <span class="comment">-- &#x8FD4;&#x56DE; 97 ,&#x53EA;&#x53D6;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7684;ASCII&#x503C;</span></span></span><br></pre></td></tr></table></figure>
+<p>3&#x3001;&#x65E5;&#x671F;&#x51FD;&#x6570;&#xFF0C;&#x5305;&#x62EC;&#x65E5;&#x671F;(date)&#xFF0C;&#x65F6;&#x95F4;&#xFF08;time&#xFF09;&#xFF0C;&#x65E5;&#x671F;&#x65F6;&#x95F4;&#xFF08;datetime&#xFF09;&#x65F6;&#x95F4;&#x6233;&#xFF08;datestamp&#xFF09;&#x7B49;&#x3002;<br>&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x8BA1;&#x7B97;&#x65E5;&#x671F;&#x76F8;&#x52A0;&#x51CF;&#x51FD;&#x6570;&#xFF0C;&#x8BA1;&#x7B97;&#x4E24;&#x4E2A;&#x65E5;&#x671F;&#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x989D;&#x51FD;&#x6570;&#xFF0C;&#x8BA1;&#x7B97;&#x4E00;&#x4E2A;&#x65E5;&#x671F;&#x662F;&#x661F;&#x671F;&#x51E0;&#xFF0C;&#x53D6;&#x5F97;&#x6307;&#x5B9A;&#x65E5;&#x671F;&#x7684;&#x6307;&#x5B9A;&#x90E8;&#x5206;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x83B7;&#x53D6;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#xFF0C;&#x8FD4;&#x56DE;xx- xx-xx  ss:ss:ss</span></span><br><span class="line">  <span class="operator"><span class="keyword">select</span>  <span class="keyword">getdate</span>()</span><br><span class="line"><span class="comment">-- &#x8BA1;&#x7B97;&#x636E;&#x4ECA;&#x5929;3&#x4E2A;&#x6708;&#x7684;&#x65E5;&#x671F;</span></span><br><span class="line">  <span class="keyword">select</span>  <span class="keyword">dateadd</span> (<span class="keyword">month</span>,<span class="number">3</span>,<span class="keyword">getdate</span>())</span><br><span class="line"><span class="comment">-- &#x8BA1;&#x7B97;&#x4E24;&#x4E2A;&#x65E5;&#x671F;&#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x989D;,2011-1-1&#x8DDD;&#x4ECA;&#x591A;&#x5C11;&#x5929;</span></span><br><span class="line">  <span class="keyword">select</span> <span class="keyword">datediff</span>(<span class="keyword">day</span>,<span class="string">&apos;2011-1-1&apos;</span>,<span class="keyword">getdate</span>())</span><br><span class="line"><span class="comment">--  &#x8BA1;&#x7B97;&#x4ECA;&#x5929;&#x661F;&#x671F;&#x51E0;</span></span><br><span class="line">  <span class="keyword">select</span> <span class="keyword">datename</span>(<span class="keyword">weekday</span>,<span class="keyword">getdate</span>())</span><br><span class="line"><span class="comment">-- &#x83B7;&#x53D6;&#x4ECA;&#x5929;&#x7684;&#x65F6;&#x95F4;&#x90E8;&#x5206;</span></span><br><span class="line">  <span class="keyword">select</span> datapart(<span class="keyword">hour</span>,<span class="keyword">getdate</span>())</span></span><br></pre></td></tr></table></figure>
+<p>4&#x3001;&#x5176;&#x5B83;&#x51FD;&#x6570;&#x5982;&#x7C7B;&#x578B;&#x8F6C;&#x6362;&#xFF08;convert&#xFF0C;cast&#xFF09;&#xFF0C;&#x7A7A;&#x503C;&#x5904;&#x7406;&#xFF08;coalesce&#xFF0C;isnull&#xFF09;case&#x51FD;&#x6570;&#x7B49;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x5C06;&#x5B57;&#x7B26;&#x7C7B;&#x578B;&#x7684;20&#x8F6C;&#x6362;&#x6210;int&#x578B;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">cast</span>(<span class="string">&apos;20&apos;</span> <span class="keyword">as</span> <span class="built_in">int</span> ), <span class="keyword">convert</span> (<span class="built_in">int</span> ,<span class="string">&apos;20&apos;</span>)</span></span><br></pre></td></tr></table></figure>
+<p>&#x7A7A;&#x503C;&#x5904;&#x7406;&#xFF1A;coalesce&#xFF08;expression&#xFF0C;value1&#xFF0C;value2&#x2026;&#x2026;&#xFF0C;valuen&#xFF09;&#xFF0C;&#x5982;&#x679C;expression&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;expression&#x7684;&#x503C;&#xFF0C;&#x82E5;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x5224;&#x65AD;value1&#x7684;&#x503C;&#xFF0C;value1&#x4E0D;&#x7A7A;&#xFF0C;&#x8FD4;&#x56DE;value1 &#x7684;&#x503C;&#xFF0C;value1&#x7A7A;&#xFF0C;&#x5224;&#x65AD;value2&#x2026;&#x2026;&#xFF0C;&#x5982;&#x679C;valuen&#x7684;&#x503C;&#x4E5F;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null&#x3002;isnull&#xFF08;expression&#xFF0C;value&#xFF09;&#x662F;&#x5176;&#x7B80;&#x5316;&#x7248;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x5C06;FName&#x4E3A;null&#x7684;&#x663E;&#x793A;&#x4E3A;&#x533F;&#x540D;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> <span class="keyword">coalesce</span>(FName,N<span class="string">&apos;&#x533F;&#x540D;&apos;</span>) <span class="keyword">from</span>  T_Person </span><br><span class="line"><span class="keyword">select</span> <span class="keyword">isnull</span> (FName,N<span class="string">&apos;&#x533F;&#x540D;&apos;</span>) <span class="keyword">from</span> T_Employee</span></span><br></pre></td></tr></table></figure>
+<p>case&#x51FD;&#x6570;&#xFF1A;&#x6D41;&#x7A0B;&#x63A7;&#x5236;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x8FD4;&#x56DE;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x5982;&#x679C;&#x5E74;&#x9F84;&gt;20&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x59D3;&#x540D;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;&#x5C0F;&#x5B69;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> </span><br><span class="line">(</span><br><span class="line"> <span class="keyword">case</span>  </span><br><span class="line"> <span class="keyword">when</span> FAge &gt;<span class="number">20</span>  <span class="keyword">then</span> FName</span><br><span class="line"> <span class="keyword">else</span>  N<span class="string">&apos;&#x5C0F;&#x5B69;&apos;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> T_Person</span><br><span class="line"><span class="comment">--case&#x51FD;&#x6570;&#x57FA;&#x672C;&#x8BED;&#x53E5;&#x7684;&#x7EC3;&#x4E60;  </span></span><br><span class="line"><span class="keyword">select</span> FName,</span><br><span class="line"> (</span><br><span class="line">  <span class="keyword">case</span> FLevel</span><br><span class="line">      <span class="keyword">when</span> <span class="number">1</span> <span class="keyword">then</span> <span class="string">&apos;&#x666E;&#x901A;&#x5BA2;&#x6237;&apos;</span></span><br><span class="line">      <span class="keyword">when</span> <span class="number">2</span> <span class="keyword">then</span> <span class="string">&apos;&#x4F1A;&#x5458;&apos;</span></span><br><span class="line">      <span class="keyword">when</span> <span class="number">3</span> <span class="keyword">then</span> <span class="string">&apos;VIP&#x5BA2;&#x6237;&apos;</span></span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">      <span class="string">&apos;&#x672A;&#x77E5;&#x7C7B;&#x578B;&#x5BA2;&#x6237;&apos;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  ) <span class="keyword">as</span> &#x5BA2;&#x6237;&#x7C7B;&#x578B;</span><br><span class="line"> <span class="keyword">from</span> T_Employee</span><br><span class="line"></span><br><span class="line"><span class="comment">--&#x4F8B;&#x5982;&#xFF1A;&#x4ECE;&#x8868;&#x4E2D;&#x9009;&#x51FA;&#x6536;&#x5165;&#x5C0F;&#x4E8E;4000&#x7684;&#x4E3A;&#x4F4E;&#x6536;&#x5165;&#x4EBA;&#x7FA4;&#xFF0C;&#x6536;&#x5165;&#x5728;4000-6000&#x4E4B;&#x95F4;&#x7684;&#x4E3A;&#x4E2D;&#x7B49;&#x6536;&#x5165;&#xFF0C;&#x5927;&#x4E8E;6000&#x7684;&#x4E3A;&#x9AD8;&#x6536;&#x5165;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span>  FName,</span><br><span class="line"> (</span><br><span class="line"> <span class="keyword">case</span> </span><br><span class="line"> <span class="keyword">when</span> FSarlary  &lt;<span class="string">&apos;4000&apos;</span> <span class="keyword">then</span> <span class="string">&apos;&#x4F4E;&#x6536;&#x5165;&apos;</span>    <span class="comment">--FSarlary &#x662F;varchar&#x7C7B;&#x578B;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&apos;4800&apos;</span></span><br><span class="line"> <span class="keyword">when</span> FSarlary &gt;=<span class="string">&apos;4000&apos;</span> <span class="keyword">and</span> FSarlary &lt;<span class="string">&apos;6000&apos;</span> <span class="keyword">then</span> <span class="string">&apos;&#x4E2D;&#x7B49;&#x6536;&#x5165;&apos;</span></span><br><span class="line"> <span class="keyword">else</span> <span class="string">&apos;&#x9AD8;&#x6536;&#x5165;&apos;</span></span><br><span class="line"> <span class="keyword">end</span></span><br><span class="line"> ) <span class="keyword">as</span> &#x6536;&#x5165;&#x6C34;&#x5E73;</span><br><span class="line"> <span class="keyword">from</span> T_Employee</span></span><br></pre></td></tr></table></figure>
+<h1 id="&#x56DB;&#x7D22;&#x5F15;&#x4E0E;&#x7EA6;&#x675F;">&#x56DB;&#x3001;&#x7D22;&#x5F15;&#x4E0E;&#x7EA6;&#x675F;</h1><p>&#x5F53;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x91CF;&#x8D8A;&#x6765;&#x8D8A;&#x5927;&#x65F6;&#xFF0C;&#x68C0;&#x7D22;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x7684;&#x901F;&#x5EA6;&#x4E5F;&#x4F1A;&#x53D8;&#x6162;&#xFF0C;&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF0C;&#x7D22;&#x5F15;&#x63D0;&#x9AD8;&#x7684;&#x641C;&#x7D22;&#x6548;&#x7387;&#xFF0C;&#x4F46;&#x662F;&#x7D22;&#x5F15;&#x4F1A;&#x5360;&#x636E;&#x4E00;&#x5B9A;&#x7684;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#xFF0C;&#x51CF;&#x7F13;&#x4E86;&#x6570;&#x636E;&#x63D2;&#x5165;&#x548C;&#x5220;&#x9664;&#x7684;&#x901F;&#x5EA6;&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x9020;&#x6210;&#x5B58;&#x50A8;&#x788E;&#x7247;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x7531;&#x4E8E;&#x7D22;&#x5F15;&#x662F;&#x91C7;&#x7528;B&#x6811;&#x7ED3;&#x6784;&#x5B58;&#x50A8;&#x7684;&#xFF0C;&#x5728;&#x5220;&#x9664;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x65F6;&#xFF0C;&#x7D22;&#x5F15;&#x9879;&#x5E76;&#x4E0D;&#x4F1A;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x8FD9;&#x6837;&#x7ECF;&#x8FC7;&#x4E00;&#x6BB5;&#x65F6;&#x95F4;&#x7684;&#x589E;&#x5220;&#x67E5;&#x6539;&#x4E4B;&#x540E;&#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x5B58;&#x50A8;&#x788E;&#x7247;&#xFF0C;&#x9053;&#x7406;&#x540C;&#x5185;&#x5B58;&#x788E;&#x7247;&#x78C1;&#x76D8;&#x788E;&#x7247;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x521B;&#x5EFA;&#x7D22;&#x5F15;&#xFF1A;create index &#x7D22;&#x5F15;&#x540D; on &#x8868;&#x540D;&#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x5B57;&#x6BB5;2&#x2026;&#x2026;&#x5B57;&#x6BB5;n&#xFF09;</p>
+<p><code>create index idx_name on T_Person (FName)</code></p>
+<p>&#x5220;&#x9664;&#x7D22;&#x5F15;&#xFF1A;drop &#x8868;&#x540D;.&#x7D22;&#x5F15;&#x540D;</p>
+<p><code>drop T_Person.idx_name</code></p>
+<p>&#x7EA6;&#x675F;&#xFF1A;&#x5305;&#x62EC;&#x975E;&#x7A7A;&#x7EA6;&#x675F;&#xFF0C;&#x552F;&#x4E00;&#x7EA6;&#x675F;&#xFF0C;&#x590D;&#x5408;&#x7EA6;&#x675F;&#xFF0C;&#x4E3B;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x5916;&#x952E;&#x7EA6;&#x675F;&#x7B49;&#x3002;</p>
+<p>1&#x3001;&#x975E;&#x7A7A;&#x7EA6;&#x675F;not null</p>
+<p><code>create T_table (FId int not null ,Fnumber int )</code></p>
+<p>2&#x3001;&#x552F;&#x4E00;&#x7EA6;&#x675F;&#xFF0C;&#x9632;&#x6B62;&#x7279;&#x5B9A;&#x7684;&#x5217;&#x4E2D;&#x542B;&#x6709;&#x76F8;&#x540C;&#x7684;&#x503C;&#xFF0C;&#x6BD4;&#x5982;&#x8BF4;&#x4E00;&#x4E2A;&#x90AE;&#x7BB1;&#x53EA;&#x80FD;&#x6CE8;&#x518C;&#x4E00;&#x6B21;&#x3002;unique&#x7EA6;&#x675F;</p>
+<p><code>create T_table (FId int not null ,Fnumber int unique)</code></p>
+<p>3&#x3001;&#x590D;&#x5408;&#x7EA6;&#x675F;&#xFF0C;&#x88AB;&#x7EA6;&#x675F;&#x7684;&#x5B57;&#x6BB5;&#x4E0D;&#x80FD;&#x540C;&#x65F6;&#x91CD;&#x590D;&#x3002;&#x4F8B;&#x5982;&#x4E00;&#x4E2A;&#x516C;&#x53F8;&#x6709;&#x591A;&#x4E2A;&#x90E8;&#x95E8;&#xFF0C;&#x6BCF;&#x4E2A;&#x90E8;&#x95E8;&#x6709;&#x591A;&#x4E2A;&#x5C0F;&#x7EC4;&#xFF0C;&#x6BCF;&#x4E2A;&#x90E8;&#x95E8;&#x91CC;&#x9762;&#x7684;&#x5C0F;&#x7EC4;&#x90FD;&#x53EF;&#x4EE5;&#x4ECE;1&#x5F00;&#x59CB;&#x5F80;&#x540E;&#x6392;&#xFF0C;&#x5C0F;&#x7EC4;&#x540D;&#x76F8;&#x540C;&#x7684;&#x5C0F;&#x7EC4;&#x5FC5;&#x5B9A;&#x90E8;&#x95E8;&#x540D;&#x4E0D;&#x76F8;&#x540C;&#x3002;constraint &#x7EA6;&#x675F;&#x540D; unique &#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x2026;&#x2026;&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x5411;&#x4E00;&#x4E2A;&#x8868;&#x4E2D;&#x6DFB;&#x52A0;&#x591A;&#x4E2A;&#x590D;&#x5408;&#x7EA6;&#x675F;&#xFF0C;&#x53EA;&#x8981;&#x7EA6;&#x675F;&#x540D;&#x4E0D;&#x540C;&#x5373;&#x53EF;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> talbe T_Person(FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span>,FName varchr(<span class="number">20</span>),FNumber <span class="built_in">varchar</span>(<span class="number">20</span>),FAge <span class="built_in">int</span> ,FDepartNum <span class="keyword">nvarchar</span>(<span class="number">20</span>),</span><br><span class="line">  <span class="keyword">constraint</span> uni_ num_departnum <span class="keyword">unique</span>  (FNumber,FDepartNum),</span><br><span class="line">  <span class="keyword">constraint</span> uni_name_num <span class="keyword">unique</span> (FName,FNumber)</span></span><br></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x5728;&#x521B;&#x5EFA;&#x8868;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6CA1;&#x6709;&#x6DFB;&#x52A0;&#x7EA6;&#x675F;&#xFF0C;&#x53EF;&#x4EE5;&#x5229;&#x7528;alter&#x6765;&#x4FEE;&#x6539;&#x6DFB;&#x52A0;&#xFF0C;alter table &#x8868;&#x540D; add constraint &#x7EA6;&#x675F;&#x540D; unique &#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x5B57;&#x6BB5;2&#x2026;&#x2026;&#xFF09;&#x3002;</p>
+<p><code>alter table T_Person add constraint uni_name_num unique (FName,FNumber)</code></p>
+<p>&#x5220;&#x9664;&#x7EA6;&#x675F; alter table &#x8868;&#x540D; drop constraint &#x7EA6;&#x675F;&#x540D;&#x3002;</p>
+<p><code>alter table drop constraint uni_name_num</code></p>
+<p>4&#x3001;check&#x7EA6;&#x675F;&#xFF0C;&#x68C0;&#x67E5;&#x8F93;&#x5165;&#x7684;&#x8BB0;&#x5F55;&#x503C;&#x662F;&#x5426;&#x7B26;&#x5408;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x7B26;&#x5408;&#xFF0C;&#x5219;&#x5BF9;&#x6570;&#x636E;&#x8868;&#x7684;&#x4FEE;&#x6539;&#x4E0D;&#x4F1A;&#x6210;&#x529F;&#xFF0C;check&#x7EA6;&#x675F;&#x540C;&#x552F;&#x4E00;&#x7EA6;&#x675F;&#x4E00;&#x6837;&#xFF0C;&#x5728;&#x58F0;&#x660E;&#x7684;&#x65F6;&#x5019;&#x5728;&#x5B57;&#x6BB5;&#x540E;&#x9762;&#x5C31;&#x53EF;&#x4EE5;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x7EA6;&#x675F;&#x3002;</p>
+<p><code>create talbe T_Person(FId int not null,FName varchr(20),FNumber varchar(20),FAge int check (FAge &gt;0))</code></p>
+<p>&#x8FD9;&#x6837;&#x7684;check&#x7EA6;&#x675F;&#x662F;&#x4E0D;&#x80FD;&#x7EA6;&#x675F;&#x4E24;&#x5217;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x7EA6;&#x675F;FWorkYear&lt; FAge ,&#x5728;&#x54EA;&#x4E2A;&#x5B57;&#x6BB5;&#x540E;&#x9762;&#x6DFB;&#x52A0;&#x8FD9;&#x4E2A;&#x7EA6;&#x675F;&#x90FD;&#x662F;&#x4E0D;&#x53EF;&#x4EE5;&#x7684;&#x3002;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#xFF1A;&#x5728;create table &#x8BED;&#x53E5;&#x7684;&#x672B;&#x5C3E;&#x4F7F;&#x7528;constraint &#x7EA6;&#x675F;&#x540D; check &#xFF08;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#xFF09;&#x6765;&#x7EA6;&#x675F;&#x8FD9;&#x4E2A;&#x6761;&#x4EF6;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x8FD9;&#x6761;&#x8BED;&#x53E5;&#x662F;&#x9519;&#x8BEF;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x5728;&#x5B57;&#x6BB5;&#x540E;&#x58F0;&#x660E;&#x7EA6;&#x675F;&#x4E24;&#x5217;</span></span><br><span class="line"><span class="operator"><span class="keyword">create</span> talbe T_Person(FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span>,FName varchr(<span class="number">20</span>),FNumber <span class="built_in">varchar</span>(<span class="number">20</span>),FAge <span class="built_in">int</span> &#xFF0C;</span><br><span class="line">FWorkYear <span class="built_in">int</span>  <span class="keyword">check</span> (FWorkYear &lt; FAge ))</span><br><span class="line"><span class="comment">-- &#x89E3;&#x51B3;&#x65B9;&#x6CD5;</span></span><br><span class="line"><span class="keyword">create</span> talbe T_Person(FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span>,FName varchr(<span class="number">20</span>),FNumber <span class="built_in">varchar</span>(<span class="number">20</span>),FAge <span class="built_in">int</span> &#xFF0C;FWorkYear <span class="built_in">int</span>,</span><br><span class="line"> <span class="keyword">constraint</span> ck_age_workyear chect (FWorkYear &lt; FAge)   )</span></span><br></pre></td></tr></table></figure>
+<p>5&#x3001;&#x4E3B;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x4E3B;&#x952E;&#x5FC5;&#x987B;&#x662F;&#x552F;&#x4E00;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x91CD;&#x590D;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;&#x590D;&#x5408;&#x4E3B;&#x952E;&#xFF0C;&#x5373;&#x5728;&#x591A;&#x4E2A;&#x5B57;&#x6BB5;&#x4E0A;&#x521B;&#x5EFA;&#x4E3B;&#x952E;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x6837;&#x505A;&#x4F1A;&#x5E26;&#x6765;&#x5F88;&#x5927; &#x7684;&#x7CFB;&#x7EDF;&#x6027;&#x80FD;&#x95EE;&#x9898;&#xFF0C;&#x9664;&#x4E86;&#x8003;&#x8651;&#x5411;&#x4E0B;&#x517C;&#x5BB9;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8FD8;&#x662F;&#x4E0D;&#x8981;&#x7528;&#x590D;&#x5408;&#x4E3B;&#x952E;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span>  <span class="keyword">table</span> T_Person (FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">primary</span> <span class="keyword">key</span> ,FName <span class="built_in">varchar</span>(<span class="number">20</span>))</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T_Person (FId <span class="built_in">int</span> <span class="keyword">not</span> <span class="literal">null</span> ,FName <span class="built_in">varchar</span>(<span class="number">20</span>),<span class="keyword">primary</span> <span class="keyword">key</span>(FId))</span><br><span class="line"><span class="comment">-- &#x4E24;&#x6761;&#x8BED;&#x53E5;&#x7B49;&#x4EF7;</span></span></span><br></pre></td></tr></table></figure>
+<p>6&#x3001;&#x5916;&#x952E;&#x7EA6;&#x675F;&#xFF0C;&#x5F53;&#x4E00;&#x4E9B;&#x4FE1;&#x606F;&#x91CD;&#x590D;&#x51FA;&#x73B0;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x8981;&#x8003;&#x8651;&#x5C06;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x63D0;&#x53D6;&#x51FA;&#x6765;&#x521B;&#x5EFA;&#x5230;&#x53E6;&#x4E00;&#x5F20;&#x8868;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x539F;&#x8868;&#x4E2D;&#x5F15;&#x7528;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x5C31;&#x7528;&#x5230;&#x4E86;&#x5916;&#x952E;&#x3002;</p>
+<p>&#x521B;&#x5EFA;&#x5916;&#x952E;&#xFF1A;&#x5728;create table &#x672B;&#x5C3E;&#x6DFB;&#x52A0;&#xFF1A;foreign key &#xFF08;&#x5B57;&#x6BB5;&#x540D;&#xFF09;references &#x8868;&#x540D;&#xFF08;&#x5B57;&#x6BB5;&#x540D;&#xFF09;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">create</span> <span class="keyword">table</span> T_Author (FId <span class="built_in">int</span> <span class="keyword">primary</span> <span class="keyword">key</span> ,FName <span class="built_in">varchar</span>(<span class="number">20</span>),FAge  <span class="built_in">int</span> )</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> T_Book (FId <span class="built_in">int</span> <span class="keyword">primary</span> <span class="keyword">key</span> ,FName <span class="built_in">varchar</span> (<span class="number">20</span>),FAuthotId <span class="built_in">int</span> ,</span><br><span class="line">    <span class="keyword">foreign</span> <span class="keyword">key</span> ( FAuthorId) <span class="keyword">references</span> T_Author (FId))</span></span><br></pre></td></tr></table></figure>
+<p>&#x5220;&#x9664;&#x5916;&#x952E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5FC5;&#x987B;&#x5148;&#x5220;&#x9664;&#x88AB;&#x5173;&#x8054;&#x7684;&#x8868;&#xFF0C;&#x5982;&#x4E0A;&#x4F8B;&#x5C31;&#x662F;&#x5FC5;&#x987B;&#x5148;&#x5220;&#x9664;T_Author&#xFF0C;&#x5728;&#x5220;&#x9664;T_Book</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">drop</span> <span class="keyword">table</span> T_Author </span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> T_Book</span></span><br></pre></td></tr></table></figure>
+<h1 id="&#x4E94;&#x8868;&#x8FDE;&#x63A5;">&#x4E94;&#x3001;&#x8868;&#x8FDE;&#x63A5;</h1><p>&#x5F53;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x5B58;&#x5728;&#x8BB8;&#x591A;&#x91CD;&#x590D;&#x7684;&#x5197;&#x4F59;&#x4FE1;&#x606F;&#x65F6;&#xFF0C;&#x5C31;&#x8981;&#x8003;&#x8651;&#x5C06;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x5EFA;&#x5728;&#x53E6;&#x4E00;&#x5F20;&#x65B0;&#x8868;&#x4E2D;&#xFF0C;&#x5728;&#x65B0;&#x8868;&#x4E2D;&#x4E3A;&#x539F;&#x8868;&#x8BBE;&#x7F6E;&#x597D;&#x5916;&#x952E;&#xFF0C;&#x5728;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x67E5;&#x8BE2;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x8981;&#x4F7F;&#x7528;&#x5230;&#x8FDE;&#x63A5;&#x4E86;&#xFF0C;&#x8868;&#x8FDE;&#x63A5;&#x5C31;&#x597D;&#x50CF;&#x4E24;&#x6839;&#x7EBF;&#xFF0C;&#x7EBF;&#x7684;&#x4E24;&#x7AEF;&#x5206;&#x522B;&#x8FDE;&#x63A5;&#x4E24;&#x5F20;&#x8868;&#x7684;&#x4E0D;&#x540C;&#x5B57;&#x6BB5;&#x4E0A;&#xFF0C;&#x5C06;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x8FDB;&#x884C;&#x5173;&#x8054;&#x3002;&#x8868;&#x8FDE;&#x63A5;&#x5206;&#x4E3A;&#x5185;&#x8FDE;&#x63A5;&#xFF08;inner join&#xFF09;&#x3001;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#x3001;&#x81EA;&#x8FDE;&#x63A5;&#x548C;&#x5916;&#x8FDE;&#x63A5;&#x7B49;&#x3002;</p>
+<p>1&#x3001;&#x5185;&#x8FDE;&#x63A5;&#xFF0C;&#x8BED;&#x6CD5;  inner join table_name on condition &#xFF0C;table_name&#x88AB;&#x5173;&#x8054;&#x7684;&#x8868;&#x540D;&#xFF0C;condition&#x5173;&#x8054;&#x6761;&#x4EF6;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;&#x6709;&#x4E24;&#x5F20;&#x8868;&#xFF0C;T_Customer&#x4FDD;&#x5B58;&#x7740;&#x5BA2;&#x6237;&#x7684;Id&#xFF0C;&#x59D3;&#x540D;&#xFF0C;&#x5E74;&#x9F84;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;T_Order&#x8868;&#x4FDD;&#x5B58;&#x7740;&#x8BA2;&#x5355;&#x53F7;&#x53CA;&#x8BA2;&#x5355;&#x4EF7;&#x683C;&#x7B49;&#x4FE1;&#x606F;&#xFF0C;T_Order&#x4E2D;FCustomerId&#x662F;T_Customer&#x4E2D;&#x7684;FId&#x7684;&#x5916;&#x952E;&#xFF0C;&#x4E0B;&#x9762;&#x67E5;&#x8BE2;&#x5BA2;&#x6237;&#x59D3;&#x540D;&#x4E3A;Mike&#x7684;&#x5BA2;&#x6237;&#x7684;&#x8BA2;&#x5355;&#x53F7;&#x53CA;&#x8BA2;&#x5355;&#x4EF7;&#x683C;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> c.FName,o.FNumber,o.FPrice</span><br><span class="line"><span class="keyword">from</span> T_Order  o</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> T_Customer c <span class="keyword">on</span> o.FCustomerId=c.FId </span><br><span class="line"><span class="keyword">where</span> c.FName=<span class="string">&apos;Mike&apos;</span></span></span><br></pre></td></tr></table></figure>
+<p>2&#x3001;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#xFF0C;&#x4E0E;&#x5185;&#x8FDE;&#x63A5;&#x76F8;&#x6BD4;&#xFF0C;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x9700;&#x8981;on&#x5B50;&#x53E5;&#xFF0C;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#x5C06;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x8BB0;&#x5F55;&#x90FD;&#x5305;&#x542B;&#x5230;&#x7ED3;&#x679C;&#x96C6;&#x4E2D;&#xFF0C;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#x5206;&#x4E3A;&#x9690;&#x5F0F;&#x7684;&#x8FDE;&#x63A5;&#x548C;&#x663E;&#x793A;&#x7684;cross join &#x8FDE;&#x63A5;&#xFF0C;&#x5176;&#x4E2D;&#x9690;&#x5F0F;&#x7684;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#xFF0C;&#x6240;&#x6709;&#x6570;&#x636E;&#x5E93;&#x90FD;&#x652F;&#x6301;&#xFF0C;cross join&#x663E;&#x793A;&#x7684;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;DB2&#x6570;&#x636E;&#x5E93;&#x4E0D;&#x652F;&#x6301;&#x3002;&#x4F8B;&#x5982;&#xFF1A;&#x67E5;&#x8BE2;&#x4E0A;&#x4E24;&#x5F20;&#x8868;&#x4E2D;&#x5BA2;&#x6237;&#x7684;Id&#xFF0C;&#x59D3;&#x540D;&#xFF0C;&#x5E74;&#x9F84;&#x4EE5;&#x53CA;&#x8BA2;&#x5355;&#x4FE1;&#x606F;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--  &#x9690;&#x5F0F;&#x7684;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span>  T_Customer.Id,T_Customer.FName,T_Customer.FAge,TOrder.FName,TOrder.FNumber</span><br><span class="line"><span class="keyword">from</span> T_Customer ,TOrder</span><br><span class="line"><span class="comment">--  &#x663E;&#x793A;&#x7684;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;</span></span><br><span class="line"><span class="keyword">select</span>  T_Customer.Id,T_Customer.FName,T_Customer.FAge,TOrder.FName,TOrder.FNumber</span><br><span class="line"><span class="keyword">from</span> T_Customer  across <span class="keyword">join</span> TOrder</span></span><br></pre></td></tr></table></figure>
+<p>3&#x3001;&#x81EA;&#x8FDE;&#x63A5;&#xFF0C;&#x5176;&#x4E3B;&#x8981;&#x7528;&#x9014;&#x5C31;&#x662F;&#x68C0;&#x7D22;&#x4E00;&#x5F20;&#x8868;&#x4E2D;&#x7684;&#x5185;&#x90E8;&#x60C5;&#x51B5;&#xFF0C;&#x4F8B;&#x5982;&#x68C0;&#x7D22;&#x8868;T_Order&#x4E2D;&#x8BA2;&#x5355;&#x7C7B;&#x578B;&#x76F8;&#x540C;&#x7684;&#x8BA2;&#x5355;&#x7684;&#x5217;&#x8868;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> o1.FNumber ,o1.FName,o1.FType, o2.FNumber ,o2.FName,o2.FType</span><br><span class="line"><span class="keyword">from</span> T_Order o1 </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> T_Order o2 <span class="keyword">on</span> o1.FType=o2.FType <span class="keyword">and</span> o1.FId &lt;o2.FId</span></span><br></pre></td></tr></table></figure>
+<p>&#xFF08;&#x81F3;&#x4E8E;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x52A0;&#x4E0A;and&#x540E;&#x9762;&#x7684;&#x7EA6;&#x675F;&#x53CA;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x662F; o1.FId &lt;&gt;o2.FId &#xFF0C;&#x611F;&#x5174;&#x8DA3;&#x7684;&#x670B;&#x53CB;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x8BD5;&#x4E00;&#x8BD5;&#xFF0C;&#x56E0;&#x4E3A;&#x5B58;&#x5728;&#x7740;&#x4FE1;&#x606F;&#x91CD;&#x590D;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x4EA4;&#x6D41;&#xFF09;</p>
+<p>4&#x3001;&#x5916;&#x8FDE;&#x63A5;&#xFF0C;&#x5185;&#x8FDE;&#x63A5;&#x8981;&#x6C42;&#x8FDE;&#x63A5;&#x7684;&#x4E24;&#x5F20;&#x8868;&#x5FC5;&#x987B;&#x6709;&#x5339;&#x914D;&#x7684;&#x8BB0;&#x5F55;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x8BF4;T_Order&#x8868;&#x4E2D;&#x7684;FCustomerId&#x4E00;&#x5217;&#x6709;null&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x5185;&#x8FDE;&#x63A5;&#x662F;&#x65E0;&#x6CD5;&#x5C06;&#x8FD9;&#x6761;&#x4FE1;&#x606F;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x662F;&#x9700;&#x8981;&#x8FD9;&#x6761;&#x6570;&#x636E;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x9700;&#x8981;&#x5916;&#x90E8;&#x8FDE;&#x63A5;&#x4E86;&#xFF0C;&#x5916;&#x8FDE;&#x63A5;&#x5305;&#x62EC;&#x5DE6;&#x5916;&#x8FDE;&#x63A5;&#xFF0C;&#x53F3;&#x5916;&#x8FDE;&#x63A5;&#x548C;&#x5168;&#x5916;&#x8FDE;&#x63A5;&#xFF0C;&#x5168;&#x5916;&#x8FDE;&#x63A5;&#x5728;&#x6570;&#x636E;&#x5E93;MySql&#x4E2D;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;union all &#x8054;&#x5408;&#x4E24;&#x4E2A;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#xFF0C;&#x5373;&#x5DE6;&#x5916;&#x8FDE;&#x63A5;&#x67E5;&#x8BE2;&#x548C;&#x53F3;&#x5916;&#x8FDE;&#x63A5;&#x67E5;&#x8BE2;&#x3002;</p>
+<p>&#x5DE6;&#x5916;&#x8FDE;&#x63A5;&#x5C31;&#x662F;&#x5C06;&#x5DE6;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x6EE1;&#x8DB3;on&#x540E;&#x9762;&#x7684;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#xFF0C;&#x90FD;&#x5339;&#x914D;&#x51FA;&#x6765;&#x3002;&#x53F3;&#x5916;&#x8FDE;&#x63A5;&#x5C31;&#x662F;&#x5C06;&#x53F3;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x6EE1;&#x8DB3;on&#x540E;&#x9762;&#x7684;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#xFF0C;&#x90FD;&#x5339;&#x914D;&#x51FA;&#x6765;&#x3002;&#x800C;&#x5168;&#x5916;&#x8FDE;&#x63A5;&#xFF0C;&#x5C31;&#x662F;&#x5C06;&#x4E24;&#x5F20;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x6EE1;&#x8DB3;on&#x540E;&#x9762;&#x7684;&#x6761;&#x4EF6;&#x8BED;&#x53E5;&#xFF0C;&#x90FD;&#x5339;&#x914D;&#x51FA;&#x6765;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x5DE6;&#x5916;&#x8FDE;&#x63A5;,&#x53D6;&#x51FA;&#x5DE6;&#x8868;T_Customer&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x5339;&#x914D; T_Customer.FId =T_Order.FCustomerId</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span>  c.FNumber ,C.FName,o.FNumber ,o.FPrice</span><br><span class="line"><span class="keyword">from</span> T_Customer c </span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> T_Order o <span class="keyword">on</span> T_Customer.FId =T_Order.FCustomerId</span><br><span class="line"><span class="comment">-- &#x53F3;&#x5916;&#x8FDE;&#x63A5;,&#x53D6;&#x51FA;&#x53F3;&#x8868;T_Order&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x5339;&#x914D; T_Customer.FId =T_Order.FCustomerId</span></span><br><span class="line"><span class="keyword">select</span>  c.FNumber ,C.FName,o.FNumber ,o.FPrice</span><br><span class="line"><span class="keyword">from</span> T_Customer c </span><br><span class="line"><span class="keyword">right</span>  <span class="keyword">outer</span> <span class="keyword">join</span> T_Order o <span class="keyword">on</span> T_Customer.FId =T_Order.FCustomerId</span><br><span class="line"><span class="comment">-- &#x5168;&#x5916;&#x8FDE;&#x63A5;,&#x53D6;&#x51FA;&#x4E24;&#x5F20;&#x8868;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#xFF0C;&#x65E0;&#x8BBA;&#x662F;&#x5426;&#x5339;&#x914D; T_Customer.FId =T_Order.FCustomerId</span></span><br><span class="line"><span class="keyword">select</span>  c.FNumber ,C.FName,o.FNumber ,o.FPrice</span><br><span class="line"><span class="keyword">from</span> T_Customer c </span><br><span class="line"><span class="keyword">full</span> <span class="keyword">outer</span> <span class="keyword">join</span> T_Order o <span class="keyword">on</span> T_Customer.FId =T_Order.FCustomerId</span></span><br></pre></td></tr></table></figure>
+<h1 id="&#x516D;&#x5B50;&#x67E5;&#x8BE2;">&#x516D;&#x3001;&#x5B50;&#x67E5;&#x8BE2;</h1><p>sql&#x5141;&#x8BB8;&#x5C06;&#x4E00;&#x4E2A;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#x4F5C;&#x4E3A;&#x7ED3;&#x679C;&#x96C6;&#x63D0;&#x4F9B;&#x7ED9;&#x5176;&#x5B83;sql&#x8BED;&#x53E5;&#x4F7F;&#x7528;&#xFF0C;&#x88AB;&#x5F53;&#x505A;&#x7ED3;&#x679C;&#x96C6;&#x7684;&#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#x5C31;&#x662F;&#x5B50;&#x67E5;&#x8BE2;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5B50;&#x67E5;&#x8BE2;&#x770B;&#x505A;&#x662F;&#x4E00;&#x5F20;&#x4E34;&#x65F6;&#x751F;&#x6210;&#x7684;&#x6570;&#x636E;&#x8868;&#xFF08;&#x6B64;&#x65F6;&#x7684;&#x641C;&#x7D22;&#x7ED3;&#x679C;&#x5FC5;&#x987B;&#x662F;&#x591A;&#x884C;&#x591A;&#x5217;&#xFF09;&#xFF0C;&#x8FD9;&#x5F20;&#x6570;&#x636E;&#x8868;&#x5728;&#x5F00;&#x59CB;&#x65F6;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x5728;&#x67E5;&#x8BE2;&#x7ED3;&#x675F;&#x65F6;&#x88AB;&#x5220;&#x9664;&#x3002;&#x5B50;&#x67E5;&#x8BE2;&#x53EF;&#x4EE5;&#x7528;&#x5728;select&#x8BED;&#x53E5;&#xFF0C;insert&#x8BED;&#x53E5;&#x4EE5;&#x53CA;update&#x8BED;&#x53E5;&#x3002;&#x5B50;&#x67E5;&#x8BE2;&#x5927;&#x5927;&#x7B80;&#x5316;&#x4E86;sql&#x8BED;&#x53E5;&#x7684;&#x7F16;&#x5199;&#xFF0C;&#x63D0;&#x9AD8;&#x4E86;&#x6548;&#x7387;&#xFF0C;&#x4F46;&#x662F;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E0D;&#x5F53;&#xFF0C;&#x5BB9;&#x6613;&#x9020;&#x6210;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x3002;</p>
+<p>1&#x3001;&#x5355;&#x503C;&#x5B50;&#x67E5;&#x8BE2;</p>
+<p>&#x5355;&#x503C;&#x5B50;&#x67E5;&#x8BE2;&#x548C;&#x666E;&#x901A;&#x7684;sql&#x8BED;&#x53E5;&#x6CA1;&#x4EC0;&#x4E48;&#x533A;&#x522B;&#xFF0C;&#x552F;&#x4E00;&#x7684;&#x9650;&#x5236;&#x5C31;&#x662F;&#x5B50;&#x67E5;&#x8BE2;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x53EA;&#x6709;&#x4E00;&#x884C;&#x8BB0;&#x5F55;&#xFF0C;&#x800C;&#x4E14;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5217;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x5B50;&#x67E5;&#x8BE2;&#x4E5F;&#x79F0;&#x4F5C;&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> <span class="number">1</span> <span class="keyword">as</span> f1 ,<span class="number">2</span> ,(<span class="keyword">select</span> <span class="keyword">MIN</span> (FYearOfPublish)<span class="keyword">from</span> T_Book ) <span class="keyword">as</span> N<span class="string">&apos;&#x6700;&#x65E9;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&apos;</span>,</span><br><span class="line">                     (<span class="keyword">select</span> <span class="keyword">MAX</span> (FYearOfPublish) <span class="keyword">from</span> T_Book )<span class="keyword">as</span> N<span class="string">&apos;&#x6700;&#x665A;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&apos;</span></span></span><br></pre></td></tr></table></figure>
+<p>2&#x3001;&#x5217;&#x503C;&#x5B50;&#x67E5;&#x8BE2;</p>
+<p>&#x4E0E;&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;&#x4E0D;&#x540C;&#xFF0C;&#x5217;&#x503C;&#x5B50;&#x67E5;&#x8BE2;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x591A;&#x884C;&#x591A;&#x5217;&#x7684;&#x7ED3;&#x679C;&#x96C6;&#xFF0C;&#x53C8;&#x79F0;&#x4E3A;&#x8868;&#x5B50;&#x67E5;&#x8BE2;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x7684;&#x8868;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--&#x67E5;&#x8BE2;&#x51FA;&#x7248;&#x65E5;&#x671F;&#x5728;1800&#x5E74;&#x4EE5;&#x524D;&#x7684;&#x4E66;&#x7684;&#x540D;&#x5B57;&#x53CA;&#x4F5C;&#x8005;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x5F53;&#x7136;&#x8FD9;&#x4E2A;&#x5730;&#x65B9;&#x7528;&#x5230;&#x4E86;&#x4EA4;&#x53C9;&#x8FDE;&#x63A5;&#x7684;&#x9690;&#x5F0F;&#x5B9E;&#x73B0;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> r.FName ,b.FName ,b.FYearOfPublish </span><br><span class="line"><span class="keyword">from</span> T_Reader r,(<span class="keyword">select</span> FName ,FYearOfPublish  <span class="keyword">from</span> T_Book <span class="keyword">where</span> FYearOfPublish &lt;<span class="number">1800</span>) b</span></span><br></pre></td></tr></table></figure>
+<p>3&#x3001;select&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;</p>
+<p>&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;&#x552F;&#x4E00;&#x7684;&#x9650;&#x5236;&#x5C31;&#x662F;&#x5B50;&#x67E5;&#x8BE2;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x53EA;&#x6709;&#x4E00;&#x884C;&#x8BB0;&#x5F55;&#xFF0C;&#x800C;&#x4E14;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x5217;&#xFF0C;&#x5176;&#x5B9E;&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x968F;&#x5F53;&#x524D;&#x8BB0;&#x5F55;&#x53D8;&#x5316;&#x800C;&#x53D8;&#x5316;&#x7684;&#x503C;&#x3002;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x7C7B;&#x56FE;&#x4E66;&#x7684;&#x6700;&#x65B0;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&#xFF0C;&#x56FE;&#x4E66;&#x7C7B;&#x522B;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> FId ,FName,</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span>  <span class="keyword">MAX</span> (FYearOfPublish)<span class="keyword">from</span> T_Book b </span><br><span class="line">    <span class="keyword">where</span> b.FCategoryId =c.FId  </span><br><span class="line"></span><br><span class="line">)<span class="keyword">as</span> N<span class="string">&apos;&#x6700;&#x65B0;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&apos;</span> </span><br><span class="line"> <span class="keyword">from</span> T_Categroy  c</span></span><br></pre></td></tr></table></figure>
+<p>4&#x3001;where&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;</p>
+<p>&#x6807;&#x91CF;&#x5B50;&#x67E5;&#x8BE2;&#x4E0D;&#x4EC5;&#x53EF;&#x4EE5;&#x7528;&#x5728;select&#x8BED;&#x53E5;&#x4E2D;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x4EE5;&#x7528;&#x5728;where&#x8BED;&#x53E5;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--&#x8FD4;&#x56DE;&#x6700;&#x559C;&#x6B22;&#x8BFB;&#x7684;&#x4E66;&#x7C4D;&#x7C7B;&#x522B;&#x4E3A;Story&#x7684;&#x8BFB;&#x8005;&#x7684;ID&#x4FE1;&#x606F;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> FReaderId  <span class="keyword">from</span> T_ReaderFavorite </span><br><span class="line">     <span class="keyword">where</span> FCategoryId =</span><br><span class="line">     (</span><br><span class="line">       <span class="keyword">select</span> FId <span class="keyword">from</span> T_Categroy</span><br><span class="line">       <span class="keyword">where</span> FName =<span class="string">&apos;Story&apos;</span></span><br><span class="line">     )</span></span><br></pre></td></tr></table></figure>
+<p>&#x518D;&#x770B;&#x4E00;&#x4E2A;&#x7EFC;&#x5408;&#x70B9;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;&#x5047;&#x8BBE;&#x9700;&#x8981;&#x68C0;&#x7D22;&#x6BCF;&#x4E00;&#x79CD;&#x4E66;&#x7C4D;&#x7C7B;&#x522B;&#x4E2D;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&#x6700;&#x65E9;&#x7684;&#x4E66;&#x7C4D;&#x7684;&#x540D;&#x79F0;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x4E24;&#x672C;&#x6216;&#x4E24;&#x672C;&#x4EE5;&#x4E0A;&#x7684;&#xFF0C;&#x5219;&#x90FD;&#x663E;&#x793A;&#x4ED6;&#x4EEC;&#x7684;&#x540D;&#x5B57;&#x3002;&#x8981;&#x6C42;&#x68C0;&#x7D22;&#x7ED3;&#x679C;&#x4E2D;&#x663E;&#x793A;&#x7C7B;&#x578B;&#x7684;&#x540D;&#x5B57;&#x3001;&#x4E66;&#x7684;&#x540D;&#x5B57;&#x548C;&#x5B83;&#x7684;&#x51FA;&#x7248;&#x5E74;&#x4EFD;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> T_Categroy .FName ,T_Book .FName ,T_Book .FYearOfPublish  </span><br><span class="line"><span class="keyword">from</span> T_Book <span class="keyword">inner</span> <span class="keyword">join</span> T_Categroy <span class="keyword">on</span> T_Book .FCategoryId =T_Categroy .FId </span><br><span class="line"><span class="keyword">where</span> T_Book .FYearOfPublish =</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> <span class="keyword">MIN</span> (T_Book .FYearOfPublish) <span class="keyword">from</span> T_Book</span><br><span class="line">    <span class="keyword">where</span> T_Book .FCategoryId =T_Categroy .FId  </span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<p>&#x5F53;&#x7136;&#x4E0A;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x4E2D;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x522B;&#x540D;&#x4EE3;&#x6362;&#xFF0C;&#x8FD9;&#x6837;&#x4F1A;&#x66F4;&#x7B80;&#x660E;&#x4E9B;&#x3002;</p>
+<p>5&#x3001;&#x96C6;&#x5408;&#x8FD0;&#x7B97;&#x7B26;&#x4E0E;&#x5B50;&#x67E5;&#x8BE2;&#xFF0C;&#x5982;&#x679C;&#x5B50;&#x67E5;&#x8BE2;&#x7684;&#x7ED3;&#x679C;&#x96C6;&#x662F;&#x591A;&#x884C;&#x591A;&#x5217;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x5C06;&#x8BE5;&#x5B50;&#x67E5;&#x8BE2;&#x770B;&#x505A;&#x662F;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x7684;&#x6570;&#x636E;&#x8868;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x7ED3;&#x679C;&#x96C6;&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x884C;&#x5355;&#x5217;&#x7684;&#x96C6;&#x5408;&#x65F6;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;in&#xFF0C;any&#xFF0C;all&#x53CA;exists&#x7B49;&#x6765;&#x67E5;&#x8BE2;&#x3002;</p>
+<p>in&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x662F;&#x7528;&#x6765;&#x5339;&#x914D;&#x591A;&#x884C;&#x5355;&#x5217;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x5339;&#x914D;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x9879;&#xFF0C;&#x6BD4;&#x5982;&#x68C0;&#x7D22;&#x5728;2001,2003,2005&#x5E74;&#x51FA;&#x7248;&#x7684;&#x6240;&#x6709;&#x56FE;&#x4E66;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Book <span class="keyword">where</span> FYearofPublish <span class="keyword">in</span> (<span class="number">2001</span>,<span class="number">2003</span>,<span class="number">2005</span>)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> T_Reader <span class="keyword">where</span> FYearofJoin <span class="keyword">in</span> (<span class="keyword">select</span> FYearofPublis <span class="keyword">from</span> T_Book)</span></span><br></pre></td></tr></table></figure>
+<p>any&#x5FC5;&#x987B;&#x548C;&#x5176;&#x4ED6;&#x7684;&#x6BD4;&#x8F83;&#x8FD0;&#x7B97;&#x7B26;&#xFF08;=&#xFF0C;&lt;,&gt;,!=&#xFF09;&#x5171;&#x540C;&#x4F7F;&#x7528;&#xFF0C;&#x4E0D;&#x4E25;&#x8C28;&#x7684;&#x8BF4;&#x4F60;&#x53EF;&#x4EE5;&#x8FD9;&#x6837;&#x8BA4;&#x4E3A;&#xFF0C;any&#x5C31;&#x662F;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#xFF0C;&#x5339;&#x914D;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x7684;&#x610F;&#x601D;&#xFF0C;&#x6BD4;&#x5982;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Reader <span class="keyword">where</span> FYearOfJoin =<span class="keyword">any</span> (  <span class="keyword">select</span> FYearOfPublish  <span class="keyword">from</span> T_Book )</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> T_Reader <span class="keyword">where</span> FYearOfJoin &lt;&gt;<span class="keyword">any</span> (  <span class="keyword">select</span> FYearOfPublish  <span class="keyword">from</span> T_Book )</span></span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x4E24;&#x6761;&#x8BED;&#x53E5;&#x524D;&#x4E00;&#x6761;=any&#x5176;&#x6548;&#x679C;&#x9002;&#x5408;in&#x4E00;&#x6837;&#x7684;&#xFF0C;&lt;&gt;any &#x6548;&#x679C;&#x9002;&#x5408;not in &#x4E00;&#x6837;&#x7684;&#xFF0C;&#x9664;&#x4E86;=&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;any&#x8FD8;&#x53EF;&#x4EE5;&#x548C;&#x5927;&#x4E8E;&#x5C0F;&#x4E8E;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x7B49;&#x8FD0;&#x7B97;&#x7B26;&#x5171;&#x540C;&#x4F7F;&#x7528;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x67E5;&#x8BE2;&#x5728;&#x6240;&#x6709;&#x4F1A;&#x5458;&#x51FA;&#x751F;&#x4E4B;&#x524D;&#x51FA;&#x7248;&#x7684;&#x4E66;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span> * <span class="keyword">from</span> T_Book <span class="keyword">where</span> FYearOfPublish &lt;<span class="keyword">any</span>( <span class="keyword">select</span> FYearOfBith  <span class="keyword">from</span> T_Reader)</span></span><br></pre></td></tr></table></figure>
+<p>exists&#xFF0C;&#x662F;&#x5426;&#x5B58;&#x5728;&#x6BD4;&#x8F83;&#x8FD0;&#x7B97;&#x7B26;&#xFF0C;&#x5176;&#x540E;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x5982;&#x679C;&#x4E3A;&#x771F;&#x5219;&#x8FD4;&#x56DE;true&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE;false&#x3002;&#x5148;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<p>&#x5728;&#x8FD9;&#x4E2A;&#x4E8B;&#x4F8B;&#x4E2D;&#xFF0C;&#x5982;&#x679C;T_Reader&#x8868;&#x4E2D;&#x5B58;&#x5728;&#x59D3;&#x540D;&#x4E3A;Tom&#x7684;&#x8BFB;&#x8005;&#x4FE1;&#x606F;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x8FD4;&#x56DE;T_Book&#x8868;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x53CD;&#x4E4B;&#xFF0C;&#x4E0D;&#x4F1A;&#x68C0;&#x7D22;&#x51FA;&#x4EFB;&#x4F55;&#x4FE1;&#x606F;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x67E5;&#x4E0D;&#x5230;&#x4EFB;&#x4F55;&#x4FE1;&#x606F;&#xFF0C;&#x770B;&#x4F3C;&#x597D;&#x50CF;exists&#x7684;&#x4F5C;&#x7528;&#x5E76;&#x4E0D;&#x662F;&#x5F88;&#x5927;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x5F80;&#x5F80;&#x7528;&#x5728;&#x5B50;&#x67E5;&#x8BE2;&#x4E2D;&#x5F15;&#x7528;&#x5916;&#x90E8;&#x5B57;&#x6BB5;&#x7684;&#x68C0;&#x7D22;&#x4E2D;&#xFF0C;&#x770B;&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- &#x68C0;&#x7D22;1950&#x5E74;&#x4EE5;&#x524D;&#x51FA;&#x7248;&#x7684;&#x56FE;&#x4E66;&#x7684;&#x56FE;&#x4E66;&#x7C7B;&#x522B;</span></span><br><span class="line"><span class="operator"><span class="keyword">select</span>  * <span class="keyword">from</span> T_Category <span class="keyword">where</span> <span class="keyword">exists</span> (<span class="keyword">select</span> * <span class="keyword">from</span> T_Book <span class="keyword">where</span> T_Book.FCategoryId =T_Category.Id <span class="keyword">and</span> T_Book .FYearofPublis &lt;<span class="number">1950</span> )</span></span><br></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x6837;&#x5C31;&#x4F1A;&#x68C0;&#x7D22;&#x51FA;&#x5728;1950&#x5E74;&#x4EE5;&#x524D;&#x51FA;&#x7248;&#x7684;&#x56FE;&#x4E66;&#x7684;&#x4FE1;&#x606F;&#x4E86;&#x3002;</p>
+<h1 id="&#x4E03;&#x5B50;&#x67E5;&#x8BE2;&#x5728;insert&#x8BED;&#x53E5;update&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x5E94;&#x7528;">&#x4E03;&#x3001;&#x5B50;&#x67E5;&#x8BE2;&#x5728;insert&#x8BED;&#x53E5;update&#x8BED;&#x53E5;&#x4E2D;&#x7684;&#x5E94;&#x7528;</h1><p>insert&#x8BED;&#x53E5;&#xFF1A;&#x4E00;&#x822C;&#x7684;&#xFF0C;&#x5411;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x6761;&#x6570;&#x636E;&#x5C31;&#x662F;&#x5E94;&#x7528;insert into &#x8868;&#x540D;&#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x5B57;&#x6BB5;2&#x2026;&#x2026;&#xFF09;values &#xFF08;&#x503C;1&#xFF0C;&#x503C;2&#xFF0C;&#x2026;&#x2026;&#xFF09; &#x6BD4;&#x5982;</p>
+<p><code>insert into T_Person(FId ,FName,FAge) values (1,&apos;Tom&apos;,20)</code></p>
+<p>&#x4F46;&#x5176;&#x5B9E;insert&#x8FD8;&#x6709;&#x53E6;&#x5916;&#x4E00;&#x79CD;&#x7528;&#x6CD5;&#xFF0C;&#x5C31;&#x662F;insert &#x2026;&#x2026;select&#x2026;&#x2026;&#x8BED;&#x53E5;&#xFF0C;&#x5177;&#x4F53;&#x8BED;&#x6CD5;&#x4E3A;insert into &#x8868;&#x540D;&#xFF08;&#x5B57;&#x6BB5;1&#xFF0C;&#x5B57;&#x6BB5;2&#x2026;&#x2026;&#xFF09;select &#xFF08;&#x503C;1&#xFF0C;&#x503C;2&#xFF0C;&#x2026;&#x2026;&#xFF09; from &#x8868;</p>
+<p><code>insert into T_Reader2(FId,FName,FAge) select (FId,FName,FAge) from T_Reader</code></p>
+<p>&#x8FD9;&#x6761;&#x8BED;&#x53E5;&#x5176;&#x5B9E;&#x5C31;&#x76F8;&#x5F53;&#x4E8E;&#x590D;&#x5236;&#x4E86;&#x4E00;&#x4E2A;T_Reader&#x8868;&#xFF0C;&#x5C06;&#x5176;&#x4FE1;&#x606F;&#x63D2;&#x5165;&#x5230;&#x4E86;T_Reader2 &#x4E2D;&#x3002;&#x5F53;&#x7136;&#xFF0C;insert&#x2026;&#x2026;select &#x8FD8;&#x6709;&#x66F4;&#x590D;&#x6742;&#x7684;&#x7528;&#x6CD5;&#xFF0C;&#x53EF;&#x4EE5;&#x5411;&#x4E0D;&#x540C;&#x7ED3;&#x6784;&#x7684;&#x8868;&#x4E2D;&#x63D2;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x8BFB;&#x8005;&#x7684;&#x7231;&#x597D;&#x589E;&#x52A0;&#x201C;&#x5C0F;&#x8BF4;&#x201D;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x8BFB;&#x8005;&#x5728;&#x5176;T_ReaderFavorite&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x6761;FCategory=1&#x7684;&#x8BB0;&#x5F55;&#xFF08;&#x5982;&#x679C;&#x539F;&#x5148;&#x8BFB;&#x8005;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x6B64;&#x7231;&#x597D;&#xFF0C;&#x5C31;&#x4E0D;&#x7528;&#x6DFB;&#x52A0;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6B64;&#x7231;&#x597D;&#xFF0C;&#x5C31;&#x6DFB;&#x52A0;&#xFF09;&#x3002;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> T_ReaderFavorite(FCategoryId ,FReaderId ) <span class="keyword">select</span> <span class="number">1</span>,FId <span class="keyword">from</span> T_Reader </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">not</span> <span class="keyword">exists</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">select</span> * <span class="keyword">from</span> T_ReaderFavorite  <span class="keyword">where</span> T_ReaderFavorite .FCategoryId =<span class="number">1</span> <span class="keyword">and</span>  T_ReaderFavorite .FReaderId =T_Reader .FId </span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<p>update&#x8BED;&#x53E5;&#xFF1A;&#x5728;update&#x8BED;&#x53E5;&#x4E2D;&#x5B50;&#x67E5;&#x8BE2;&#x4E5F;&#x53EF;&#x4EE5;&#x6709;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#x7684;&#x68C0;&#x7D22;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;&#x5C06;&#x6240;&#x6709;&#x540C;&#x7C7B;&#x56FE;&#x4E66;&#x7684;&#x672C;&#x6570;&#x8D85;&#x8FC7;3&#x672C;&#x7684;&#x56FE;&#x4E66;&#x7684;&#x51FA;&#x7248;&#x65E5;&#x671F;&#x66F4;&#x65B0;&#x4E3A;2008&#xFF08;&#x81EA;&#x8FDE;&#x63A5;&#xFF09;</p>
+<p><code>update T_Book set FYearOfPublish =2008 where (select COUNT (*) from T_Book bk2 where bk2 .FCategoryId =T_Book .FCategoryId )&gt;3</code></p>
+<p>delete&#x8BED;&#x53E5;&#xFF1A;&#x4F8B;&#x5982;&#xFF1A;&#x5C06;&#x6240;&#x6709;&#x540C;&#x7C7B;&#x56FE;&#x4E66;&#x7684;&#x672C;&#x6570;&#x8D85;&#x8FC7;3&#x672C;&#x7684;&#x56FE;&#x4E66;&#x5220;&#x9664;</p>
+<p><code>delete from T_Book where (select count(*) from T_Book bk where bk.FCategoryId=T_Book.FCategoryId)&gt;3</code></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+    
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sql/"> #sql </a>
+          
+            <a href="/tags/sqlserver/"> #sqlserver </a>
+          
+            <a href="/tags/数据库/"> #数据库 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/24/how-hbase-use-apache-phoenix/">使用Phoenix通过sql语句更新操作hbase数据</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/20/reading-notes-tough-workout/">硬派健身思维导图读书笔记(硬派健身.mmp/.xmind思维导图分享)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+
+<div class="ds-share" data-thread-key="2015/06/20/materials-about-sql/" data-title="sql语句基础复习及资料推荐" data-images="http://www.ixirong.com/2015/06/20/materials-about-sql/" data-content="一篇不错的文章，推荐给大家！" data-url="http://www.ixirong.com/2015/06/20/materials-about-sql/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>  
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>              
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+          <!-- 评论框 -->
+          <div class="ds-thread" data-thread-key="2015/06/20/materials-about-sql/"
+               data-title="sql语句基础复习及资料推荐" data-url="http://www.ixirong.com/2015/06/20/materials-about-sql/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+
+          
+          <!-- 多说热评文章-->
+          <div class="c-duoshuo-hot-artical">
+          <p>热评文章</p>
+          <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+          <div>
+          
+         
+        </div>        
+      </div>
+               
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/xirong.jpg" alt="xirong" />
+          <p class="site-author-name">xirong</p>
+        </div>
+        <p class="site-description motion-element">有故事、有担当、有思考</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/ixirong" target="_blank">Twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/jackieliuxirong" target="_blank">微博</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/xirong/" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank">StackOverflow</a>
+            </span>
+                      
+           </div>
+        
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+     
+        
+          <div class="links-of-author motion-element">        
+          <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.read.org.cn/" target="_blank">战隼</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.mifengtd.cn/" target="_blank">褪墨</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://mindhacks.cn/" target="_blank">刘未鹏</a>
+              </span>
+            
+          </div>
+        
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-数据类型"><span class="nav-text">一、 数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二操作数据表"><span class="nav-text">二、操作数据表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1创建数据表"><span class="nav-text">1、创建数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2修改已有表"><span class="nav-text">2、修改已有表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3删除数据表"><span class="nav-text">3、删除数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4为数据表插入新的数据insert语句"><span class="nav-text">4、为数据表插入新的数据（insert语句）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5数据更新update语句"><span class="nav-text">5、数据更新（Update语句）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6数据表的检索select语句"><span class="nav-text">6、数据表的检索（select语句）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三函数包括数学函数字符串函日期函数以及其它函数等"><span class="nav-text">三、函数，包括数学函数，字符串函、日期函数以及其它函数等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四索引与约束"><span class="nav-text">四、索引与约束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五表连接"><span class="nav-text">五、表连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六子查询"><span class="nav-text">六、子查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七子查询在insert语句update语句中的应用"><span class="nav-text">七、子查询在insert语句update语句中的应用</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  
+  <span class="author"> xirong</span>
+</div>
+
+<div class="powered-by">
+  <div style="float:left;margin-top:7px;margin-right:10px;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254711542'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254711542%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+   鲁ICP备15013969号
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Clone theme 
+  <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
+    NexT
+  </a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if (isDesktop() && HEXO_SIDEBAR_CONFIGURATION === 'post') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+
+
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

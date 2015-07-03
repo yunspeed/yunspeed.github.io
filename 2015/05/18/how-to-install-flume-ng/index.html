@@ -1,0 +1,1135 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+    <meta name="description" content="分布式实时日志系统（二） 环境搭建之 flume 集群搭建/flume ng资料,flume日志收集是什么？消息积压，日志延迟，日志存储日期过短怎么办？业界已经有了比较成熟的流程，即基于流式处理，采用 flume 收集日志，发送到 kafka 队列做缓冲，storm 分布式实时框架进行消费处理，短期数据落地到 hbase、mongo中，长期数据进入 hadoop 中存储。 有故事、有担当、有思考" />
+
+
+
+  <meta name="keywords" content="分布式,大数据,存储,实时日志, flume,flume ng,流式日志收集,分布式日志收集,分布式日志存储" />
+
+
+
+
+
+  <meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+
+
+
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+ 
+
+
+
+  <meta name="baidu_union_verify" content="63d8c69bdbc435b09f0d1b064de79a19" />
+
+
+
+  <meta  baidu-gxt-verify-token="52c8363b5f7cf3520969573f8b170868" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自由" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+  <title> 分布式实时日志系统（二） 环境搭建之 flume 集群搭建/flume ng资料 - 自由 </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">自由</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
+    </script>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
+        <a href="/404.html">
+          <i class="menu-item-icon icon-commonweal"></i> <br />
+          公益404
+        </a>
+      </li>
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              分布式实时日志系统（二） 环境搭建之 flume 集群搭建/flume ng资料
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-05-18
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/大数据/">大数据</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/05/18/how-to-install-flume-ng/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/18/how-to-install-flume-ng/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>&#x6700;&#x8FD1;&#x516C;&#x53F8;&#x4E1A;&#x52A1;&#x6570;&#x636E;&#x91CF;&#x8D8A;&#x6765;&#x8D8A;&#x5927;&#xFF0C;&#x4EE5;&#x524D;&#x7684;&#x57FA;&#x4E8E;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x65E5;&#x5FD7;&#x7CFB;&#x7EDF;&#x8D8A;&#x6765;&#x8D8A;&#x96BE;&#x4EE5;&#x6EE1;&#x8DB3;&#x76EE;&#x524D;&#x7684;&#x4E1A;&#x52A1;&#x91CF;&#xFF0C;&#x8868;&#x73B0;&#x4E3A;&#x6D88;&#x606F;&#x79EF;&#x538B;&#xFF0C;&#x65E5;&#x5FD7;&#x5EF6;&#x8FDF;&#xFF0C;&#x65E5;&#x5FD7;&#x5B58;&#x50A8;&#x65E5;&#x671F;&#x8FC7;&#x77ED;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x7740;&#x624B;&#x8981;&#x91CD;&#x65B0;&#x8BBE;&#x8BA1;&#x8FD9;&#x5757;&#xFF0C;&#x4E1A;&#x754C;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x6BD4;&#x8F83;&#x6210;&#x719F;&#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x5373;&#x57FA;&#x4E8E;&#x6D41;&#x5F0F;&#x5904;&#x7406;&#xFF0C;&#x91C7;&#x7528; flume &#x6536;&#x96C6;&#x65E5;&#x5FD7;&#xFF0C;&#x53D1;&#x9001;&#x5230; kafka &#x961F;&#x5217;&#x505A;&#x7F13;&#x51B2;&#xFF0C;storm &#x5206;&#x5E03;&#x5F0F;&#x5B9E;&#x65F6;&#x6846;&#x67B6;&#x8FDB;&#x884C;&#x6D88;&#x8D39;&#x5904;&#x7406;&#xFF0C;&#x77ED;&#x671F;&#x6570;&#x636E;&#x843D;&#x5730;&#x5230; hbase&#x3001;mongo&#x4E2D;&#xFF0C;&#x957F;&#x671F;&#x6570;&#x636E;&#x8FDB;&#x5165; hadoop &#x4E2D;&#x5B58;&#x50A8;&#x3002; &#x63A5;&#x4E0B;&#x6765;&#x6253;&#x7B97;&#x5C06;&#x8FD9;&#x5176;&#x95F4;&#x6240;&#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;&#x3001;&#x5B66;&#x4E60;&#x5230;&#x7684;&#x77E5;&#x8BC6;&#x8BB0;&#x5F55;&#x6574;&#x7406;&#x4E0B;&#xFF0C;&#x4F5C;&#x4E3A;&#x5907;&#x5FD8;&#xFF0C;&#x4F5C;&#x4E3A;&#x5206;&#x4EAB;&#xFF0C;&#x5E26;&#x7ED9;&#x9700;&#x8981;&#x7684;&#x4EBA;&#x3002;</p>
+<p>&#x5B66;&#x4E60;flume ng&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x8FD8;&#x662F;&#x9047;&#x5230;&#x4E00;&#x4E9B;&#x969C;&#x788D;&#x7684;&#xFF0C;&#x53EF;&#x662F;&#x5728;&#x641C;&#x7D22;&#x5F15;&#x64CE;&#x641C;&#x5230;&#x7684;&#x6240;&#x6709;&#x7684;flume&#x7684;&#x8D44;&#x6599;&#x90FD;&#x662F;&#x4EE5;&#x524D;&#x7684;<code>flume og</code>&#xFF08;flume orign generation&#xFF09;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x4E0D;&#x662F;&#x6211;&#x4EEC;&#x8981;&#x7528;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x4F7F;&#x7528; <code>flume ng</code>&#xFF08;flume next generation&#xFF09;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x8981;&#x641C;&#x8D44;&#x6599;&#x6700;&#x597D;&#x641C;&#x7D22; <code>flume ng</code> &#x6765;&#x67E5;&#x627E;&#xFF0C;&#x8BE6;&#x7EC6;&#x770B;&#x4E00;&#x4E0B;&#x8FD9;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#x7684;&#x533A;&#x522B;&#xFF1A;<a id="more"></a><br> <a href="http://www.ibm.com/developerworks/cn/data/library/bd-1404flumerevolution/index.html" target="_blank" rel="external">Flume NG&#xFF1A;Flume &#x53D1;&#x5C55;&#x53F2;&#x4E0A;&#x7684;&#x7B2C;&#x4E00;&#x6B21;&#x9769;&#x547D;</a><br> &#x8BB2;&#x7684;&#x975E;&#x5E38;&#x8BE6;&#x7EC6;&#xFF0C;&#x5305;&#x62EC; &#x4E24;&#x4EE3;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x5B89;&#x88C5;&#x914D;&#x7F6E;&#x7B49;&#xFF0C;&#x53EF;&#x4EE5;&#x4ED4;&#x7EC6;&#x9605;&#x8BFB;&#x4E0B;&#x3002;</p>
+<p>&#x5173;&#x4E8E;&#x4F7F;&#x7528; flume ng &#x6765;&#x6536;&#x96C6;&#x65E5;&#x5FD7;&#xFF0C;&#x7F8E;&#x56E2;&#x7F51;&#x6709;&#x4E24;&#x7BC7;&#x4E0D;&#x9519;&#x7684;&#x6587;&#x7AE0;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#xFF1A;<br><a href="http://tech.meituan.com/mt-log-system-arch.html" target="_blank" rel="external">&#x57FA;&#x4E8E;Flume&#x7684;&#x7F8E;&#x56E2;&#x65E5;&#x5FD7;&#x6536;&#x96C6;&#x7CFB;&#x7EDF;(&#x4E00;)  &#x67B6;&#x6784;&#x548C;&#x8BBE;&#x8BA1;</a><br><a href="http://tech.meituan.com/mt-log-system-optimization.html" target="_blank" rel="external">&#x57FA;&#x4E8E;Flume&#x7684;&#x7F8E;&#x56E2;&#x65E5;&#x5FD7;&#x6536;&#x96C6;&#x7CFB;&#x7EDF;(&#x4E8C;)  &#x6539;&#x8FDB;&#x548C;&#x4F18;&#x5316;</a></p>
+<p>&#x5173;&#x4E8E;&#x5B66;&#x4E60; flume-ng &#xFF0C;<a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">&#x5B98;&#x65B9;&#x7528;&#x6237;&#x6587;&#x6863;</a> &#x662F;&#x6700;&#x597D;&#x7684;&#x8D44;&#x6599;&#xFF0C;&#x9605;&#x8BFB;&#x82F1;&#x6587;&#x8FD8;&#x6709;&#x4E9B;&#x56F0;&#x96BE;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<a href="http://weibo.com/chenzhijun" target="_blank" rel="external">@javachen</a> &#x5199;&#x7684;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x8BB2;&#x6E05;&#x695A;&#x4E86;&#x6587;&#x6863;&#x4E2D;&#x5927;&#x90E8;&#x5206;&#x573A;&#x666F;&#xFF0C;xirong &#x6781;&#x4E3A;&#x63A8;&#x8350;&#xFF0C;<a href="http://blog.javachen.com/2014/07/22/flume-ng.html" target="_blank" rel="external">Flume-ng &#x7684;&#x539F;&#x7406;&#x548C;&#x4F7F;&#x7528;</a> </p>
+<p>&#x9605;&#x8BFB;&#x5B8C;&#x4E0A;&#x9762;&#x7684;&#x6587;&#x7AE0;&#x5BF9; flume &#x6709;&#x4E86;&#x4E00;&#x4E9B;&#x6982;&#x5FF5;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x4E00;&#x4E0B;&#x8FD9;&#x7BC7; PPT&#xFF0C;&#x6765;&#x81EA;&#x4E8E; yahoo &#x7684;&#x5DE5;&#x7A0B;&#x5E08;&#x5206;&#x4EAB;&#xFF1A;</p>
+<p><iframe src="//www.slideshare.net/slideshow/embed_code/key/IJuqQSXomm3EeG" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ydn/flume-hug" title="Feb 2013 HUG: Large Scale Data Ingest Using Apache Flume" target="_blank">Feb 2013 HUG: Large Scale Data Ingest Using Apache Flume</a> </strong> from <strong><a href="//www.slideshare.net/ydn" target="_blank">Yahoo! Developer Network</a></strong> </div></p>
+<p><strong>flume-ng &#x96C6;&#x7FA4;&#x642D;&#x811A;&#x672C;</strong></p>
+<p>flume-ng &#x7684;&#x642D;&#x5EFA;&#x8FD8;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x5982;&#x4E0B;&#x811A;&#x672C;&#x6240;&#x793A;&#xFF0C;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x6267;&#x884C;&#x4EE5;&#x4E0B;&#x5C31;ok&#x4E86;&#xFF0C;&#x91CD;&#x8981;&#x7684;&#x662F;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x673A;&#x5668;&#x7684;&#x4E0D;&#x540C;&#x6240;&#x505A;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5728; javachen &#x7684;&#x6587;&#x7AE0;&#x4E2D;&#x6709;&#x8BE6;&#x7EC6;&#x7684;&#x8BB2;&#x8FF0;&#x914D;&#x7F6E;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x76F8;&#x5173;&#x9605;&#x8BFB;&#x3002; </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line"><span class="comment"># author&#xFF1A; xirong </span></span><br><span class="line"><span class="comment"># date  :  2015-02-06 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#####  &#x642D;&#x5EFA; flume &#x96C6;&#x7FA4;&#x7684;&#x811A;&#x672C;</span></span><br><span class="line"><span class="comment">#	&#x6CE8;&#x610F;&#xFF1A;</span></span><br><span class="line"><span class="comment">#   1. &#x9700;&#x8981; jdk7 &#x73AF;&#x5883;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709; Java &#x73AF;&#x5883;&#xFF0C;&#x8BF7;&#x914D;&#x7F6E;</span></span><br><span class="line"><span class="comment">#   2. &#x6709; /home/work &#x76EE;&#x5F55;&#xFF0C;&#x5426;&#x5219;&#x65E0;&#x6CD5;&#x5B89;&#x88C5;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">####</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x538B;&#x7F29;&#x6587;&#x4EF6;&#x89E3;&#x538B;</span></span><br><span class="line">tar -zxf apache-flume-<span class="number">1.5</span>.<span class="number">2</span>-bin.tar.gz -C /home/work/flume_cluster/</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x914D;&#x7F6E;flume&#x73AF;&#x5883;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&apos;## flume configuration &apos;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&apos;export FLUME_HOME=/home/work/flume_cluster/apache-flume-1.5.2-bin&apos;</span> &gt;&gt; /etc/profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&apos;export PATH=.:$PATH::$FLUME_HOME/bin&apos;</span> &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x6DFB;&#x52A0;Java &#x73AF;&#x5883;&#x53D8;&#x91CF;</span></span><br><span class="line">\cp <span class="operator">-f</span> <span class="variable">$FLUME_HOME</span>/conf/flume-env.sh.template <span class="variable">$FLUME_HOME</span>/conf/flume-env.sh</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&apos;JAVA_HOME=/opt/jdk1.7.0_75/&apos;</span> &gt;&gt; <span class="variable">$FLUME_HOME</span>/conf/flume-env.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&apos;confgratulations! fluem has been installed and flume-env.sh has been set!&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># &#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x6210;&#x529F; </span></span><br><span class="line">flume-ng version</span><br><span class="line"></span><br><span class="line"><span class="comment">## Flume 1.5.2</span></span><br><span class="line"><span class="comment">## Source code repository: https://git-wip-us.apache.org/repos/asf/flume.git</span></span><br><span class="line"><span class="comment">## Revision: 229442aa6835ee0faa17e3034bcab42754c460f5</span></span><br><span class="line"><span class="comment">## Compiled by hshreedharan on Wed Nov 12 12:51:22 PST 2014</span></span><br><span class="line"><span class="comment">## From source with checksum 837f81bd1e304a65fcaf8e5f692b3f18</span></span><br></pre></td></tr></table></figure>
+<p><strong>&#x5B9E;&#x8DF5;&#x6587;&#x7AE0;</strong> &#xFF0C;&#x5305;&#x62EC;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0A;&#x9762;&#x7684;&#x4F18;&#x5316;&#x914D;&#x7F6E;&#xFF0C;&#x5E38;&#x89C1;&#x95EE;&#x9898;&#xFF0C;&#x8BE6;&#x7EC6;&#x67E5;&#x770B; <a href="http://my.oschina.net/leejun2005/blog/288136" target="_blank" rel="external">flume ng &#x5B9E;&#x6218;&#x914D;&#x7F6E;</a></p>
+<p><strong>flume &#x540E;&#x53F0;&#x542F;&#x52A8;</strong>&#xFF1A;&#xFF0C;&#x4F7F;&#x7528;<code>nohup</code>&#x547D;&#x4EE4;&#xFF0C;&#x5373; <code>nohup flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/flume_weblog.conf --name agent1 &amp;</code> &#xFF0C;&#x8BE6;&#x7EC6;&#x53C2;&#x8003;&#xFF1A; <a href="https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/" target="_blank" rel="external">Linux &#x6280;&#x5DE7;&#xFF1A;&#x8BA9;&#x8FDB;&#x7A0B;&#x5728;&#x540E;&#x53F0;&#x53EF;&#x9760;&#x8FD0;&#x884C;&#x7684;&#x51E0;&#x79CD;&#x65B9;&#x6CD5;</a></p>
+<p>&#x5982;&#x4E4B;&#x524D; Jstorm&#x7684;&#x642D;&#x5EFA;&#x4E00;&#x6837;&#xFF0C;&#x63D0;&#x4F9B;&#x4E00;&#x952E;&#x5B89;&#x88C5;&#x7684;&#x811A;&#x672C;&#xFF0C;zip&#x5305;&#x4E2D;&#x5305;&#x542B;&#x6240;&#x9700;&#x8981;&#x7684;&#x6587;&#x4EF6;&#xFF0C;<a href="http://pan.baidu.com/s/1gdpMOM3" target="_blank" rel="external">&#x767E;&#x5EA6;&#x7F51;&#x76D8;</a> &#xFF0C;&#x5BC6;&#x7801;&#x4E3A; <code>usfc</code> &#xFF0C;&#x6B22;&#x8FCE;&#x4E0B;&#x8F7D;&#x4F53;&#x9A8C;&#x3002;<br>&#x5982;&#x6709;&#x4EFB;&#x4F55;&#x95EE;&#x9898;&#xFF0C;&#x8BF7;&#x7559;&#x8A00;&#x6216;&#x8005;&#x5728;&#x53F3;&#x4FA7;&#x627E;&#x5230;&#x6211;&#x7684;&#x8054;&#x7CFB;&#x65B9;&#x5F0F;&#xFF0C;&#x8054;&#x7CFB;&#x6211;</p>
+
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+    
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分布式/"> #分布式 </a>
+          
+            <a href="/tags/大数据/"> #大数据 </a>
+          
+            <a href="/tags/存储/"> #存储 </a>
+          
+            <a href="/tags/实时日志/"> #实时日志 </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/22/how-to-install-hadoop-cluster/">分布式实时日志系统（三） 环境搭建之centos 6.4下hadoop 2.5.2完全分布式集群搭建最全资料</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/17/how-to-build-ixirong-blog/">使用 github Pages 服务建立 ixirong.com 独立博客全过程</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+
+<div class="ds-share" data-thread-key="2015/05/18/how-to-install-flume-ng/" data-title="分布式实时日志系统（二） 环境搭建之 flume 集群搭建/flume ng资料" data-images="http://www.ixirong.com/2015/05/18/how-to-install-flume-ng/" data-content="一篇不错的文章，推荐给大家！" data-url="http://www.ixirong.com/2015/05/18/how-to-install-flume-ng/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>  
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>              
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+          <!-- 评论框 -->
+          <div class="ds-thread" data-thread-key="2015/05/18/how-to-install-flume-ng/"
+               data-title="分布式实时日志系统（二） 环境搭建之 flume 集群搭建/flume ng资料" data-url="http://www.ixirong.com/2015/05/18/how-to-install-flume-ng/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+
+          
+          <!-- 多说热评文章-->
+          <div class="c-duoshuo-hot-artical">
+          <p>热评文章</p>
+          <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+          <div>
+          
+         
+        </div>        
+      </div>
+               
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/xirong.jpg" alt="xirong" />
+          <p class="site-author-name">xirong</p>
+        </div>
+        <p class="site-description motion-element">有故事、有担当、有思考</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/ixirong" target="_blank">Twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/jackieliuxirong" target="_blank">微博</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/xirong/" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank">StackOverflow</a>
+            </span>
+                      
+           </div>
+        
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+     
+        
+          <div class="links-of-author motion-element">        
+          <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.read.org.cn/" target="_blank">战隼</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.mifengtd.cn/" target="_blank">褪墨</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://mindhacks.cn/" target="_blank">刘未鹏</a>
+              </span>
+            
+          </div>
+        
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  
+  <span class="author"> xirong</span>
+</div>
+
+<div class="powered-by">
+  <div style="float:left;margin-top:7px;margin-right:10px;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254711542'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254711542%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+   鲁ICP备15013969号
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Clone theme 
+  <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
+    NexT
+  </a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if (isDesktop() && HEXO_SIDEBAR_CONFIGURATION === 'post') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+
+
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

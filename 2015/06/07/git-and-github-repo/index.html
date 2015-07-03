@@ -1,0 +1,1154 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+    <meta name="description" content="如何高效的使用github,作为一名程序员、开发者，如果你不知道github是什么，你走吧，别看这篇文章了，我都替你不好意思，当你第一次接触github的时候是不是不知道怎么使用，无从下手？ 当你开始学习git的时候是不是感觉很苦难，因为和svn的理念不一样？ 从12年知道github到15年广泛使用，经历了太长的时间，中间由于不理解也不会用，不知道怎么使用好，也不明白为什么使用，而浪费了大量的时间，所以我想整理下自己这段时间的总结，将这些资料分享给初学者，少走弯路。 有故事、有担当、有思考" />
+
+
+
+  <meta name="keywords" content="git,github, 高效使用github,github使用指南,怎么样使用github" />
+
+
+
+
+
+  <meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+
+
+
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+ 
+
+
+
+  <meta name="baidu_union_verify" content="63d8c69bdbc435b09f0d1b064de79a19" />
+
+
+
+  <meta  baidu-gxt-verify-token="52c8363b5f7cf3520969573f8b170868" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自由" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+  <title> 如何高效的使用github - 自由 </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">自由</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
+    </script>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
+        <a href="/404.html">
+          <i class="menu-item-icon icon-commonweal"></i> <br />
+          公益404
+        </a>
+      </li>
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              如何高效的使用github
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-06-07
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/git/">git</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/07/git-and-github-repo/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/07/git-and-github-repo/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <p>&#x4E0B;&#x9762;&#x4E24;&#x4E2A;&#x8D44;&#x6599;&#x662F;&#x6211;&#x5728;github&#x4E0A;&#x9762;&#x6574;&#x7406;&#x51FA;&#x6765;&#x7684;repo&#xFF0C;&#x4E0D;&#x65AD;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF0C;&#x5C06;&#x9047;&#x5230;&#x7684;&#x6709;&#x5E2E;&#x52A9;&#x7684;&#x6587;&#x7AE0;&#x5C3D;&#x91CF;&#x6574;&#x7406;&#x5230;&#x4E0A;&#x9762;&#xFF0C;&#x65B9;&#x4FBF;&#x521D;&#x5B66;&#x8005;&#x4E5F;&#x65B9;&#x4FBF;&#x56DE;&#x987E;&#x5B66;&#x4E60;&#x3002;&#x5982;&#x679C;&#x6070;&#x597D;&#x4F60;&#x4E5F;&#x6709;&#x4E00;&#x4E9B;&#x8D44;&#x6599;&#x6587;&#x7AE0;&#xFF0C;&#x6B22;&#x8FCE;<code>fork - modify - pull request</code> &#x4E00;&#x8D77;&#x5B66;&#x4E60;&#x5206;&#x4EAB;&#x3002;</p>
+<h1 id="github-&#x5B66;&#x4E60;&#x6307;&#x5357;">github &#x5B66;&#x4E60;&#x6307;&#x5357;</h1><ul>
+<li><a href="http://developer.51cto.com/art/201407/446249_all.htm" target="_blank" rel="external">github &#x5165;&#x95E8;&#x4F7F;&#x7528;&#x6559;&#x7A0B;-&#x56FE;&#x6587;&#x5E76;&#x8302;</a> &#x5F88;&#x7B80;&#x6D01;&#x7684;&#x8BF4;&#x660E;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#xFF0C;&#x770B;&#x56FE;&#x5373;&#x53EF;&#x660E;&#x767D;&#x3002;    </li>
+<li><a href="https://help.github.com/" target="_blank" rel="external">github help</a> Sometimes you just need a little help. &#x4E2D;&#x6587;&#x7FFB;&#x8BD1;&#x7248;&#x5728;&#x6B64;<a href="https://github.com/waylau/github-help" target="_blank" rel="external">Github &#x5E2E;&#x52A9;&#x6587;&#x6863;</a>&#x3002;</li>
+<li><a href="https://linux.cn/article-4292-1.html" target="_blank" rel="external">github &#x4E4B; fork &#x7B80;&#x4ECB;&#x6307;&#x5357;</a> &#x5E2E;&#x4F60;&#x7406;&#x89E3;&#x6E05;&#x695A;&#x4EC0;&#x4E48;&#x662F;fork&#xFF0C;fork &#x7684;&#x5DE5;&#x4F5C;&#x6D41;&#x6709;&#x54EA;&#x4E9B;&#x3002;</li>
+<li><a href="https://github.com/tiimgreen/github-cheat-sheet" target="_blank" rel="external">github-cheat-sheet</a> &#x5173;&#x4E8E;&#x4F7F;&#x7528; git &#x548C; github &#x7684;&#x4E00;&#x4E9B;&#x6280;&#x5DE7;&#x6C47;&#x603B;&#xFF0C;&#x4E2D;&#x6587;&#x7248;&#x5728;&#x6B64;<a href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md" target="_blank" rel="external">GitHub&#x79D8;&#x7C4D;</a></li>
+<li><a href="https://github.com/blog" target="_blank" rel="external">The GitHub Blog</a> github &#x5B98;&#x65B9;&#x535A;&#x5BA2;&#xFF0C;&#x5173;&#x6CE8;&#x6700;&#x65B0;&#x52A8;&#x6001;&#x3002;</li>
+<li><a href="http://zachholman.com/talk/how-to-build-a-github/" target="_blank" rel="external">How to Build a GitHub</a> Github&#x4E00;&#x540D;&#x65E9;&#x671F;&#x5458;&#x5DE5;&#x4ECB;&#x7ECD;Github&#x7684;&#x5386;&#x53F2;&#xFF0C;5&#x5E74;108&#x540D;&#x5458;&#x5DE5;&#x65E0;&#x4EBA;&#x79BB;&#x804C;&#x3002;</li>
+<li><a href="http://www.yangzhiping.com/tech/github.html" target="_blank" rel="external">&#x9633;&#x5FD7;&#x5E73;&#xFF1A;&#x5982;&#x4F55;&#x9AD8;&#x6548;&#x5229;&#x7528;GitHub</a> &#x4ECB;&#x7ECD;&#x7684;&#x633A;&#x5168;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E9B;&#x7528;&#x6CD5;&#xFF0C;&#x5982;&#x600E;&#x6837;&#x5229;&#x7528;Github&#x6765;&#x5B66;&#x4E60;&#x3001;&#x6F14;&#x8BB2;&#x627E;&#x5DE5;&#x4F5C;&#x7B49;&#x3002;</li>
+<li><a href="https://github.com/xirong/my-github/wiki/GotGitHub" target="_blank" rel="external">&#x848B;&#x946B;-GotGitHub</a> &#x300A;Git&#x6743;&#x5A01;&#x6307;&#x5357;&#x300B;&#x7684;&#x4F5C;&#x8005;&#xFF0C;&#x5BF9;Github&#x6709;&#x5F88;&#x6DF1;&#x7684;&#x4E86;&#x89E3;&#x3002;&#xFF08;&#x7531;&#x4E8E;&#x9996;&#x9875;&#x6253;&#x5F00;&#x592A;&#x6162;&#xFF0C;&#x653E;&#x5230;&#x4E86;&#x672C;&#x6587;&#x76EE;&#x5F55;&#x4E2D;&#xFF09;</li>
+</ul>
+<h2 id="&#x548C;&#x522B;&#x4EBA;&#x5171;&#x540C;&#x5F00;&#x53D1;">&#x548C;&#x522B;&#x4EBA;&#x5171;&#x540C;&#x5F00;&#x53D1;</h2><p>&#x5173;&#x4E8E; github &#x7684;&#x4F7F;&#x7528;&#x5B66;&#x4E60;&#x8D44;&#x6599;&#xFF0C;&#x6211;&#x4F1A;&#x5728; repo &#x4E0A;&#x9762;&#x4E0D;&#x65AD;&#x66F4;&#x65B0;&#xFF0C;&#x6B22;&#x8FCE; star&#xFF1A;<a href="https://github.com/xirong/my-github" target="_blank" rel="external">https://github.com/xirong/my-github</a></p>
+<h1 id="git-&#x5165;&#x95E8;&#x4ECB;&#x7ECD;&#x8D44;&#x6599;">git &#x5165;&#x95E8;&#x4ECB;&#x7ECD;&#x8D44;&#x6599;</h1><ul>
+<li><a href="https://github.com/xirong/my-git/blob/master/why-git.md" target="_blank" rel="external">&#x4E3A;&#x4EC0;&#x4E48;&#x5F00;&#x59CB;&#x4F7F;&#x7528;Git&#x7248;&#x672C;&#x7BA1;&#x7406;&#xFF0C;Git VS SVN &#x6709;&#x54EA;&#x4E9B;&#x533A;&#x522B;&#xFF1F;</a></li>
+<li><a href="https://github.com/xirong/my-git/blob/master/ixirong.com.md" target="_blank" rel="external">&#x5F00;&#x7BC7;&#xFF1A;&#x4E00;&#x7BC7;&#x9002;&#x5408;&#x5165;&#x95E8;&#x5B66;&#x4E60;git&#x7684;&#x8D44;&#x6599;&#x6C47;&#x603B;</a> &#x672C;&#x4EBA;&#x7684;&#x62D9;&#x7B14;&#xFF0C;&#x6B22;&#x8FCE;&#x5410;&#x69FD;&#xFF01;</li>
+<li><a href="https://github.com/tiimgreen/github-cheat-sheet" target="_blank" rel="external">github-cheat-sheet</a> &#x5173;&#x4E8E;&#x4F7F;&#x7528; git &#x548C; github &#x7684;&#x4E00;&#x4E9B;&#x6280;&#x5DE7;&#x6C47;&#x603B;&#xFF0C;&#x4E2D;&#x6587;&#x7248;&#x5728;&#x6B64;<a href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md" target="_blank" rel="external">GitHub&#x79D8;&#x7C4D;</a></li>
+</ul>
+<h1 id="git-branch">git branch</h1><ul>
+<li><a href="http://nvie.com/posts/a-successful-git-branching-model/" target="_blank" rel="external">A successful Git branching model</a> &#x4ECB;&#x7ECD;&#x65E5;&#x5E38;&#x63A8;&#x8350;&#x7684;&#x5206;&#x652F;&#x5F00;&#x53D1;&#x6A21;&#x578B;&#xFF0C;&#x57FA;&#x4E8E;&#x6B64;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD9;&#x4E2A;&#x5C0F;&#x6E38;&#x620F;&#x6765;&#x8FDB;&#x884C;&#x5B66;&#x4E60; <a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">Learn Git Branch</a></li>
+<li><a href="https://github.com/oldratlee/translations/tree/master/git-workflows-and-tutorials" target="_blank" rel="external">git&#x5DE5;&#x4F5C;&#x6D41;&#x6307;&#x5357;</a> &#x5B8C;&#x6574;&#x7684;&#x5BF9;&#x6BD4;&#x76EE;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x96C6;&#x4E2D;&#x5F0F;&#xFF08;svn&#xFF09;&#x5DE5;&#x4F5C;&#x6D41;&#x3001;&#x529F;&#x80FD;&#x5206;&#x652F;&#x5DE5;&#x4F5C;&#x6D41;&#x3001;gitflow&#x5DE5;&#x4F5C;&#x6D41;&#x3001;forking&#x5DE5;&#x4F5C;&#x6D41;&#x3001;pull request &#x7B49;&#x51E0;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x6A21;&#x5F0F;&#xFF0C;&#x901A;&#x4FD7;&#x6613;&#x61C2;&#xFF0C;&#x5F3A;&#x70C8;&#x63A8;&#x8350;&#x770B;&#x4E00;&#x770B;&#xFF0C;&#x5982;&#x679C;&#x89C9;&#x7684;&#x7FFB;&#x9875;&#x592A;&#x9EBB;&#x70E6;&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B; xirong &#x6574;&#x7406;&#x7684;&#x8FD9;&#x7BC7;&#x5B8C;&#x6574;&#x7248;<a href="https://github.com/xirong/my-git/blob/master/workflow-translations.md" target="_blank" rel="external">&#x4E00;&#x9875;&#x7248;Git&#x5DE5;&#x4F5C;&#x6D41;&#x6307;&#x5357;</a> </li>
+</ul>
+<h1 id="git-expert">git expert</h1><ul>
+<li>&#x9879;&#x76EE;&#x4F9D;&#x8D56;&#x5176;&#x4ED6;&#x9879;&#x76EE;&#xFF0C;&#x6BD4;&#x5982;&#x516C;&#x5171;css&#x3001;dll&#x7B49;&#x7B49;&#xFF0C;&#x5F3A;&#x5927;&#x7684;git-submodule &#x4F18;&#x96C5;&#x7684;&#x89E3;&#x51B3;&#x8FD9;&#x7C7B;&#x95EE;&#x9898;&#x3002;&#x7406;&#x89E3;&#x9605;&#x8BFB; <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules" target="_blank" rel="external">Git Tools - Submodules</a> &#xFF0C;&#x5907;&#x5FD8;&#x6216;&#x8005;&#x67E5;&#x770B;&#x547D;&#x4EE4;&#x9605;&#x8BFB;<a href="https://git.wiki.kernel.org/index.php/GitSubmoduleTutorial" target="_blank" rel="external">Git Submodule Tutorial</a> &#x6216;&#x8005; <a href="http://www.kafeitu.me/git/2012/03/27/git-submodule.html" target="_blank" rel="external">Git Submodule&#x4F7F;&#x7528;&#x5B8C;&#x6574;&#x6559;&#x7A0B;</a></li>
+</ul>
+<h1 id="git-&#x4E66;&#x7C4D;">git &#x4E66;&#x7C4D;</h1><ul>
+<li><a href="http://git-scm.com/book/zh/v1" target="_blank" rel="external">Pro Git</a> &#x4F5C;&#x8005;Scott Chacon&#x662F;github&#x7684;&#x5458;&#x5DE5;&#xFF0C;git&#x7684;&#x5E03;&#x9053;&#x8005;&#xFF0C;&#x8FD9;&#x672C;&#x4E66;&#x88AB;&#x8A89;&#x4E3A;git&#x5B66;&#x4E60;&#x5723;&#x7ECF;&#xFF0C;&#x4E2D;&#x95F4;&#x6709;&#x597D;&#x591A;&#x63D2;&#x56FE;&#x63CF;&#x8FF0;&#x7684;&#x6D45;&#x663E;&#x6613;&#x61C2;&#xFF0C;&#x633A;&#x9002;&#x5408;&#x8BE6;&#x7EC6;&#x5B66;&#x4E60;&#x4E0B;&#x7684;&#xFF0C;&#x6700;&#x65B0;&#x82F1;&#x6587;&#x7B2C;&#x4E8C;&#x7248;&#x300A;<a href="http://git-scm.com/book/en/v2" target="_blank" rel="external">pro git (Editon 2)</a>&#x300B;&#xFF1B;</li>
+<li><a href="https://github.com/pluralsight/git-internals-pdf" target="_blank" rel="external">git-internals-pdf</a> &#x8001;&#x5916;&#x5199;&#x7684;&#xFF0C;&#x5F88;&#x7ED9;&#x529B;&#xFF0C;&#x848B;&#x946B;&#x63A8;&#x8350;&#xFF0C;&#x4ECE;&#x76EE;&#x5F55;&#x4E0A;&#x9762;&#x5305;&#x62EC;&#x5B89;&#x88C5;&#x4F7F;&#x7528;&#x4EE5;&#x53CA;&#x8BBE;&#x8BA1;&#x539F;&#x7406;&#x90FD;&#x6709;&#x8BB2;&#x89E3;&#xFF0C;&#x6709;&#x673A;&#x4F1A;&#x770B;&#x770B;&#x3002;</li>
+<li><a href="http://gitbook.liuhui998.com/" target="_blank" rel="external">Git Community Book</a> &#x6C47;&#x805A;&#x4E86;Git&#x793E;&#x533A;&#x7684;&#x5F88;&#x591A;&#x7CBE;&#x534E;,  &#x5E76;&#x5BF9;git&#x7684;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#x539F;&#x7406;&#x7B49;&#x505A;&#x4E86;&#x89E3;&#x91CA;&#xFF0C;&#x53EF;&#x4EE5;&#x6DF1;&#x5165;&#x7684;&#x4E86;&#x89E3;&#x4E0B;git&#x539F;&#x7406;&#xFF1B;</li>
+</ul>
+<h1 id="git-&#x5DE5;&#x5177;">git &#x5DE5;&#x5177;</h1><ul>
+<li><a href="https://github.com/nvie/gitflow" target="_blank" rel="external">git flow &#x5DE5;&#x5177;</a></li>
+<li><a href="http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html" target="_blank" rel="external">git flow &#x4E2D;&#x6587;&#x5907;&#x5FD8;&#x6E05;&#x5355;</a></li>
+<li>&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x610F;&#x601D;&#x7684;&#x5B66;&#x4E60; git &#x7684;&#x5C0F;&#x6E38;&#x620F; <a href="http://pcottle.github.io/learnGitBranching/" target="_blank" rel="external">http://pcottle.github.io/learnGitBranching/</a> </li>
+</ul>
+<p>&#x5173;&#x4E8E; git &#x7684;&#x5B66;&#x4E60;&#x8D44;&#x6599;&#xFF0C;&#x6211;&#x540C;&#x6837;&#x4F1A;&#x5728; repo &#x4E2D;&#x4E0D;&#x65AD;&#x7684;&#x66F4;&#x65B0;&#xFF0C;&#x6B22;&#x8FCE;star&#xFF1A;<a href="https://github.com/xirong/my-git" target="_blank" rel="external">https://github.com/xirong/my-git</a></p>
+
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+    
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/"> #git </a>
+          
+            <a href="/tags/github/"> #github </a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/08/how-to-use-mac-efficiently/">如何优雅的高效使用MAC OSX系统？</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/25/how-to-install-hbase-cluster/">分布式实时日志系统（四） 环境搭建之centos 6.4下hbase 1.0.1 分布式集群搭建</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+      <div class="comments" id="comments">
+        
+
+<div class="ds-share" data-thread-key="2015/06/07/git-and-github-repo/" data-title="如何高效的使用github" data-images="http://www.ixirong.com/2015/06/07/git-and-github-repo/" data-content="一篇不错的文章，推荐给大家！" data-url="http://www.ixirong.com/2015/06/07/git-and-github-repo/">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">        
+        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>  
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>              
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+
+          <!-- 评论框 -->
+          <div class="ds-thread" data-thread-key="2015/06/07/git-and-github-repo/"
+               data-title="如何高效的使用github" data-url="http://www.ixirong.com/2015/06/07/git-and-github-repo/">
+          </div>
+        
+      </div>
+    
+  </div>
+
+
+
+          
+          <!-- 多说热评文章-->
+          <div class="c-duoshuo-hot-artical">
+          <p>热评文章</p>
+          <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+          <div>
+          
+         
+        </div>        
+      </div>
+               
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/xirong.jpg" alt="xirong" />
+          <p class="site-author-name">xirong</p>
+        </div>
+        <p class="site-description motion-element">有故事、有担当、有思考</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/ixirong" target="_blank">Twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/jackieliuxirong" target="_blank">微博</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/xirong/" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank">StackOverflow</a>
+            </span>
+                      
+           </div>
+        
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+     
+        
+          <div class="links-of-author motion-element">        
+          <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.read.org.cn/" target="_blank">战隼</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.mifengtd.cn/" target="_blank">褪墨</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://mindhacks.cn/" target="_blank">刘未鹏</a>
+              </span>
+            
+          </div>
+        
+        
+      </div>
+
+      
+        <div class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#github-学习指南"><span class="nav-text">github 学习指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#和别人共同开发"><span class="nav-text">和别人共同开发</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-入门介绍资料"><span class="nav-text">git 入门介绍资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-branch"><span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-expert"><span class="nav-text">git expert</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-书籍"><span class="nav-text">git 书籍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-工具"><span class="nav-text">git 工具</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </div>
+      
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  
+  <span class="author"> xirong</span>
+</div>
+
+<div class="powered-by">
+  <div style="float:left;margin-top:7px;margin-right:10px;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254711542'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254711542%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+   鲁ICP备15013969号
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Clone theme 
+  <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
+    NexT
+  </a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if (isDesktop() && HEXO_SIDEBAR_CONFIGURATION === 'post') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+
+
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

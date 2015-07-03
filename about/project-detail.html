@@ -1,0 +1,647 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+    <meta name="description" content=", 有故事、有担当、有思考" />
+
+
+
+  <meta name="keywords" content="shadowsocks,git,github,git工作流,大数据,jstorm,fastdfs,xirong,ixirong,分布式 " />
+
+
+
+
+
+  <meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+
+
+
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+ 
+
+
+
+  <meta name="baidu_union_verify" content="63d8c69bdbc435b09f0d1b064de79a19" />
+
+
+
+  <meta  baidu-gxt-verify-token="52c8363b5f7cf3520969573f8b170868" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自由" type="application/atom+xml" />
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+
+
+  <title>
+  
+
+  
+    自由
+  
+</title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column ">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">自由</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+    <script type="text/javascript">
+      if(isDesktop() || isTablet()){        
+        $('.c-search-form-div').css("display","inline");
+      }    
+    </script>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-categories">
+        <a href="/categories">
+          <i class="menu-item-icon icon-categories"></i> <br />
+          分类
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          归档
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-commonweal" style="display:none;">
+        <a href="/404.html">
+          <i class="menu-item-icon icon-commonweal"></i> <br />
+          公益404
+        </a>
+      </li>
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+    
+      <h1 id="&#x4E00;v4&#x641C;&#x7D22;&#x91CD;&#x6784;-2013&#x5E74;12&#x6708;-2014&#x5E74;4&#x6708;">&#x4E00;&#x3001;V4&#x641C;&#x7D22;&#x91CD;&#x6784;  2013&#x5E74;12&#x6708; - 2014&#x5E74;4&#x6708;</h1><p>&#x53C2;&#x4E0E;&#x9152;&#x5E97;&#x641C;&#x7D22;V4&#x7CFB;&#x7EDF;&#x7684;&#x91CD;&#x6784;&#xFF0C;&#x4E2A;&#x4EBA;&#x5B8C;&#x6210;list&#x641C;&#x7D22;&#x9759;&#x6001;&#x6A21;&#x5757;&#x5F00;&#x53D1;&#x3001;all in one&#x667A;&#x80FD;&#x641C;&#x7D22;&#x7684;&#x6574;&#x5408;&#x3001;rank&#x6A21;&#x5757;&#x7684;&#x8BBE;&#x8BA1;&#x5F00;&#x53D1;&#xFF0C;V4&#x6574;&#x4F53;&#x6027;&#x80FD;&#x63D0;&#x5347;70%&#xFF0C;tps&#x63D0;&#x5347;10&#x500D;&#xFF0C;&#x6269;&#x5C55;&#x5230;&#x652F;&#x6301;C#&#x3001;java&#x3001;C++&#x7B49;&#x591A;&#x79CD;&#x8BED;&#x8A00;&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x8054;&#x5408;&#x7F51;&#x7AD9;&#x56FD;&#x5185;&#x9891;&#x9053;&#x8FC1;&#x79FB;&#x5230;V4&#xFF0C;Elong&#x9996;&#x9875;&#x641C;&#x7D22;&#x6027;&#x80FD;&#x63D0;&#x5347;&#x660E;&#x663E;&#xFF0C;&#x7528;&#x6237;&#x53CD;&#x6620;&#x826F;&#x597D;&#xFF0C;&#x540E;&#x7EED;&#x7EE7;&#x7EED;&#x652F;&#x6301;&#x624B;&#x673A;&#x7AEF;&#x3001;northbound&#x7AEF;&#x63A5;&#x5165;V4&#x7248;&#x641C;&#x7D22;&#x3002;</p>
+<h1 id="&#x4E8C;all-in-one&#x667A;&#x80FD;&#x641C;&#x7D22;&#x7CFB;&#x7EDF;&#x7EF4;&#x62A4;-2013&#x5E74;10&#x6708;-2014&#x5E74;5&#x6708;">&#x4E8C;&#x3001;All In One&#x667A;&#x80FD;&#x641C;&#x7D22;&#x7CFB;&#x7EDF;&#x7EF4;&#x62A4; 2013&#x5E74;10&#x6708;-2014&#x5E74;5&#x6708;</h1><p>&#x4F18;&#x5316;AIO&#x667A;&#x80FD;&#x641C;&#x7D22;&#x7CFB;&#x7EDF;&#x4E0D;&#x5408;&#x7406;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6BD4;&#x5982;&#x51E0;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x529F;&#x80FD;&#xFF1A;<br>&#x5F00;&#x53D1;&#x624B;&#x673A;&#x7AEF;&#x6211;&#x9644;&#x8FD1;&#x7684;&#x9152;&#x5E97;&#x540E;&#x7AEF;&#x641C;&#x7D22;&#x63A5;&#x53E3;&#xFF1B;<br>&#x901A;&#x8FC7;&#x591A;&#x7C92;&#x5EA6;&#x5206;&#x8BCD;&#x548C;&#x589E;&#x91CF;&#x66F4;&#x65B0;&#x5206;&#x8BCD;&#x8BCD;&#x5E93;&#x7684;&#x673A;&#x5236;&#x89E3;&#x51B3;&#x67D0;&#x4E9B;&#x9152;&#x5E97;&#x540D;&#x5173;&#x952E;&#x5B57;&#x641C;&#x7D22;&#x4E0D;&#x51FA;&#x9152;&#x5E97;&#x7684;&#x95EE;&#x9898;&#xFF1B;<br>&#x89E3;&#x51B3;psg&#x5BF9;&#x4E8E;&#x5546;&#x5708;&#x641C;&#x7D22;&#x9152;&#x5E97;&#x6392;&#x5E8F;&#x4E0E;&#x666E;&#x901A;&#x7528;&#x6237;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x4F7F;&#x95F4;&#x591C;&#x91CF;&#x5229;&#x6DA6;&#x7387;&#x9AD8;&#x7684;&#x9152;&#x5E97;&#x6392;&#x5E8F;&#x9760;&#x524D;&#xFF1B;<br>&#x4F18;&#x5316;poi&#x641C;&#x7D22;&#x9152;&#x5E97;&#x6392;&#x5E8F;&#x95EE;&#x9898;&#xFF0C;poi+&#x9152;&#x5E97;&#x540D;&#x5168;&#x641C;&#x6DF7;&#x6392;&#xFF1B;<br>&#x4F18;&#x5316;poi&#x641C;&#x7D22;&#x53EC;&#x56DE;&#x9152;&#x5E97;&#x903B;&#x8F91;&#xFF0C;5&#x516C;&#x91CC;&#x3001;10&#x516C;&#x91CC;&#x5206;&#x6BB5;&#x53EC;&#x56DE;&#xFF1B;</p>
+<p>&#x4E09;&#x3001;&#x76EE;&#x7684;&#x5730;&#x7CFB;&#x7EDF;&#x91CD;&#x6784; 2013&#x5E74;11&#x6708;<br>&#x827A;&#x9F99;&#x9996;&#x9875;&#x76EE;&#x7684;&#x5730;&#x6846;&#x91CD;&#x6784;&#x540E;&#x7AEF;&#x641C;&#x7D22;&#x903B;&#x8F91;&#xFF0C;&#x5F31;&#x5316;&#x57CE;&#x5E02;&#x6982;&#x5FF5;&#xFF0C;&#x5F3A;&#x5316;&#x76EE;&#x7684;&#x5730;&#x6982;&#x5FF5;&#xFF0C;&#x652F;&#x6301;&#x8DE8;&#x57CE;&#x5E02;&#x641C;&#x7D22;&#xFF0C;&#x5B9E;&#x73B0;&#x5BF9;&#x4E00;&#x4E9B;&#x5927;&#x98CE;&#x666F;&#x533A;&#x5982;&#x516B;&#x8FBE;&#x5CAD;&#x957F;&#x57CE;&#x3001;&#x897F;&#x6E56;&#x7684;&#x667A;&#x80FD;&#x611F;&#x77E5;&#xFF0C;&#x5B8C;&#x6210;&#x540E;&#x7AEF;&#x641C;&#x7D22;&#x6240;&#x9700;&#x8981;&#x505A;&#x7684;&#x5DE5;&#x4F5C;&#x3002;</p>
+<p>&#x56DB;&#x3001;V3&#x641C;&#x7D22;&#x529F;&#x80FD;&#x5F00;&#x53D1;  2013&#x5E74;10&#x6708;-2013&#x5E74;11&#x6708;<br>&#x2460; &#x516C;&#x5BD3;&#x9879;&#x76EE;&#xFF1A;&#x5916;&#x7F51;&#x516C;&#x5BD3;&#x9891;&#x9053;&#x540E;&#x7AEF;&#x4EA7;&#x54C1;&#x7ED3;&#x6784;&#x7684;&#x652F;&#x6301;&#x548C;&#x641C;&#x7D22;&#x7684;&#x652F;&#x6301;&#xFF0C;&#x91CD;&#x6784;&#x4EA7;&#x54C1;&#x6A21;&#x578B;&#xFF0C;&#x652F;&#x6301;&#x516C;&#x5BD3;&#x9152;&#x5E97;&#x7684;&#x843D;&#x5730;&#xFF0C;&#x4FEE;&#x6539;&#x641C;&#x7D22;&#x903B;&#x8F91;&#xFF0C;&#x652F;&#x6301;&#x516C;&#x5BD3;&#x9152;&#x5E97;&#x7684;&#x7B5B;&#x9009;&#x548C;&#x8FD4;&#x56DE;&#xFF1B;<br>&#x2461; &#x623F;&#x578B;&#x89C4;&#x6574;&#x5C55;&#x793A;&#x9879;&#x76EE;&#xFF1A;&#x7531;&#x4E8E;&#x4EA7;&#x54C1;&#x7ED3;&#x6784;&#x4E0A;mroom&#x548C;sroom&#x7EF4;&#x62A4;&#x7684;&#x6DF7;&#x4E71;&#xFF0C;&#x5916;&#x7F51;&#x5C55;&#x793A;&#x540C;&#x4E00;&#x4E2A;&#x623F;&#x578B;&#x4E0B;&#x591A;&#x4E2A;&#x4EA7;&#x54C1;&#x65F6;&#x5BF9;&#x7528;&#x6237;&#x4EA7;&#x751F;&#x4E00;&#x5B9A;&#x7684;&#x6DF7;&#x4E71;&#xFF0C;&#x9700;&#x8981;&#x89C4;&#x6574;&#x5230;&#x4E00;&#x95F4;&#x623F;&#x578B;&#x4E0B;&#x5C55;&#x793A;&#x591A;&#x4E2A;&#x4EA7;&#x54C1;&#xFF0C;&#x91CD;&#x6784;&#x4E3B;&#x3001;&#x5B50;&#x623F;&#x578B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x91CD;&#x6784;mis&#x7CFB;&#x7EDF;&#x7EF4;&#x62A4;&#x623F;&#x578B;&#x9875;&#x9762;&#xFF0C;&#x4FEE;&#x6539;&#x641C;&#x7D22;&#x8FD4;&#x56DE;&#x7ED3;&#x6784;&#x652F;&#x6301;&#x8BE5;&#x9879;&#x76EE;&#xFF1B;<br>&#x2462; &#x5927;&#x53CC;&#x5E8A;&#x9879;&#x76EE;&#xFF1A;&#x4E3A;&#x89E3;&#x51B3;&#x4E94;&#x4E00;&#x5341;&#x4E00;&#x9AD8;&#x5CF0;&#x671F;&#x95F4;&#x67D0;&#x4E2A;&#x623F;&#x578B;&#x5927;&#x53CC;&#x5E8A;&#x56E0;&#x67D0;&#x4E00;&#x5E8A;&#x578B;&#x5356;&#x5B8C;&#x5BFC;&#x81F4;&#x5BA2;&#x6237;&#x5165;&#x4F4F;&#x65F6;&#x7684;&#x5E8A;&#x578B;&#x548C;&#x827A;&#x9F99;&#x7F51;&#x7AD9;&#x8BA2;&#x5355;&#x4E0A;&#x5E8A;&#x578B;&#x4E0D;&#x4E00;&#x81F4;&#x5BFC;&#x81F4;&#x7684;&#x7528;&#x6237;&#x6295;&#x8BC9;&#x6216;&#x8005;&#x56E0;&#x67D0;&#x4E00;&#x5E8A;&#x578B;&#x5356;&#x5B8C;&#x800C;&#x5173;&#x95ED;&#x5176;&#x4ED6;&#x5E8A;&#x578B;&#x5BFC;&#x81F4;&#x7684;&#x8BA2;&#x5355;&#x635F;&#x5931;&#xFF0C;&#x91CD;&#x6784;&#x623F;&#x578B;&#x7684;&#x4EA7;&#x54C1;&#x6A21;&#x578B;&#xFF0C;&#x652F;&#x6301;&#x5927;&#x53CC;&#x5E8A;&#x4E0D;&#x540C;&#x623F;&#x578B;&#x7684;&#x623F;&#x91CF;&#x5206;&#x5F00;&#xFF0C;&#x4FEE;&#x6539;&#x641C;&#x7D22;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x51C6;&#x786E;&#x8FD4;&#x56DE;&#x4E0B;&#x5355;&#x65F6;&#x771F;&#x5B9E;&#x7684;&#x5E8A;&#x578B;&#xFF1B;</p>
+<p>&#x4E94;&#x3001;&#x5E93;&#x5B58;&#x5206;&#x5E03;&#x5F0F;&#x6570;&#x636E;&#x5E93;&#x8FC1;&#x79FB;&#x9879;&#x76EE; 2013&#x5E74;3&#x6708;-2013&#x5E74;9&#x6708;&#x4EFD;<br>&#x7531;&#x4E8E;&#x8003;&#x8651;&#x5230;&#x5E93;&#x5B58;&#x5355;&#x8868;1.6&#x4EBF;&#x6570;&#x636E;&#x7684;&#x538B;&#x529B;&#xFF0C;&#x4E3A;&#x5E94;&#x5BF9;&#x4E94;&#x4E00;&#x3001;&#x5341;&#x4E00;&#x9AD8;&#x5CF0;&#x671F;&#xFF0C;&#x9152;&#x5E97;&#x7EC4;&#x89C4;&#x5212;&#x7ECF;&#x8FC7;&#x5782;&#x76F4;&#x62C6;&#x5206;&#x5E93;&#x5B58;&#x5E93;&#x3001;&#x6C34;&#x5E73;&#x8FC1;&#x79FB;mysql&#x5206;&#x5E03;&#x5F0F;&#x4E24;&#x5927;&#x6B65;&#x5C06;&#x5E93;&#x5B58;&#x5E93;&#x8FC1;&#x79FB;&#x5230;&#x5206;&#x5E03;&#x5F0F;&#x9AD8;&#x53EF;&#x7528;&#x7684;db&#x4E0A;&#xFF0C;&#x964D;&#x4F4E;&#x4E86;bdg&#x4E3B;&#x5E93;&#x7684;&#x538B;&#x529B;&#xFF0C;&#x63D0;&#x9AD8;&#x5E93;&#x5B58;&#x7EF4;&#x5EA6;&#x7CFB;&#x7EDF;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x4E3A;&#x9152;&#x5E97;&#x7EC4;&#x540E;&#x7EED;&#x8BA2;&#x5355;&#x5E93;&#x62C6;&#x5206;&#x3001;&#x8FC1;&#x79FB;&#x7559;&#x4E0B;&#x5B9D;&#x8D35;&#x7684;&#x7ECF;&#x9A8C;&#xFF1B;&#x671F;&#x95F4;&#x4E3B;&#x8981;&#x7ECF;&#x8FC7;&#x5E93;&#x5B58;&#x8BBF;&#x95EE;&#x6536;&#x53E3;&#x3001;&#x5E93;&#x5B58;&#x5E93;&#x5782;&#x76F4;&#x62C6;&#x5206;&#x5355;&#x72EC;&#x5B9E;&#x4F8B;&#x3001;sql&#x4F18;&#x5316;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x6570;&#x636E;&#x5E93;&#x8FC1;&#x79FB;&#x3001;&#x6570;&#x636E;&#x8FC1;&#x79FB;&#x7B49;&#x51E0;&#x6B65;&#x6765;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x516D;&#x3001;&#x4EA7;&#x54C1;&#x7CFB;&#x7EDF;&#x7EF4;&#x62A4; 2012&#x5E74;7&#x6708;-2013&#x5E74;2&#x6708;<br>&#x2460; &#x591A;&#x4F9B;&#x5E94;&#x5546;&#x7CFB;&#x7EDF;&#xFF1A;&#x62BD;&#x8C61;&#x4EA7;&#x54C1;&#x6A21;&#x578B;&#xFF0C;&#x5206;&#x6210;mhotel&#x3001;shotel&#x3001;mroom&#x3001;sroom&#x7B49;&#x6765;&#x652F;&#x6301;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x7269;&#x7406;&#x9152;&#x5E97;&#x53EF;&#x4EE5;&#x88AB;&#x591A;&#x4E2A;&#x4F9B;&#x5E94;&#x5546;&#x6765;&#x5356;&#xFF0C;&#x5B8C;&#x6210;&#x8FD9;&#x5957;&#x7CFB;&#x7EDF;&#x6784;&#x5EFA;&#x6240;&#x9700;&#x8981;&#x505A;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x4F7F;&#x9152;&#x5E97;&#x4EA7;&#x54C1;&#x591A;&#x5143;&#x5316;&#xFF0C;&#x63D0;&#x5347;&#x9152;&#x5E97;&#x7684;&#x7ADE;&#x4E89;&#x529B;&#xFF0C;&#x589E;&#x52A0;&#x9152;&#x5E97;&#x95F4;&#x591C;&#x91CF;&#x7B49;&#xFF1B;<br>&#x2461; &#x5E93;&#x5B58;&#x9884;&#x6D4B;&#x7CFB;&#x7EDF;&#xFF1A;&#x5B9E;&#x73B0;&#x672A;&#x6765;&#x4E00;&#x4E2A;&#x6708;&#x5185;&#x9152;&#x5E97;&#x7684;&#x5E93;&#x5B58;&#x3001;&#x4EF7;&#x683C;&#x4E0E;&#x7ADE;&#x4E89;&#x5BF9;&#x624B;&#x7684;&#x5BF9;&#x6BD4;&#xFF0C;&#x65B9;&#x4FBF;psg&#x4E89;&#x53D6;&#x66F4;&#x4F18;&#x60E0;&#x7684;&#x4EF7;&#x683C;&#x548C;&#x66F4;&#x591A;&#x7684;&#x5E93;&#x5B58;&#xFF0C;&#x63D0;&#x9AD8;&#x7528;&#x6237;&#x5728;&#x5916;&#x7F51;&#x4E0A;&#x7684;&#x8F6C;&#x5316;&#x7387;&#xFF1B;<br>&#x2462; &#x9152;&#x5E97;&#x7ED3;&#x7B97;&#x7CFB;&#x7EDF;&#x91CD;&#x6784;&#xFF1A;&#x539F;&#x5148;&#x7684;&#x7ED3;&#x7B97;&#x7CFB;&#x7EDF;&#x8FC7;&#x4E8E;&#x7B80;&#x5355;&#xFF0C;&#x91CD;&#x6784;&#x4E00;&#x5957;&#x652F;&#x6301;&#x591A;&#x5E01;&#x79CD;&#x3001;&#x652F;&#x6301;&#x652F;&#x4ED8;&#x5B9D;&#x8D22;&#x4ED8;&#x901A;&#x7B49;&#x8D26;&#x6237;&#x7ED3;&#x7B97;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x548C;&#x7ED3;&#x7B97;&#x7EC4;&#x5408;&#x4F5C;&#xFF0C;&#x63D0;&#x9AD8;&#x548C;&#x9152;&#x5E97;&#x7ED3;&#x7B97;&#x7684;&#x6548;&#x7387;&#xFF1B;<br>&#x2463; Mis&#x65E5;&#x5E38;&#x529F;&#x80FD;&#x5F00;&#x53D1;&#xFF1A;&#x5B8C;&#x6210;&#x65E5;&#x5E38;&#x8FED;&#x4EE3;&#x7684;&#x4EA7;&#x54C1;&#x9700;&#x6C42;&#xFF0C;&#x4FDD;&#x8BC1;mis&#x4E2D;&#x4EA7;&#x54C1;&#x7CFB;&#x7EDF;&#x7684;&#x53EF;&#x7528;&#x6027;&#xFF1B;</p>
+
+    
+  </div>
+
+
+
+          
+         
+        </div>        
+      </div>
+               
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      <div class="site-overview">
+        <div class="site-author motion-element">
+          <img class="site-author-image" src="/xirong.jpg" alt="xirong" />
+          <p class="site-author-name">xirong</p>
+        </div>
+        <p class="site-description motion-element">有故事、有担当、有思考</p>
+        <div class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+        </div>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml">
+              <i class="menu-item-icon icon-feed"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        
+          <div class="links-of-author motion-element">
+            
+              <span class="links-of-author-item">
+              <a href="https://twitter.com/ixirong" target="_blank">Twitter</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://weibo.com/jackieliuxirong" target="_blank">微博</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="https://github.com/xirong/" target="_blank">GitHub</a>
+            </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://stackoverflow.com/users/1632013/xirong" target="_blank">StackOverflow</a>
+            </span>
+                      
+           </div>
+        
+
+        
+        
+          <div class="cc-license motion-element">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank" rel="external nofollow"> 
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+     
+        
+          <div class="links-of-author motion-element">        
+          <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.ruanyifeng.com/blog/" target="_blank">阮一峰</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.read.org.cn/" target="_blank">战隼</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://www.mifengtd.cn/" target="_blank">褪墨</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://mindhacks.cn/" target="_blank">刘未鹏</a>
+              </span>
+            
+          </div>
+        
+        
+      </div>
+
+      
+    </div>
+
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2014 - 
+  2015
+  
+  <span class="author"> xirong</span>
+</div>
+
+<div class="powered-by">
+  <div style="float:left;margin-top:7px;margin-right:10px;">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254711542'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254711542%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+  </div>
+   鲁ICP备15013969号
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Clone theme 
+  <a class="theme-link" href="https://github.com/xirong/hexo-theme-next" rel="external nofollow">
+    NexT
+  </a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

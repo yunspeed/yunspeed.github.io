@@ -1,0 +1,943 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="description" content="果敢、责任、思考" />
+<meta name="keywords" content="shadowsocks,git,github,git工作流,大数据,android ,ios,分布式 " />
+<meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+<link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+<link rel="alternate" href="/atom.xml" title="做个创造者" type="application/atom+xml" />
+<link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <title> app后端API开发总结 - 做个创造者</title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">做个创造者</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          记录
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+    
+      
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+              app后端API开发总结
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-07-05
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+            
+              <a href="/categories/架构/">架构</a>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2015/06/24/how-hbase-use-apache-phoenix/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/how-hbase-use-apache-phoenix/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+
+      一.API 设计规范
+		1.1 按需Restful设计原则
+		按业务选择Restful API还是 josn风格的，关于restful api可参考：
+
+		RESTful API 设计指南
+		理解RESTful架构
+		RESTful API 设计最佳实践
+		1.2 合理的api命名
+		正确精炼的名称，能够体现这个接口是干什么的
+		配合时态(现在，过去，将来)和动态(如setName)
+		不要用生僻单词，也不要用汉语拼音
+		注意缩写规范，不要自己发明缩写
+		保持接口名称的对称性， 如/api/msg/open和/api/msg/close等
+		1.3 api的安全性
+		在登录注册等用户操作能使用https尽量使用它
+		API 接口操作时，采用公钥加私钥保证安全，公钥如(user_id), 私钥(user_id经过某种对称加密算法生成)如sid.将公钥和私钥作为参数传递。生成的私钥字符串每次都不同，且设置过期时间(存储在redis中)，每次启动或注册登录时候生成并更新私钥。当过期后就提示重新登录，每次请求的时候服务器端校验sid是否解密成对应的user_id, sid在redis中用户关系映射是否正确。如果用户N天后未使用APP，则到了过期点就重新登录；否则就一直重新计算过期时间。(有待优化)
+		json web token (jwt) JWT方案，给客户端的是公钥，然后用公钥把数据加密发送给服务端，服务端在根据来源的信息，使用对应的私钥来解析数据。这样就能保证数据的安全性。
+		推荐阅读：
+
+		app后端如何保证通讯安全--url签名
+		如何从app业务逻辑提炼api接口
+		1.4 api返回数据
+		要定义一致的返回数据，如 成功：{"data": "xxx", "code":0}，异常 {"data":"", "code": 500, "msg": "程序异常"}
+		注意null的使用， 如果为空或无，最好用空字符串替代
+		数据库设计中所有字段都有默认值，且为空值或数字而非null
+		异常提示信息的设计，分为用户友好类msg, 和面向程序员的异常提示类msg.
+		二.API开发注意事项
+		2.1 emoji 表情的处理
+		emoji 表情是 4 个字节，而 MySQL 的 utf8 编码最多支持 3 个字节，所以插入会出错。为了解决这个问题，MySQL 开始支持 utf8mb4. 具体参考让 MySQL 支持 emoji 存储
+
+		推荐一个python第三方模块emoji: emoji terminal output for Python
+
+		其他资源：
+
+		emoji标签库
+		Full Emoji Data
+		2.2 图片处理
+		参考：app后端设计(12)--图片的处理
+
+		app后台图片处理的一个基本原则，数据库中只保存原图的路径。对于同一张图片来说，针对不同机型，不同app版本所需要的不同尺寸，使用动态生成的策略，大体思路如下：
+		在图片的url末尾加上参数，声明需要生成的图片的新的尺寸，例如：户端需要图片（http://www.baidu.com/img/bdlogo.gif）的80*80的尺寸，则在图片的路径加上宽和高的参数（类似于CDN的机制） http://www.baidu.com/img/bdlogo.gif？w=80&h=80
+		服务器接收到图片的请求，先在缓存中查找这个尺寸的图片是否已经生成，如果已经在缓存中有记录，则不用重新生成。
+		如果该尺寸的图片还没生成，则生成新的图片尺寸，并把新生成的图片路径放在缓存中.
+		在app整个系统架构中，图片应该有两层缓存：
+
+		（1）app本地的图片缓存，当app中没有该图片时，才去服务取
+
+		（2）服务器的图片缓存，记录图片不同尺寸的保存路径
+
+		图片操作是非常消耗CPU，内存，和大量的磁盘IO，这里推荐GraphicsMagick,在GraphicsMagick Programming Interfaces 查看支持编程语言的接口，对于python的支持在这里
+
+		2.3 考虑移动端的网络情况和耗电量
+		APP后端开发不同web后端开发的地方有很多，虽然并没有细分。比如网络流量，这里汇总注意事项。
+
+		图片缩略图压缩
+		精简请求参数和返回数据，只返回需要的数据，对于大量数据要采用压缩上传或响应给app
+		根据用户的网络情况来设定不同的请求情况，如只有在wifi的情况下才给用户传输封面图、缩略图之类等
+		2.4 跨平台性
+		所谓跨平台是指我们的接口要能够支持不同的终端，比如android、ios、windowsphone以及桌面软件、网站等， 采用通用的解决方案，比如通信协议就采用最常用的HTTP协议，如果是即时通信，可以采用开放的XMPP协议，做游戏的可以采用可靠的TCP协议，除非TCP不够用了，再采用定制的UDP协议。 数据交换采用xml或者json格式等等。 总之，要达到的目标就是让不同的端能够很方便的使用你的接口。
+		2.5 通用的数据交换格式
+		目前，对于接口和客户端的数据交换格式，基本上就是两种，xml和json，而现在使用json的应该占大多数。交换的数据包括两种，一种是客户端请求服务器端接口时传递的一些参数，一种是服务器端返回给客户端的数据。
+
+		2.5.1 request
+		对于客户端的请求参数，现在也越来越多的接口要求采用json的格式，而不是以往最常见的key_value对了。
+
+		比如，接口需要username和password两个参数 key_value pair的方式是：
+
+		username=xxxx&password=*****
+		然后通过GET或者POST方式传送。
+
+		而通过json方式交换数据的话，格式如下，直接POST到服务器端。
+
+		{
+		'username':'xxxx',
+		'password':'*****'
+		}
+		2.5.2 response
+		对于服务器端返回的json数据格式，需要注意两个问题： 一是汉字编码问题，因为json（javascript）内部支持Unicode编码，会将汉字等转换成unicode编码保存， 所以在返回结果中，对于中文，可以直接输出中文，也可以输出中文的unicode编码，json解析器都会很好的解析。 比如下面两种方式都是可以的。
+
+		{"code":"208","data":"\u53c2\u6570\u4e0d\u5b8c\u6574"} 
+		{
+		    "code": "208",
+		    "data": "参数不完整"
+		}
+		二是字段的数据类型，特别是数字类型的，json中尽量转成数字格式， 比如{'userid':128}不要写成{'userid':'128'}
+
+		2.2 取舍之道
+		对于创业型公司能用第三方服务就使用第三方的服务。
+		能在服务器端实现的功能就不要放在客户端
+		服务器端接口也要做好相应的版本维护
+		在app启动时，调用一个初始化api获取必要的信息.例如，最新的app版本。当发现本地app的版本已经低于最新的app版本，可提示用户更新。当然了，这个提示版本更新的功能很多第三方sdk都提供。
+		  
+
+      
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+    
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hbase/"> #hbase </a>
+          
+            <a href="/tags/phoenix/"> #phoenix </a>
+          
+            <a href="/tags/中间件/"> #中间件 </a>
+          
+            <a href="/tags/大数据/"> #大数据 </a>
+          
+        </div>
+      
+
+      
+      
+    </div>
+  </div>
+
+
+
+    
+  </div>
+
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2015 - 
+  2016
+  
+  <span class="author"> Johnson</span>
+</div>
+
+<div class="powered-by">
+
+   现实的理想主义者
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if (isDesktop() && HEXO_SIDEBAR_CONFIGURATION === 'post') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+
+
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>

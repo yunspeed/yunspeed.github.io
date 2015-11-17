@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.1.1 (452254)"/><meta name="altitude" content="31.19075584411621"/><meta name="author" content="865641511@qq.com"/><meta name="created" content="2015-11-17 03:18:04 +0000"/><meta name="latitude" content="31.22362644184435"/><meta name="longitude" content="121.4688821097825"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2015-11-17 06:17:48 +0000"/><title>Tomcat 配置详解/优化方案</title></head><body>
+<div><span style="font-size: 18px;"><b> 1、Tomcat的目录层次结构</b></span></div>
+<div><br/></div>
+<div>         bin:   存放启动和关闭Tomcat的脚本文件</div>
+<div><br/></div>
+<div>         conf： 存放Tomcat服务器的各种配置文件</div>
+<div><br/></div>
+<div>         lib:   存放tomcat服务器支撑的jar包</div>
+<div><br/></div>
+<div>         logs:  存放Tomcat的日志文件</div>
+<div><br/></div>
+<div>         temp:  存放Tomcat运行时产生的临时文件</div>
+<div><br/></div>
+<div>         webapps:web应用虽在目录，即供外界访问的web资源的存放目录</div>
+<div><br/></div>
+<div>         work:  Tomcat的工作目录</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 2、JavaWeb应用的组成结构</b></span></div>
+<div><br/></div>
+<div>           |----html、jsp、css、js等文件，根目录下的文件外界可以直接访问</div>
+<div><br/></div>
+<div>           |----WEB-INF目录</div>
+<div><br/></div>
+<div>                    |---------classes目录(java类)</div>
+<div><br/></div>
+<div>                    |---------lib目录(java类运行所需的jar包)</div>
+<div><br/></div>
+<div>                    |---------web.xml(web应用的配置文件)</div>
+<div><br/></div>
+<div>             WEB-INF 这个目录下的文件外界无法直接访问，由web服务器负责调用</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 3、JavaWeb应用的发布</b></span></div>
+<div>            开放式目录方式：</div>
+<div>            打包war方式:   使用   Jar -cvf *.war .</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 4、Tomcat的Server.xml文件</b></span></div>
+<div>            Tomcat本身由一系列可配置的组件构成，其中核心组件是Servlet容器组件，它是所有其他Tomcat组件的顶层容器。每个组件都可以在Tomcat安装目录/conf/server.xml文件中进行配置，每个Tomcat组件在server.xml文件中对应一种配置元素。</div>
+<div>server.xml被称为Tomcat的主配置文件或全局配置文件，它完成两个任务：</div>
+<div>（1）提供Tomcat组件的初始配置</div>
+<div>（2）说明Tomcat的结构，含义，使Tomcat通过实例化组件完成启动及构建自身。</div>
+<div><br/></div>
+<div>server.xml中描述的重要元素有 Server ,Service ,Connector ,Engine ,Host ,Context .</div>
+<div>结构如下：</div>
+<div>Tomcat-配置及原理</div>
+<div>它们的用处是：</div>
+<div><br/></div>
+<div><b>Server:</b></div>
+<div>顶层元素,整个配置文件的根元素,表示整个Servlet容器或者Tomcat服务器包含多个Listener,一个GlobalNamingResources和一个Service</div>
+<div><br/></div>
+<div><b>Service:</b></div>
+<div>一组Connector和一个Engine的集合，这组Connector共用一个Engine来处理所有Connector收到的请求，负责处理&lt;Connector&gt;所获得到的客户请求</div>
+<div><br/></div>
+<div><b>Listener组</b>: </div>
+<div>监听器，用来管理Tomcat生命周期和全局资源</div>
+<div><br/></div>
+<div>GlobalNamingResources:</div>
+<div>配置系统的JNDI（Java Naming and Directory Interface）</div>
+<div><br/></div>
+<div><b>Connector组:</b></div>
+<div>连接器，代表外部客户之间的接口，将在一个指定的接口上侦听客户请求，并将获得的请求交给&lt;Engine&gt;进行处理，然后把处理结果返回给客户</div>
+<div><br/></div>
+<div><b>Engine: </b></div>
+<div>引擎，处理&lt;Service&gt;中的所有客户请求，具体来说，获得一个&lt;Connectors&gt;交给的请求后，把这个请求匹配到某个&lt;Host&gt;上进行处理，如果没有找到合适的&lt;Host&gt;来进行处理，则把这个请求交给一个默认虚拟主机处理。</div>
+<div><br/></div>
+<div><b>Host组:</b></div>
+<div>虚拟主机，处理一个特定主机的请求，一般来说，每个虚拟主机都可以配置一个到多个Web应用，每个Web应用对应一个&lt;Context&gt;,&lt;Host&gt;获得的请求最终匹配到某个&lt;Context&gt;上，由它进行处理。</div>
+<div><br/></div>
+<div><b>Context组:</b> </div>
+<div>Web应用组，每个Web应用由一个或多个Servlet组成，当&lt;Context&gt;获得一个请求后，将映射/conf/web.xml文件中的&lt;servlet&gt;元素，匹配一个Servlet类进行处理并返回。当一个Web应用被初始化的时候，它将用自己的ClassLoader对象载入web.xml中定义的每个Servlet类。</div>
+<div><br/></div>
+<div>我们启动Tomcat，在浏览器中输入：http://localhost:8080/ 会打开Tomcat的默认页面。实际上，这个页面是在Tomcat安装目录下的：/webapps/root/index.jsp;/webapps是Tomcat服务器用来存放Web应用的目录，每个Web应用都将在这建立各自的子目录，刚装好的Tomcat服务器虚拟主机的默认目录是/webapps/ROOT,所以默认会打开这个目录下的文件。流程如下：</div>
+<div>在/conf目录下的web.xml配置文件中有如下配置：</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div style=" padding: 0px;">
+<div>&lt;welcome-file-list&gt;</div>
+<div>        &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;</div>
+<div>        &lt;welcome-file&gt;index.htm&lt;/welcome-file&gt;</div>
+<div>        &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;</div>
+</div>
+<div>&lt;/welcome-file-list&gt;</div>
+</td>
+</tr>
+</table>
+<div>这里正是用来配置首页的，Tomcat将按顺序找出&lt;welcome-file&gt;标签中的内容作为首页。而在我们的目录下，它只找到了index.jsp，所以会显示它；</div>
+<div>但我们不能将所有的Web程序都放在ROOT里。所以我们需要更改Tomcat的虚拟目录；</div>
+<div><br/></div>
+<div>要设置虚拟路径，需要在server.xml文件的&lt;Host&gt;&lt;/Host&gt;中的Web应用添加一个&lt;Context&gt;子元素，实际上是配置了一个Web应用的物理存放地址到Tomcat虚拟路径的过程，使得Tomcat能够正确找到Web应用的物理存放路径;</div>
+<div>步骤：</div>
+<div>1）在server.xml的&lt;Host&gt;&lt;/Host&gt;中加上如下代码：</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>&lt;Context docBase="D:/myApp" path="/myapp" reloadable="true"&gt;&lt;/Context&gt;</div>
+</td>
+</tr>
+</table>
+<div>2)我们把写好的Web应用中的所有文件放到下面的目录中：D:/myapp/test</div>
+<div>3)重启Tomcat，在浏览器中输入：http://localhost:8080/test 即可测试</div>
+<div><br/></div>
+<div><b>web.xml</b></div>
+<div>Tomcat目录下/conf 可为不同的应用程序配置不同的上下文环境；用来对Servlet进行映射；</div>
+<div>一个Web应用的根目录下的/WEB-INF目录中也有一个web.xml，当部署一个Web应用时，总是先加载/conf/web.xml，然后才加载自己Web应用的/WEB-INF/web.xml文件；但处理过程中，总是先使用自己的web.xml配置文件，如果无法处理，才把它交给Tomcat的web.xml文件。</div>
+<div><br/></div>
+<div>当用户在浏览器中输入一个JSP文件地址：</div>
+<div>http://localhost:8080/test/index.jsp</div>
+<div>提交的请求最终由一个具体的Servlet来进行处理。我们请求传递的过程如下：</div>
+<div>1）请求首先到达商品为8080的&lt;Connector&gt;,然后把该请求交给&lt;Engine&gt;引擎处理；</div>
+<div>2）&lt;Engine&gt;将这个请求匹配到某个&lt;Host&gt;去处理，因为这里&lt;Engine&gt;默认处理的&lt;Host&gt;是localhost，所以请求传递到name属性是localhost的&lt;Host&gt;。</div>
+<div>3）&lt;Host&gt;根据地址串中的子目录为"test",获知能够处理该请求的Servlet存放在虚拟目录为"test"的Web应用中，于是通过查找&lt;Context&gt;元素，找到path="test" 的&lt;Content&gt;,然后根据&lt;Content&gt;中的物理路径"docBase"的属性值查找Web应用的物理地址；</div>
+<div>4）服务器根据对应的Web应用的“WEB_INF/web.xml”配置文件，查找能够处理index.jsp的servlet;</div>
+<div>Tomcat-配置及原理</div>
+<div><br/></div>
+<div>如上图所示:</div>
+<div>connector负责接收客户请求,并向客户返回响应结果.在同一个service中,多个connector共享同一个Engine,同一个Engine可以有多个Host,一个Host可以有多个context;一个context对应一个web项目.在运行时,一个Tomcat会给每个context生成一个ServletContext类的实例.</div>
+<div>http://localhost:8080/test/index.jsp</div>
+<div>提交的请求最终由一个具体的Servlet来进行处理。我们请求传递的过程如下</div>
+<div>请求首先到达商品为8080的&lt;Connector&gt;,然后把该请求交给&lt;Engine&gt;引擎处理；</div>
+<div>&lt;Engine&gt;将这个请求匹配到某个&lt;Host&gt;去处理，因为这里&lt;Engine&gt;默认处理的&lt;Host&gt;是localhost，所以请求传递到name属性是localhost的&lt;Host&gt;。</div>
+<div>&lt;Host&gt;根据地址串中的子目录为"test",获知能够处理该请求的Servlet存放在虚拟目录为"test"的Web应用中，于是通过查找&lt;Context&gt;元素，找到path="test" 的&lt;Content&gt;,然后根据&lt;Content&gt;中的物理路径"docBase"的属性值查找Web应用的物理地址；</div>
+<div>服务器根据对应的Web应用的“WEB_INF/web.xml”配置文件，查找能够处理index.jsp的servlet;</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 5、Tomcat配置优化</b></span></div>
+<div>  <b>1 ,增加JVM堆内存大小</b></div>
+<div> 通过修改conf 目录下的 catalina.sh文件</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>
+<div> JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8</div>
+<div>    -server -Xms1024m -Xmx1024m</div>
+<div>    -XX:NewSize=512m -XX:MaxNewSize=512m -XX:PermSize=512m</div>
+</div>
+<div>    -XX:MaxPermSize=512m -XX:+DisableExplicitGC"</div>
+</td>
+</tr>
+</table>
+<div>    -Xms – 指定初始化时化的栈内存</div>
+<div>    -Xmx – 指定最大栈内存</div>
+<div>   在重启你的Tomcat服务器之后，这些配置的更改才会有效。</div>
+<div><b><br/></b></div>
+<div><b>2,maxThreads 连接数限制</b></div>
+<div><span style="color: rgb(0, 0, 0); font-family: STHeiti; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none;">     maxThreads 是 Tomcat 所能接受最大连接数。一般设置不要超过8000以上，如果你的网站访问量非常大可能使用   运行多个Tomcat实例的方法。</span></div>
+<div><span style="font-family: STHeiti;">     maxThreads 配置要结合 JVM -Xmx 参数调整，也就是要考虑内存开销。</span></div>
+<div><span style="font-family: STHeiti;">     maxThreads          客户请求最大线程数</span></div>
+<div><span style="font-family: STHeiti;">     minSpareThreads        初始化时创建的 socket 线程数</span></div>
+<div><span style="font-family: STHeiti;">     maxSpareThreads       连接器的最大空闲 socket 线程数</span></div>
+<div><br/></div>
+<div><b>3,压缩</b></div>
+<div>压缩会增加Tomcat负担，最好采用Nginx + Tomcat 或者 Apache + Tomcat 方式，压缩交由Nginx/Apache 去做。</div>
+<div>compression             打开压缩功能   </div>
+<div>compressionMinSize       启用压缩的输出内容大小，这里面默认为2KB</div>
+<div>compressableMimeType     压缩类型            </div>
+<div><br/></div>
+<div><b>4,安全配置</b></div>
+<div>1，当Tomcat完成安装后你首先要做的事情如下：首次安装完成后立即删除webapps下面的所有代码</div>
+<div>rm -rf /srv/apache-tomcat/webapps/*</div>
+<div>注释或删除 tomcat-users.xml 所有用户权限，看上去如下：</div>
+<div># cat conf/tomcat-users.xml</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div> &lt;?xml version='1.0' encoding='utf-8'?&gt;</div>
+<div>
+<div>  &lt;tomcat-users&gt;</div>
+</div>
+<div>   &lt;/tomcat-users&gt;</div>
+</td>
+</tr>
+</table>
+<div>2， 隐藏版本信息</div>
+<div>隐藏Tomcat版本信息</div>
+<div>vim $CATALINA_HOME/conf/server.xml</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>
+<div>    &lt;Connector port="80" protocol="HTTP/1.1"</div>
+<div>               connectionTimeout="20000"</div>
+<div>               redirectPort="8443"</div>
+<div>                maxThreads="8192"</div>
+<div>                minSpareThreads="64"</div>
+<div>                maxSpareThreads="128"</div>
+<div>                acceptCount="128"</div>
+<div>                enableLookups="false"</div>
+</div>
+<div>                server="Neo App Srv 1.0"/&gt;</div>
+</td>
+</tr>
+</table>
+<div>运行  http://localhost:8080/</div>
+<div>服务器信息已经被改为 Server: Neo App Srv 1.0</div>
+<div><br/></div>
+<div>3， 应用程序安全</div>
+<div>关闭war自动部署 unpackWARs="false" autoDeploy="false"。防止被植入木马等恶意程序</div>
+<div>关闭 reloadable="false" 也用于防止被植入木马</div>
+<div><b> </b></div>
+<div><b>6、Tomcat配置优化后实例</b></div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>  </div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;?xml version=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">'1.0'</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">encoding=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">'utf-8'</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">?&gt;</span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Server</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">port</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8005"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">shutdown</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"SHUTDOWN"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.AprLifecycleListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">SSLEngine</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"on"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.JasperListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.JreMemoryLeakPreventionListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.ThreadLocalLeakPreventionListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;!-- </span> <span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">配置系统的</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">JNDI</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">（</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Java Naming and Directory Interface</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">）</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">--&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;GlobalNamingResources&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+   </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Resource</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UserDatabase"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">auth</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Container"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">type</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.UserDatabase"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">description</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"User database that can be updated and saved"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">factory</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.users.MemoryUserDatabaseFactory"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">pathname</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"conf/tomcat-users.xml"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/GlobalNamingResources&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Service</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Catalina"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">    <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;!--</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">                一组</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">和一个</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Engine</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">的集合，这组</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">共用一个</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Engine</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">来处理所有</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">收到的请求，</span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">                 负责处理</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;Connector&gt;</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">所获得到的请求</span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">    --&gt;</span></span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures">   </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Connector</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">port</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8080"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">protocol</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"HTTP/1.1"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">URIEncoding</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UTF-8"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">minSpareThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"25"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxSpareThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"75"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">enableLookups</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">disableUploadTimeout</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"true"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">connectionTimeout</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"20000"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">acceptCount</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"300"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"300"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxProcessors</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"1000"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">minProcessors</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"5"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">useURIValidationHack</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">redirectPort</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8443"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">server</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Homeat App Srv 1.0"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+               /&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+              <br/>
+     </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Engine</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Catalina"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">defaultHost</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"localhost"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+         <br/>
+      </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Realm</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.realm.LockOutRealm"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+           </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Realm</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.realm.UserDatabaseRealm"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">resourceName</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UserDatabase"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">       <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Realm&gt;</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">    </span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">       <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Host</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"localhost"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"> </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">appBase</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">""</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">unpackWARs</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">autoDeploy</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">        <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Context</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">path</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">""</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">docBase</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"/var/tomcat/tomcat-7/version/h</span></span></span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">omeat.war</span><span style="font-size: 11px;"><span style="font-family: Menlo;"><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">reloadable</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span></span></span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures">      </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Host&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+       <br/>
+     </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Engine&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+     <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Service&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Server&gt;</span></div>
+</td>
+</tr>
+</table>
+<div><br/></div>
+<div><br/></div>
+<div><b><br/></b></div>
+<div><b><br/></b></div>
+<div>
+<div style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div><br/></div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,1084 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="description" content="果敢、责任、思考" />
+<meta name="keywords" content="shadowsocks,git,github,git工作流,大数据,android ,ios,分布式 " />
+<meta name="360-site-verification" content="2ebfa6bfe0988ac65c00405e3012ab01" />
+<meta name="sogou_site_verification" content="r5H99U6ELU"/>
+<link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.2"/>
+<link rel="alternate" href="/atom.xml" title="做个创造者" type="application/atom+xml" />
+<link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.2" />
+  <title> Tomcat 配置详解/优化方案 - 做个创造者 </title>
+</head>
+
+<body>
+<!--[if lte IE 8]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'> <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://static.ixirong.com/picouterie.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari." style='margin-left:auto;margin-right:auto;display: block;'/></a></div> <![endif]-->
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+
+    <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+
+
+      <div class="header-inner">
+        <h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">做个创造者
+      </span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    <div class="c-search-form-div" style="display:none;">
+      
+            
+      <form class="menu-item" ><input type="text" id="ts-search-input" class="menu-search-input"></form>
+      <script type="text/javascript">
+        var option = {
+          engineKey: 'd4ab1eac98f4d5235098'
+        };
+        (function(w,d,t,u,n,s,e){
+         s = d.createElement(t);
+          s.src = u;
+          s.async = 1;
+          w[n] = function(r){
+            w[n].opts = r;
+          };
+          e = d.getElementsByTagName(t)[0];
+          e.parentNode.insertBefore(s, e);
+        })(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+        _ts(option);
+      </script>
+      
+
+    </div>
+
+    
+      
+      
+        <li class="menu-item menu-item-about">
+        <a href="/about">
+          <i class="menu-item-icon icon-about"></i> <br />
+          关于
+        </a>
+      </li>
+      
+    
+      
+        <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          记录
+        </a>
+      </li>
+      
+    
+      
+      
+        <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          标签
+        </a>
+      </li>
+      
+  
+    
+
+    <script type="text/javascript">
+      if(!isMobile()){
+         $('.menu-item-commonweal').css("display","");
+      }
+    </script>
+
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">     
+    
+        <h1 class="post-title">
+           Tomcat 配置详解/优化方案   
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于 2015-11-17
+        </span>
+
+        
+          <span class="post-category">
+            &nbsp; | &nbsp; 分类于
+              <a href="/categories/tomcat/">ios</a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    <div class="post-body">
+<div><span style="font-size: 18px;"><b> 1、Tomcat的目录层次结构</b></span></div>
+<div><br/></div>
+<div>         bin:   存放启动和关闭Tomcat的脚本文件</div>
+<div><br/></div>
+<div>         conf： 存放Tomcat服务器的各种配置文件</div>
+<div><br/></div>
+<div>         lib:   存放tomcat服务器支撑的jar包</div>
+<div><br/></div>
+<div>         logs:  存放Tomcat的日志文件</div>
+<div><br/></div>
+<div>         temp:  存放Tomcat运行时产生的临时文件</div>
+<div><br/></div>
+<div>         webapps:web应用虽在目录，即供外界访问的web资源的存放目录</div>
+<div><br/></div>
+<div>         work:  Tomcat的工作目录</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 2、JavaWeb应用的组成结构</b></span></div>
+<div><br/></div>
+<div>           |----html、jsp、css、js等文件，根目录下的文件外界可以直接访问</div>
+<div><br/></div>
+<div>           |----WEB-INF目录</div>
+<div><br/></div>
+<div>                    |---------classes目录(java类)</div>
+<div><br/></div>
+<div>                    |---------lib目录(java类运行所需的jar包)</div>
+<div><br/></div>
+<div>                    |---------web.xml(web应用的配置文件)</div>
+<div><br/></div>
+<div>             WEB-INF 这个目录下的文件外界无法直接访问，由web服务器负责调用</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 3、JavaWeb应用的发布</b></span></div>
+<div>            开放式目录方式：</div>
+<div>            打包war方式:   使用   Jar -cvf *.war .</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 4、Tomcat的Server.xml文件</b></span></div>
+<div>            Tomcat本身由一系列可配置的组件构成，其中核心组件是Servlet容器组件，它是所有其他Tomcat组件的顶层容器。每个组件都可以在Tomcat安装目录/conf/server.xml文件中进行配置，每个Tomcat组件在server.xml文件中对应一种配置元素。</div>
+<div>server.xml被称为Tomcat的主配置文件或全局配置文件，它完成两个任务：</div>
+<div>（1）提供Tomcat组件的初始配置</div>
+<div>（2）说明Tomcat的结构，含义，使Tomcat通过实例化组件完成启动及构建自身。</div>
+<div><br/></div>
+<div>server.xml中描述的重要元素有 Server ,Service ,Connector ,Engine ,Host ,Context .</div>
+<div>结构如下：</div>
+<div>Tomcat-配置及原理</div>
+<div>它们的用处是：</div>
+<div><br/></div>
+<div><b>Server:</b></div>
+<div>顶层元素,整个配置文件的根元素,表示整个Servlet容器或者Tomcat服务器包含多个Listener,一个GlobalNamingResources和一个Service</div>
+<div><br/></div>
+<div><b>Service:</b></div>
+<div>一组Connector和一个Engine的集合，这组Connector共用一个Engine来处理所有Connector收到的请求，负责处理&lt;Connector&gt;所获得到的客户请求</div>
+<div><br/></div>
+<div><b>Listener组</b>: </div>
+<div>监听器，用来管理Tomcat生命周期和全局资源</div>
+<div><br/></div>
+<div>GlobalNamingResources:</div>
+<div>配置系统的JNDI（Java Naming and Directory Interface）</div>
+<div><br/></div>
+<div><b>Connector组:</b></div>
+<div>连接器，代表外部客户之间的接口，将在一个指定的接口上侦听客户请求，并将获得的请求交给&lt;Engine&gt;进行处理，然后把处理结果返回给客户</div>
+<div><br/></div>
+<div><b>Engine: </b></div>
+<div>引擎，处理&lt;Service&gt;中的所有客户请求，具体来说，获得一个&lt;Connectors&gt;交给的请求后，把这个请求匹配到某个&lt;Host&gt;上进行处理，如果没有找到合适的&lt;Host&gt;来进行处理，则把这个请求交给一个默认虚拟主机处理。</div>
+<div><br/></div>
+<div><b>Host组:</b></div>
+<div>虚拟主机，处理一个特定主机的请求，一般来说，每个虚拟主机都可以配置一个到多个Web应用，每个Web应用对应一个&lt;Context&gt;,&lt;Host&gt;获得的请求最终匹配到某个&lt;Context&gt;上，由它进行处理。</div>
+<div><br/></div>
+<div><b>Context组:</b> </div>
+<div>Web应用组，每个Web应用由一个或多个Servlet组成，当&lt;Context&gt;获得一个请求后，将映射/conf/web.xml文件中的&lt;servlet&gt;元素，匹配一个Servlet类进行处理并返回。当一个Web应用被初始化的时候，它将用自己的ClassLoader对象载入web.xml中定义的每个Servlet类。</div>
+<div><br/></div>
+<div>我们启动Tomcat，在浏览器中输入：http://localhost:8080/ 会打开Tomcat的默认页面。实际上，这个页面是在Tomcat安装目录下的：/webapps/root/index.jsp;/webapps是Tomcat服务器用来存放Web应用的目录，每个Web应用都将在这建立各自的子目录，刚装好的Tomcat服务器虚拟主机的默认目录是/webapps/ROOT,所以默认会打开这个目录下的文件。流程如下：</div>
+<div>在/conf目录下的web.xml配置文件中有如下配置：</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div style=" padding: 0px;">
+<div>&lt;welcome-file-list&gt;</div>
+<div>        &lt;welcome-file&gt;index.html&lt;/welcome-file&gt;</div>
+<div>        &lt;welcome-file&gt;index.htm&lt;/welcome-file&gt;</div>
+<div>        &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;</div>
+</div>
+<div>&lt;/welcome-file-list&gt;</div>
+</td>
+</tr>
+</table>
+<div>这里正是用来配置首页的，Tomcat将按顺序找出&lt;welcome-file&gt;标签中的内容作为首页。而在我们的目录下，它只找到了index.jsp，所以会显示它；</div>
+<div>但我们不能将所有的Web程序都放在ROOT里。所以我们需要更改Tomcat的虚拟目录；</div>
+<div><br/></div>
+<div>要设置虚拟路径，需要在server.xml文件的&lt;Host&gt;&lt;/Host&gt;中的Web应用添加一个&lt;Context&gt;子元素，实际上是配置了一个Web应用的物理存放地址到Tomcat虚拟路径的过程，使得Tomcat能够正确找到Web应用的物理存放路径;</div>
+<div>步骤：</div>
+<div>1）在server.xml的&lt;Host&gt;&lt;/Host&gt;中加上如下代码：</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>&lt;Context docBase="D:/myApp" path="/myapp" reloadable="true"&gt;&lt;/Context&gt;</div>
+</td>
+</tr>
+</table>
+<div>2)我们把写好的Web应用中的所有文件放到下面的目录中：D:/myapp/test</div>
+<div>3)重启Tomcat，在浏览器中输入：http://localhost:8080/test 即可测试</div>
+<div><br/></div>
+<div><b>web.xml</b></div>
+<div>Tomcat目录下/conf 可为不同的应用程序配置不同的上下文环境；用来对Servlet进行映射；</div>
+<div>一个Web应用的根目录下的/WEB-INF目录中也有一个web.xml，当部署一个Web应用时，总是先加载/conf/web.xml，然后才加载自己Web应用的/WEB-INF/web.xml文件；但处理过程中，总是先使用自己的web.xml配置文件，如果无法处理，才把它交给Tomcat的web.xml文件。</div>
+<div><br/></div>
+<div>当用户在浏览器中输入一个JSP文件地址：</div>
+<div>http://localhost:8080/test/index.jsp</div>
+<div>提交的请求最终由一个具体的Servlet来进行处理。我们请求传递的过程如下：</div>
+<div>1）请求首先到达商品为8080的&lt;Connector&gt;,然后把该请求交给&lt;Engine&gt;引擎处理；</div>
+<div>2）&lt;Engine&gt;将这个请求匹配到某个&lt;Host&gt;去处理，因为这里&lt;Engine&gt;默认处理的&lt;Host&gt;是localhost，所以请求传递到name属性是localhost的&lt;Host&gt;。</div>
+<div>3）&lt;Host&gt;根据地址串中的子目录为"test",获知能够处理该请求的Servlet存放在虚拟目录为"test"的Web应用中，于是通过查找&lt;Context&gt;元素，找到path="test" 的&lt;Content&gt;,然后根据&lt;Content&gt;中的物理路径"docBase"的属性值查找Web应用的物理地址；</div>
+<div>4）服务器根据对应的Web应用的“WEB_INF/web.xml”配置文件，查找能够处理index.jsp的servlet;</div>
+<div>Tomcat-配置及原理</div>
+<div><br/></div>
+<div>如上图所示:</div>
+<div>connector负责接收客户请求,并向客户返回响应结果.在同一个service中,多个connector共享同一个Engine,同一个Engine可以有多个Host,一个Host可以有多个context;一个context对应一个web项目.在运行时,一个Tomcat会给每个context生成一个ServletContext类的实例.</div>
+<div>http://localhost:8080/test/index.jsp</div>
+<div>提交的请求最终由一个具体的Servlet来进行处理。我们请求传递的过程如下</div>
+<div>请求首先到达商品为8080的&lt;Connector&gt;,然后把该请求交给&lt;Engine&gt;引擎处理；</div>
+<div>&lt;Engine&gt;将这个请求匹配到某个&lt;Host&gt;去处理，因为这里&lt;Engine&gt;默认处理的&lt;Host&gt;是localhost，所以请求传递到name属性是localhost的&lt;Host&gt;。</div>
+<div>&lt;Host&gt;根据地址串中的子目录为"test",获知能够处理该请求的Servlet存放在虚拟目录为"test"的Web应用中，于是通过查找&lt;Context&gt;元素，找到path="test" 的&lt;Content&gt;,然后根据&lt;Content&gt;中的物理路径"docBase"的属性值查找Web应用的物理地址；</div>
+<div>服务器根据对应的Web应用的“WEB_INF/web.xml”配置文件，查找能够处理index.jsp的servlet;</div>
+<div><br/></div>
+<div><span style="font-size: 18px;"><b> 5、Tomcat配置优化</b></span></div>
+<div>  <b>1 ,增加JVM堆内存大小</b></div>
+<div> 通过修改conf 目录下的 catalina.sh文件</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>
+<div> JAVA_OPTS="-Djava.awt.headless=true -Dfile.encoding=UTF-8</div>
+<div>    -server -Xms1024m -Xmx1024m</div>
+<div>    -XX:NewSize=512m -XX:MaxNewSize=512m -XX:PermSize=512m</div>
+</div>
+<div>    -XX:MaxPermSize=512m -XX:+DisableExplicitGC"</div>
+</td>
+</tr>
+</table>
+<div>    -Xms – 指定初始化时化的栈内存</div>
+<div>    -Xmx – 指定最大栈内存</div>
+<div>   在重启你的Tomcat服务器之后，这些配置的更改才会有效。</div>
+<div><b><br/></b></div>
+<div><b>2,maxThreads 连接数限制</b></div>
+<div><span style="color: rgb(0, 0, 0); font-family: STHeiti; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none;">     maxThreads 是 Tomcat 所能接受最大连接数。一般设置不要超过8000以上，如果你的网站访问量非常大可能使用   运行多个Tomcat实例的方法。</span></div>
+<div><span style="font-family: STHeiti;">     maxThreads 配置要结合 JVM -Xmx 参数调整，也就是要考虑内存开销。</span></div>
+<div><span style="font-family: STHeiti;">     maxThreads          客户请求最大线程数</span></div>
+<div><span style="font-family: STHeiti;">     minSpareThreads        初始化时创建的 socket 线程数</span></div>
+<div><span style="font-family: STHeiti;">     maxSpareThreads       连接器的最大空闲 socket 线程数</span></div>
+<div><br/></div>
+<div><b>3,压缩</b></div>
+<div>压缩会增加Tomcat负担，最好采用Nginx + Tomcat 或者 Apache + Tomcat 方式，压缩交由Nginx/Apache 去做。</div>
+<div>compression             打开压缩功能   </div>
+<div>compressionMinSize       启用压缩的输出内容大小，这里面默认为2KB</div>
+<div>compressableMimeType     压缩类型            </div>
+<div><br/></div>
+<div><b>4,安全配置</b></div>
+<div>1，当Tomcat完成安装后你首先要做的事情如下：首次安装完成后立即删除webapps下面的所有代码</div>
+<div>rm -rf /srv/apache-tomcat/webapps/*</div>
+<div>注释或删除 tomcat-users.xml 所有用户权限，看上去如下：</div>
+<div># cat conf/tomcat-users.xml</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div> &lt;?xml version='1.0' encoding='utf-8'?&gt;</div>
+<div>
+<div>  &lt;tomcat-users&gt;</div>
+</div>
+<div>   &lt;/tomcat-users&gt;</div>
+</td>
+</tr>
+</table>
+<div>2， 隐藏版本信息</div>
+<div>隐藏Tomcat版本信息</div>
+<div>vim $CATALINA_HOME/conf/server.xml</div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>
+<div>    &lt;Connector port="80" protocol="HTTP/1.1"</div>
+<div>               connectionTimeout="20000"</div>
+<div>               redirectPort="8443"</div>
+<div>                maxThreads="8192"</div>
+<div>                minSpareThreads="64"</div>
+<div>                maxSpareThreads="128"</div>
+<div>                acceptCount="128"</div>
+<div>                enableLookups="false"</div>
+</div>
+<div>                server="Neo App Srv 1.0"/&gt;</div>
+</td>
+</tr>
+</table>
+<div>运行  http://localhost:8080/</div>
+<div>服务器信息已经被改为 Server: Neo App Srv 1.0</div>
+<div><br/></div>
+<div>3， 应用程序安全</div>
+<div>关闭war自动部署 unpackWARs="false" autoDeploy="false"。防止被植入木马等恶意程序</div>
+<div>关闭 reloadable="false" 也用于防止被植入木马</div>
+<div><b> </b></div>
+<div><b>6、Tomcat配置优化后实例</b></div>
+<table border="1" cellpadding="0" cellspacing="0" style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(217, 217, 217); width: 731px; background-position: initial initial; background-repeat: initial initial;">
+<tr>
+<td valign="top" style="width:99.72640218878249%;">
+<div>  </div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;?xml version=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">'1.0'</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">encoding=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">'utf-8'</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">?&gt;</span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Server</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">port</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8005"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">shutdown</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"SHUTDOWN"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.AprLifecycleListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">SSLEngine</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"on"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.JasperListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.JreMemoryLeakPreventionListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Listener</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.core.ThreadLocalLeakPreventionListener"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;!-- </span> <span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">配置系统的</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">JNDI</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">（</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Java Naming and Directory Interface</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">）</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">--&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;GlobalNamingResources&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+   </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Resource</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UserDatabase"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">auth</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Container"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">type</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.UserDatabase"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">description</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"User database that can be updated and saved"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">factory</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.users.MemoryUserDatabaseFactory"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+             </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">pathname</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"conf/tomcat-users.xml"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/GlobalNamingResources&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Service</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Catalina"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">    <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;!--</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">                一组</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">和一个</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Engine</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">的集合，这组</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">共用一个</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Engine</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">来处理所有</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">Connector</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">收到的请求，</span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">                 负责处理</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">&lt;Connector&gt;</span><span style="font: 11.0px 'PingFang SC'; font-variant-ligatures: no-common-ligatures; color: #008400">所获得到的请求</span></span></div>
+<div><span style="font-size: 11px;"><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #008400">    --&gt;</span></span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures">   </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Connector</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">port</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8080"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">protocol</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"HTTP/1.1"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">URIEncoding</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UTF-8"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">minSpareThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"25"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxSpareThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"75"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">enableLookups</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">disableUploadTimeout</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"true"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">connectionTimeout</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"20000"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">acceptCount</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"300"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxThreads</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"300"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">maxProcessors</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"1000"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">minProcessors</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"5"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">useURIValidationHack</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">redirectPort</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"8443"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+              </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">server</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Homeat App Srv 1.0"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"><br/>
+               /&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+              <br/>
+     </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Engine</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"Catalina"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">defaultHost</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"localhost"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+         <br/>
+      </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Realm</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.realm.LockOutRealm"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+           </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Realm</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">className</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"org.apache.catalina.realm.UserDatabaseRealm"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">resourceName</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"UserDatabase"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">       <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Realm&gt;</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">    </span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">       <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Host</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">name</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"localhost"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2"> </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">appBase</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">""</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">unpackWARs</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">autoDeploy</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&gt;</span></span></span></div>
+<div><span style="font-size: 11px;"><span style="font-family: Menlo;">        <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;Context</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">path</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">""</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">docBase</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"/var/tomcat/tomcat-7/version/h</span></span></span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">omeat.war</span><span style="font-size: 11px;"><span style="font-family: Menlo;"><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"</span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #967e34">reloadable</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">=</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #d12f1b">"false"</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">/&gt;</span></span></span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures">      </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Host&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+       <br/>
+     </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Engine&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+     <br/>
+ </span> <span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Service&gt;</span><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures"><br/>
+ </span></div>
+<div><span style="font: 11.0px Menlo; font-variant-ligatures: no-common-ligatures; color: #bb2ca2">&lt;/Server&gt;</span></div>
+</td>
+</tr>
+</table>
+<div><br/></div>
+<div><br/></div>
+<div><b><br/></b></div>
+<div><b><br/></b></div>
+<div>
+<div style="font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div><br/></div>
+</div>
+</div>
+           
+    </div>
+
+    <div class="post-footer">
+    
+    <! -- 添加捐赠图标 -->
+    
+<! -- 添加捐赠图标 -->
+
+
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ios/"> #生活 </a>
+          
+            <a href="/tags/ios/"> #总结 思考 </a>
+          
+        </div>
+
+      
+      
+    </div>
+  </div>
+
+    
+  </div>
+
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp;  2015 - 
+  2016
+  
+  <span class="author"> Johnson</span>
+</div>
+
+<div class="powered-by">
+
+   现实的理想主义者
+</div>
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" rel="external nofollow">Hexo</a> 
+</div>
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <!-- <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script> -->
+
+  
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.content img').each(function () {
+        var $image = $(this);
+        var $imageWrapLink = $image.parent('a');
+
+        if ($imageWrapLink.size() < 1) {
+          $imageWrapLink = $image.wrap('<a href="' + this.getAttribute('src') + '"></a>').parent('a');
+        }
+        $imageWrapLink.addClass('fancybox');
+      });
+    });
+    $('.fancybox').fancybox({
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+  </script>
+
+
+  <!-- <script type="text/javascript">
+  function hasMobileUA () {
+    var nav = window.navigator;
+    var ua = nav.userAgent;
+    var pa = /iPad|iPhone|Android|Opera Mini|BlackBerry|webOS|UCWEB|Blazer|PSP|IEMobile|Symbian/g;
+
+    return pa.test(ua);
+  }
+
+  function isDesktop () {
+    return screen.width > 991 && !hasMobileUA();
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767 && hasMobileUA();
+  }
+
+  function isMobile () {
+    return screen.width < 767 && hasMobileUA();
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+  
+  function displaySidebar () {
+    setTimeout(function () {
+      $('.sidebar-toggle').trigger('click');
+    }, 800);
+  }
+
+</script>
+ -->
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    LogoAndMenuMotion();
+    sidebarToggleMotion();
+    postsListMotion();
+    backToTopMotion();    
+
+    $(document)
+      .on('sidebar.isShowing', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.isHiding', function () {});
+
+//search animate
+$(function(){
+   $('#ts-search-input').focus(function() {  //设置获得焦点时的方法，让文本框变长
+    $(this).animate({width: "150"}, 300 );  
+    $(this).val(''); //用于清空内容，可选操作
+   });
+ 
+   $('#ts-search-input').blur(function() {  //设置失去焦点时的方法，让文本框变短
+    $(this).animate({width: "70"}, 300 );
+   });
+});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
+        duration: SIDEBAR_DISPLAY_DURATION,
+        complete: function () {
+          sidebar.addClass('sidebar-active');
+          sidebar.trigger('sidebar.didShow');
+        }
+      });
+      sidebar.trigger('sidebar.isShowing');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.removeClass('sidebar-active');
+      sidebar.trigger('sidebar.isHiding');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
+    }
+
+    function sidebarToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var $sidebarInner = $('.sidebar-inner');
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.didShow', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if (isDesktop() && HEXO_SIDEBAR_CONFIGURATION === 'post') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+
+
+
+   <script type="text/javascript">
+    var HEXO_SIDEBAR_CONFIGURATION = 'hide';
+    $(document).ready(function () {
+      if (HEXO_SIDEBAR_CONFIGURATION === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"xirong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+  
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?35130bce62151673e28ec769bef55e70";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  
+  <script type="text/javascript">
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-61803765-1');ga('send','pageview');
+  </script>
+
+</body>
+</html>
